@@ -1,0 +1,440 @@
+---
+import Base from '../layouts/Base.astro';
+import WorldMap from '../components/WorldMap.astro';
+import MfrTile from '../components/MfrTile.astro';
+import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Distributors from '../components/Distributors.astro';
+import { manufacturers, distributors } from '../data/manufacturers';
+import { company } from '../data/company';
+import { type Lang, url } from '../i18n/routes';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const n = manufacturers.length;
+const years = new Date().getFullYear() - company.founded;
+
+const c = {
+  pt: {
+    meta: {
+      title: 'Mastertronics · Semicondutores e componentes eletrônicos desde 1991',
+      desc: 'Desde 1991 conectamos a indústria eletroeletrônica da América Latina aos principais fabricantes globais de semicondutores e componentes eletrônicos, com suporte técnico local, distribuidores globais, China HUB ISO 9001 e energia renovável com a CRRC.',
+    },
+    hero: {
+      label: `Desde 1991 · ${years} anos de mercado`,
+      title: ['Desenvolvendo soluções', 'eletrônicas juntos.'],
+      sub: 'Representamos fabricantes globais de semicondutores e componentes eletrônicos no Brasil e na América Latina, com suporte técnico local e compra através dos maiores distribuidores do mundo.',
+      cta1: 'Fale com um especialista',
+      cta2: 'Conheça os fabricantes',
+    },
+    stats: [
+      { v: '1991', l: 'No mercado desde a fundação, em Porto Alegre' },
+      { v: String(n), l: 'Fabricantes globais no portfólio' },
+      { v: '4', l: 'Distribuidores globais parceiros' },
+      { v: 'ISO 9001', l: 'China HUB, em operação desde 2001' },
+    ],
+    marquee: 'Fabricantes que representamos no Brasil e na América Latina',
+    via: 'Disponíveis através de',
+    areas: {
+      label: 'Soluções',
+      title: 'Tudo o que a sua engenharia e o seu suprimento precisam, em um só parceiro.',
+      items: [
+        { photo: 'pcb', tag: 'Semicondutores e componentes', title: 'Fabricantes globais com suporte local', text: 'Representamos fabricantes internacionais de semicondutores e componentes eletrônicos, com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes.', cta: 'Ver fabricantes', key: 'manufacturers' as const },
+        { photo: 'factory', tag: 'China HUB', title: 'Fornecedores alternativos qualificados na origem', text: 'Unidade ISO 9001 na China dedicada ao desenvolvimento, auditoria e qualificação de fabricantes alternativos, com foco em confiabilidade e redução de custos.', cta: 'Conhecer o China HUB', key: 'chinaHub' as const },
+        { photo: 'solar', tag: 'Energia renovável', title: 'Sistemas completos com tecnologia CRRC', text: 'Geração solar e eólica, armazenamento BESS e hidrogênio verde, em parceria estratégica com a CRRC, líder global da Fortune 500.', cta: 'Ver soluções em energia', key: 'renewables' as const },
+      ],
+    },
+    about: {
+      label: 'A Mastertronics',
+      title: 'Excelência em Soluções Eletrônicas',
+      p1: 'Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Representamos fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes.',
+      p2: 'Nosso portfólio inclui semicondutores de potência, memórias, displays customizados, sensores MEMS, optoacopladores e sensores de corrente e tensão para aplicações industriais e de energia.',
+      more: 'Conheça a empresa',
+      badge: `${years} anos`,
+      badgeL: 'conectando a indústria à tecnologia global',
+    },
+    mfr: {
+      label: 'Portfólio',
+      title: 'Nossos fabricantes',
+      sub: 'Líderes globais em semicondutores de potência, memórias, sensores, optoeletrônica, displays, cristais e magnéticos.',
+      all: 'Ver todos os fabricantes',
+    },
+    hub: {
+      label: 'China HUB',
+      title: 'Nosso braço na China para desenvolver o que o seu projeto precisa.',
+      p0: 'Em 2001, iniciamos o suporte a placas de circuito impresso por meio da operação de um hub na China, dedicado ao desenvolvimento, auditoria e qualificação de fabricantes.',
+      p: 'Hoje, prospectamos fabricantes de conectores, cabos customizados, componentes magnéticos, baterias, peças plásticas e metálicas customizadas, componentes passivos e semicondutores de baixa complexidade — insumos que não estão no portfólio dos nossos fabricantes, atendendo às demandas específicas de cada cliente.',
+      steps: ['Demanda', 'Prospecção', 'Auditoria', 'Qualificação'],
+      cta: 'Como funciona o China HUB',
+      badge: 'Unidade certificada na China',
+      since: 'Desde',
+    },
+    energy: {
+      label: 'Energia renovável · Mastertronics & CRRC',
+      title: 'A escala da CRRC para a infraestrutura de energia do Brasil.',
+      p: 'Parceria estratégica com as divisões Times Electric e ZhuZhou Institute Comprehensive Energy da CRRC: consultoria, suporte técnico e soluções completas em geração, armazenamento e hidrogênio verde.',
+      stats: [
+        { v: 'Fortune 500', l: 'Líder global' },
+        { v: '+48 GWh', l: 'Em BESS implantados · Top 3 global' },
+        { v: '+70 GW', l: 'Top 3 em inversores solares na China' },
+        { v: 'Top 1', l: 'Mercado eólico na China' },
+      ],
+      cta: 'Soluções em energia',
+    },
+  },
+  en: {
+    meta: {
+      title: 'Mastertronics · Semiconductors and electronic components since 1991',
+      desc: 'Since 1991 we have connected Latin America’s electronics industry with leading global semiconductor and electronic component manufacturers, with local technical support, global distributors, an ISO 9001 China HUB and renewable energy with CRRC.',
+    },
+    hero: {
+      label: `Since 1991 · ${years} years in the market`,
+      title: ['Developing electronics', 'together.'],
+      sub: 'We represent global semiconductor and electronic component manufacturers in Brazil and Latin America, with local technical support and purchasing through the world’s largest distributors.',
+      cta1: 'Talk to a specialist',
+      cta2: 'Explore our manufacturers',
+    },
+    stats: [
+      { v: '1991', l: 'In the market since our founding in Porto Alegre' },
+      { v: String(n), l: 'Global manufacturers in our portfolio' },
+      { v: '4', l: 'Global distribution partners' },
+      { v: 'ISO 9001', l: 'China HUB, operating since 2001' },
+    ],
+    marquee: 'Manufacturers we represent in Brazil and Latin America',
+    via: 'Available through',
+    areas: {
+      label: 'Solutions',
+      title: 'Everything your engineering and sourcing teams need, from one partner.',
+      items: [
+        { photo: 'pcb', tag: 'Semiconductors & components', title: 'Global manufacturers, local support', text: 'We represent international semiconductor and electronic component manufacturers, with agile, close technical and commercial support focused on customer needs.', cta: 'See manufacturers', key: 'manufacturers' as const },
+        { photo: 'factory', tag: 'China HUB', title: 'Alternative suppliers, qualified at the source', text: 'An ISO 9001-certified unit in China dedicated to developing, auditing and qualifying alternative manufacturers, with a focus on reliability and cost reduction.', cta: 'Discover the China HUB', key: 'chinaHub' as const },
+        { photo: 'solar', tag: 'Renewable energy', title: 'Complete systems with CRRC technology', text: 'Solar and wind generation, BESS storage and green hydrogen, in strategic partnership with CRRC, a Fortune 500 global leader.', cta: 'See energy solutions', key: 'renewables' as const },
+      ],
+    },
+    about: {
+      label: 'Mastertronics',
+      title: 'Excellence in Electronic Solutions',
+      p1: 'Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. We represent international manufacturers with agile, close technical and commercial support focused on customer needs — anticipating trends and enabling access to emerging technologies.',
+      p2: 'Our portfolio includes power semiconductors, memory, custom displays, MEMS sensors, optocouplers and current and voltage sensors for industrial and energy applications.',
+      more: 'About the company',
+      badge: `${years} years`,
+      badgeL: 'connecting industry to global technology',
+    },
+    mfr: {
+      label: 'Portfolio',
+      title: 'Our manufacturers',
+      sub: 'Global leaders in power semiconductors, memory, sensors, optoelectronics, displays, crystals and magnetics.',
+      all: 'See all manufacturers',
+    },
+    hub: {
+      label: 'China HUB',
+      title: 'Our arm in China, developing what your project needs.',
+      p0: 'In 2001 we opened our hub in China to support printed circuit boards, dedicated to developing, auditing and qualifying manufacturers.',
+      p: 'Today we source manufacturers of connectors, custom cables, magnetic components, batteries, custom plastic and metal parts, passive components and low-complexity semiconductors — parts outside our manufacturers’ portfolio, tailored to each customer’s needs.',
+      steps: ['Request', 'Sourcing', 'Audit', 'Qualification'],
+      cta: 'How the China HUB works',
+      badge: 'Certified unit in China',
+      since: 'Since',
+    },
+    energy: {
+      label: 'Renewable energy · Mastertronics & CRRC',
+      title: 'CRRC’s scale for Brazil’s energy infrastructure.',
+      p: 'A strategic partnership with CRRC’s Times Electric and ZhuZhou Institute Comprehensive Energy divisions: consulting, technical support and complete solutions in generation, storage and green hydrogen.',
+      stats: [
+        { v: 'Fortune 500', l: 'Global leader' },
+        { v: '48+ GWh', l: 'Of BESS deployed · Top 3 worldwide' },
+        { v: '70+ GW', l: 'Top 3 in solar inverters in China' },
+        { v: 'No. 1', l: 'Wind market in China' },
+      ],
+      cta: 'Energy solutions',
+    },
+  },
+}[lang];
+
+const mapNodes = [
+  { id: 'poa', label: 'Porto Alegre', lon: -51.2, lat: -30.0, kind: 'hq' as const },
+  { id: 'uk', label: 'UK', lon: -0.5, lat: 53.2, kind: 'mfr' as const },
+  { id: 'tj', label: 'Tianjin', lon: 117.2, lat: 39.1, kind: 'mfr' as const },
+  { id: 'nb', label: 'Ningbo', lon: 121.5, lat: 29.9, kind: 'mfr' as const },
+  { id: 'tw', label: 'Taiwan', lon: 121.0, lat: 24.2, kind: 'mfr' as const },
+  { id: 'zz', label: 'Zhuzhou', lon: 113.1, lat: 27.8, kind: 'mfr' as const },
+  { id: 'hub', label: 'China HUB', lon: 113.9, lat: 22.6, kind: 'hub' as const },
+];
+const marquee = [...manufacturers, ...manufacturers];
+---
+<Base lang={lang} title={c.meta.title} description={c.meta.desc} alt={lang === 'pt' ? '/en/' : '/'} headerTheme="dark">
+  <!-- HERO -->
+  <section class="hero dark">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="container hero-in">
+      <div class="hero-copy">
+        <span class="label reveal">{c.hero.label}</span>
+        <h1 class="display reveal" style="--d:.06s">{c.hero.title[0]}<br /><span class="hero-soft">{c.hero.title[1]}</span></h1>
+        <p class="lead reveal" style="--d:.14s">{c.hero.sub}</p>
+        <div class="hero-ctas reveal" style="--d:.2s">
+          <a href={url(lang, 'contact')} class="btn btn--lime">{c.hero.cta1}<Icon name="arrow" /></a>
+          <a href={url(lang, 'manufacturers')} class="btn btn--ghost">{c.hero.cta2}</a>
+        </div>
+      </div>
+      <div class="hero-map reveal" style="--d:.25s"><WorldMap nodes={mapNodes} /></div>
+    </div>
+    <div class="container">
+      <dl class="stats">
+        {c.stats.map((s, i) => (
+          <div class="stat reveal" style={`--d:${0.3 + i * 0.06}s`}>
+            <dt class="stat-v">{s.v}</dt>
+            <dd class="stat-l">{s.l}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- LOGO MARQUEE -->
+  <section class="mq" aria-label={c.marquee}>
+    <p class="mq-h mono">{c.marquee}</p>
+    <div class="mq-track-wrap">
+      <ul class="mq-track">
+        {marquee.map((m, i) => (
+          <li aria-hidden={i >= manufacturers.length ? 'true' : undefined}>
+            <a href={`${url(lang, 'manufacturers')}${m.slug}/`} tabindex={i >= manufacturers.length ? -1 : undefined}>
+              <img src={m.logo} alt={i >= manufacturers.length ? '' : m.name} loading="lazy" style={`--s:${m.logoScale ?? 1}`} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="mq-dist container">
+      <p class="mono">{c.via}</p>
+      <ul>{distributors.map((d) => <li><a href={url(lang, 'distributors')}><img src={d.logo} alt={d.name} loading="lazy" /></a></li>)}</ul>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="section areas">
+    <div class="container">
+      <div class="shead">
+        <span class="label reveal">{c.areas.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.areas.title}</h2>
+      </div>
+      <div class="agrid">
+        {c.areas.items.map((a, i) => (
+          <a href={url(lang, a.key)} class="acard reveal" style={`--d:${i * 0.08}s`}>
+            <span class="acard-img"><Photo name={a.photo} alt="" sizes="(max-width: 900px) 100vw, 33vw" /></span>
+            <span class="acard-body">
+              <span class="acard-tag mono">{a.tag}</span>
+              <span class="acard-title">{a.title}</span>
+              <span class="acard-text">{a.text}</span>
+              <span class="link-arrow acard-cta"><span>{a.cta}</span><Icon name="arrow" /></span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section white about">
+    <div class="container about-grid">
+      <div class="about-fig reveal">
+        <Photo name="cleanroom" alt="" sizes="(max-width: 900px) 100vw, 50vw" position="35% 50%" />
+        <div class="about-badge">
+          <strong>{c.about.badge}</strong>
+          <span>{c.about.badgeL}</span>
+        </div>
+      </div>
+      <div class="about-copy">
+        <span class="label reveal">{c.about.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.about.title}</h2>
+        <div class="prose reveal" style="--d:.1s">
+          <p class="about-lead">{c.about.p1}</p>
+          <p>{c.about.p2}</p>
+        </div>
+        <a href={url(lang, 'about')} class="btn btn--primary reveal" style="--d:.15s">{c.about.more}<Icon name="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <Distributors lang={lang} />
+
+  <!-- MANUFACTURERS -->
+  <section class="section mfr">
+    <div class="container">
+      <div class="shead shead--row">
+        <div>
+          <span class="label reveal">{c.mfr.label}</span>
+          <h2 class="h2 reveal" style="--d:.05s">{c.mfr.title}</h2>
+          <p class="lead reveal" style="--d:.1s">{c.mfr.sub}</p>
+        </div>
+        <a href={url(lang, 'manufacturers')} class="btn btn--ghost reveal">{c.mfr.all}<Icon name="arrow" /></a>
+      </div>
+      <div class="lgrid">
+        {manufacturers.map((m, i) => <div class="reveal" style={`--d:${(i % 4) * 0.05}s`}><MfrTile m={m} lang={lang} /></div>)}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CHINA HUB -->
+  <section class="section dark hub">
+    <div class="container hub-grid">
+      <div class="hub-fig reveal">
+        <Photo name="factory" alt="" sizes="(max-width: 900px) 100vw, 45vw" />
+        <div class="hub-badge">
+          <Icon name="shield" size={26} />
+          <div><strong>ISO 9001</strong><span>{c.hub.badge}</span></div>
+          <div class="hub-since"><span>{c.hub.since}</span><strong>2001</strong></div>
+        </div>
+      </div>
+      <div class="hub-copy">
+        <span class="label reveal">{c.hub.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.hub.title}</h2>
+        <div class="hub-p reveal" style="--d:.1s"><p>{c.hub.p0}</p><p>{c.hub.p}</p></div>
+        <ol class="hub-steps reveal" style="--d:.14s">
+          {c.hub.steps.map((s, i) => <li><span class="mono">0{i + 1}</span>{s}</li>)}
+        </ol>
+        <a href={url(lang, 'chinaHub')} class="btn btn--lime reveal" style="--d:.18s">{c.hub.cta}<Icon name="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENERGY -->
+  <section class="energy dark">
+    <div class="energy-bg" aria-hidden="true"><Photo name="wind" alt="" sizes="100vw" /></div>
+    <div class="container energy-in">
+      <div class="energy-copy">
+        <span class="label reveal">{c.energy.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.energy.title}</h2>
+        <p class="lead reveal" style="--d:.1s">{c.energy.p}</p>
+        <a href={url(lang, 'renewables')} class="btn btn--lime reveal" style="--d:.15s">{c.energy.cta}<Icon name="arrow" /></a>
+      </div>
+      <dl class="energy-stats">
+        {c.energy.stats.map((s, i) => <div class="reveal" style={`--d:${i * 0.06}s`}><dt>{s.v}</dt><dd>{s.l}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <ContactSection lang={lang} />
+</Base>
+
+<style>
+  /* HERO */
+  .hero { position: relative; overflow: hidden; padding-top: clamp(130px, 16vw, 180px); padding-bottom: 48px; isolation: isolate; }
+  .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 50% at 78% 55%, rgba(222,221,58,.07), transparent 70%), radial-gradient(50% 60% at 10% 0%, rgba(255,255,255,.05), transparent 70%); }
+  .hero-grid { position: absolute; inset: 0; z-index: -1; opacity: .5; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(80% 70% at 50% 40%, #000 30%, transparent 100%); }
+  .hero-in { position: relative; min-height: 560px; }
+  .hero-copy { position: relative; z-index: 2; display: grid; gap: 26px; max-width: 760px; }
+  .hero-copy .display { font-size: clamp(2.6rem, 6.2vw, 5.4rem); }
+  .hero h1 { color: #fff; }
+  .hero-soft { color: #8f949b; }
+  .hero .lead { max-width: 560px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .hero-map { position: absolute; z-index: 1; pointer-events: none; width: min(1180px, 88vw); right: calc(var(--gutter) * -1 - 4vw); top: -10px; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%); mask-image: linear-gradient(90deg, transparent 0%, #000 34%); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-dark); margin-top: 24px; }
+  .stat { padding: 28px 24px 8px 0; display: grid; gap: 6px; align-content: start; }
+  .stat + .stat { padding-left: 24px; border-left: 1px solid var(--line-dark); }
+  .stat-v { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.04em; color: #fff; line-height: 1; }
+  .stat-l { font-size: 0.875rem; color: var(--on-dark-muted); }
+  @media (max-width: 1100px) { .hero-in { min-height: 0; } .hero-map { position: relative; right: auto; top: auto; width: auto; margin: -40px -8% 0 10%; } }
+  @media (max-width: 760px) {
+    .hero-map { margin: 28px -18% 0 -6%; -webkit-mask-image: none; mask-image: none; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat + .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--line-dark); }
+  }
+
+  /* MARQUEE */
+  .mq { background: var(--white); border-bottom: 1px solid var(--line); padding: 34px 0 30px; overflow: hidden; }
+  .mq-h { text-align: center; font-size: .6875rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 22px; padding-inline: var(--gutter); }
+  .mq-track-wrap { mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .mq-track { list-style: none; padding: 0; display: flex; width: max-content; animation: mq 60s linear infinite; }
+  .mq-track-wrap:hover .mq-track { animation-play-state: paused; }
+  .mq-track li { flex: none; }
+  .mq-track a { display: grid; place-items: center; width: 210px; height: 64px; padding: 0 28px; }
+  .mq-track img { max-height: calc(38px * var(--s)); max-width: 100%; object-fit: contain; }
+  @keyframes mq { to { transform: translateX(-50%); } }
+  .mq-dist { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+  .mq-dist p { font-size: .6875rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .mq-dist ul { list-style: none; padding: 0; display: flex; align-items: center; gap: clamp(20px, 4vw, 52px); flex-wrap: wrap; justify-content: center; }
+  .mq-dist img { height: 30px; width: auto; max-width: 150px; object-fit: contain; }
+  @media (max-width: 560px) { .mq-dist img { height: 24px; max-width: 120px; } .mq-dist { gap: 16px; } }
+  @media (prefers-reduced-motion: reduce) { .mq-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; } .mq-track li[aria-hidden] { display: none; } }
+
+  /* SECTION HEAD */
+  .shead { display: grid; gap: 18px; max-width: 800px; margin-bottom: clamp(40px, 5vw, 60px); }
+  .shead--row { max-width: none; display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  .shead--row > div { display: grid; gap: 18px; max-width: 680px; }
+
+  /* SOLUTIONS */
+  .agrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .acard { display: grid; grid-template-rows: auto 1fr; border-radius: 20px; overflow: hidden; background: var(--white); border: 1px solid var(--line); transition: box-shadow .4s var(--ease), transform .4s var(--ease); }
+  .acard:hover { box-shadow: var(--shadow-2); transform: translateY(-3px); }
+  .acard-img { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink); }
+  .acard-img :global(img), .acard-img :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .acard:hover .acard-img :global(img) { transform: scale(1.05); }
+  .acard-body { display: grid; gap: 10px; align-content: start; padding: 26px 26px 28px; }
+  .acard-tag { font-size: .6875rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+  .acard-title { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; letter-spacing: -.03em; line-height: 1.15; }
+  .acard-text { color: var(--slate); font-size: .9375rem; }
+  .acard-cta { margin-top: 8px; }
+  @media (max-width: 960px) { .agrid { grid-template-columns: 1fr; } .acard { grid-template-columns: 1fr 1.2fr; grid-template-rows: none; } .acard-img { aspect-ratio: auto; min-height: 100%; } }
+  @media (max-width: 620px) { .acard { grid-template-columns: 1fr; } .acard-img { aspect-ratio: 16 / 10; } }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 110px); align-items: center; }
+  .about-fig { position: relative; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--ink); }
+  .about-fig :global(img), .about-fig :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; }
+  .about-badge { position: absolute; left: 20px; bottom: 20px; right: 20px; display: flex; align-items: baseline; gap: 14px; padding: 18px 22px; border-radius: 14px; background: rgba(20,22,25,.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; border: 1px solid rgba(255,255,255,.1); }
+  .about-badge strong { font-family: var(--font-display); font-size: 2rem; letter-spacing: -.04em; line-height: 1; color: var(--lime); white-space: nowrap; }
+  .about-badge span { font-size: .875rem; color: #c9ccd0; }
+  .about-copy { display: grid; gap: 24px; justify-items: start; }
+  .about-lead { font-size: 1.1875rem !important; color: var(--ink) !important; line-height: 1.6 !important; }
+  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .about-fig { aspect-ratio: 16 / 11; } }
+
+  /* MANUFACTURERS */
+  .lgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .lgrid > div { height: 100%; min-width: 0; }
+  @media (max-width: 1000px) { .lgrid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px) { .lgrid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+  /* HUB */
+  .hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 110px); align-items: center; }
+  .hub-fig { position: relative; border-radius: 22px; overflow: hidden; aspect-ratio: 1; background: #22252a; }
+  .hub-fig :global(img), .hub-fig :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; }
+  .hub-badge { position: absolute; left: 20px; right: 20px; bottom: 20px; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 16px 20px; border-radius: 14px; background: rgba(20,22,25,.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(222,221,58,.25); color: var(--lime); }
+  .hub-badge div { display: grid; }
+  .hub-badge strong { font-family: var(--font-display); font-size: 1.25rem; letter-spacing: -.02em; color: #fff; }
+  .hub-badge span { font-size: .8125rem; color: var(--on-dark-muted); }
+  .hub-since { text-align: right; padding-left: 16px; border-left: 1px solid rgba(222,221,58,.25); }
+  .hub-copy { display: grid; gap: 24px; justify-items: start; }
+  .hub h2 { color: #fff; }
+  .hub-p { display: grid; gap: 1em; font-size: 1.0625rem; line-height: 1.7; }
+  .hub-p p:first-child { color: var(--on-dark); }
+  .hub-steps { list-style: none; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line-dark); border-radius: 14px; overflow: hidden; }
+  .hub-steps li { display: grid; gap: 6px; padding: 14px 16px; font-weight: 550; color: #fff; font-size: .9375rem; }
+  .hub-steps li + li { border-left: 1px solid var(--line-dark); }
+  .hub-steps .mono { color: var(--lime); font-size: .6875rem; }
+  @media (max-width: 900px) { .hub-grid { grid-template-columns: 1fr; } .hub-fig { aspect-ratio: 16 / 11; } }
+  @media (max-width: 520px) { .hub-steps { grid-template-columns: 1fr 1fr; } .hub-steps li + li:nth-child(3) { border-left: 0; } .hub-steps li:nth-child(n+3) { border-top: 1px solid var(--line-dark); } }
+
+  /* ENERGY */
+  .energy { position: relative; overflow: hidden; isolation: isolate; padding-block: clamp(110px, 13vw, 180px) clamp(56px, 6vw, 80px); }
+  .energy-bg { position: absolute; inset: 0; z-index: -1; }
+  .energy-bg :global(img), .energy-bg :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; }
+  .energy-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,22,25,.94) 0%, rgba(20,22,25,.78) 45%, rgba(20,22,25,.35) 100%), linear-gradient(0deg, rgba(20,22,25,.95) 0%, transparent 45%); }
+  .energy-in { display: grid; gap: clamp(56px, 8vw, 110px); }
+  .energy-copy { display: grid; gap: 22px; justify-items: start; max-width: 680px; }
+  .energy h2 { color: #fff; }
+  .energy .lead { color: #c3c6cb; }
+  .energy-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.16); }
+  .energy-stats div { padding: 24px 20px 0 0; display: grid; gap: 6px; align-content: start; }
+  .energy-stats div + div { padding-left: 20px; border-left: 1px solid rgba(255,255,255,.16); }
+  .energy-stats dt { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.5rem, 2.6vw, 2.25rem); letter-spacing: -.04em; line-height: 1; color: #fff; white-space: nowrap; }
+  .energy-stats dd { font-size: .875rem; color: #b5b9be; }
+  @media (max-width: 760px) {
+    .energy-stats { grid-template-columns: 1fr 1fr; }
+    .energy-stats div + div:nth-child(3) { padding-left: 0; border-left: 0; }
+    .energy-stats div:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.16); padding-top: 20px; margin-top: 20px; }
+  }
+</style>

@@ -1,0 +1,7 @@
+---
+import V from '../../views/ManufacturerDetail.astro';
+import { manufacturers } from '../../data/manufacturers';
+export const getStaticPaths = () => manufacturers.map((m) => ({ params: { slug: m.slug }, props: { m } }));
+const { m } = Astro.props;
+---
+<V lang="pt" m={m} />

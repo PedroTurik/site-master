@@ -1,0 +1,41 @@
+---
+import type { Manufacturer } from '../data/manufacturers';
+import { type Lang, mfrUrl } from '../i18n/routes';
+
+interface Props { m: Manufacturer; lang: Lang; compact?: boolean; }
+const { m, lang, compact = false } = Astro.props;
+---
+<a href={mfrUrl(lang, m.slug)} class:list={['tile', compact && 'tile--compact']}>
+  <span class="tile-logo">
+    <img src={m.logo} alt={m.legal} loading="lazy" decoding="async" style={`--s:${m.logoScale ?? 1}`} />
+  </span>
+  <span class="tile-meta">
+    <span class="tile-name">{m.name}</span>
+    {!compact && <span class="tile-tag">{m.tagline[lang]}</span>}
+  </span>
+  <svg class="tile-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+</a>
+
+<style>
+  .tile {
+    position: relative; display: grid; grid-template-rows: 1fr auto; gap: 16px; height: 100%;
+    min-height: 236px; padding: 22px 22px 20px; border-radius: var(--radius);
+    background: var(--white); border: 1px solid var(--line);
+    transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .tile:hover { border-color: var(--line-strong); box-shadow: var(--shadow-2); transform: translateY(-2px); }
+  .tile-logo { display: grid; place-items: center; height: 104px; }
+  .tile-logo img {
+    max-width: calc(80% * var(--s)); max-height: calc(60px * var(--s)); width: auto; object-fit: contain;
+    transition: transform 0.5s var(--ease);
+  }
+  .tile:hover .tile-logo img { transform: scale(1.04); }
+  .tile-meta { display: grid; gap: 4px; padding-top: 16px; padding-right: 24px; border-top: 1px solid var(--line); }
+  .tile-name { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.0625rem; }
+  .tile-tag { font-size: 0.8125rem; line-height: 1.45; color: var(--muted); }
+  .tile-arrow { position: absolute; right: 18px; bottom: 22px; color: var(--muted); transition: transform 0.35s var(--ease), color 0.35s; }
+  .tile:hover .tile-arrow { transform: translate(2px, -2px); color: var(--ink); }
+  .tile--compact { min-height: 190px; }
+  @media (max-width: 520px) { .tile { padding: 16px 16px 16px; min-height: 200px; } .tile-meta { padding-right: 18px; } .tile-name { font-size: .9375rem; } .tile-tag { font-size: .75rem; } .tile-arrow { right: 12px; bottom: 16px; } .tile-logo { height: 84px; } }
+  .tile--compact .tile-logo { height: 92px; }
+</style>

@@ -1,0 +1,209 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Distributors from '../components/Distributors.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { manufacturers, categories } from '../data/manufacturers';
+import { type Lang, url, routes, mfrUrl } from '../i18n/routes';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const other = lang === 'pt' ? 'en' : 'pt';
+
+const c = {
+  pt: {
+    title: 'Fabricantes',
+    metaTitle: 'Fabricantes · Semicondutores e componentes eletrônicos',
+    desc: 'Fabricantes globais de semicondutores de potência, memórias, displays, sensores, optoacopladores, cristais e magnéticos, com representação e suporte técnico da Mastertronics no Brasil e na América Latina.',
+    h1: 'Fabricantes globais.<br><em>Suporte técnico local.</em>',
+    lead: 'Representamos fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes.',
+    index: 'Portfólio por área de produto',
+    details: 'Ver fabricante',
+    why: {
+      label: 'Por que a Mastertronics',
+      title: 'O fabricante certo, com quem entende do seu projeto.',
+      items: [
+        { icon: 'chip', t: 'Suporte técnico especializado', d: 'Acompanhamos a escolha e a aplicação dos componentes junto ao seu time de engenharia.' },
+        { icon: 'target', t: 'Acesso a tecnologias emergentes', d: 'Antecipamos tendências e trazemos ao mercado latino-americano as novas gerações de semicondutores e componentes.' },
+        { icon: 'truck', t: 'Logística integrada', d: 'Os produtos são disponibilizados por distribuidores globais, com soluções logísticas integradas e suporte especializado.' },
+        { icon: 'users', t: 'Atendimento próximo', d: 'Equipe comercial e técnica com agilidade e foco nas necessidades de cada cliente, desde 1991.' },
+      ],
+    },
+    hub: {
+      label: 'Precisa de algo além do portfólio?',
+      title: 'O China HUB desenvolve o fornecedor para você.',
+      p: 'De conectores e cabos customizados a CIs e semicondutores de baixa complexidade, nossa unidade ISO 9001 na China prospecta, audita e qualifica fabricantes alternativos.',
+      cta: 'Conhecer o China HUB',
+    },
+  },
+  en: {
+    title: 'Manufacturers',
+    metaTitle: 'Manufacturers · Semiconductors and electronic components',
+    desc: 'Global manufacturers of power semiconductors, memory, displays, sensors, optocouplers, crystals and magnetics, with Mastertronics representation and technical support in Brazil and Latin America.',
+    h1: 'Global manufacturers.<br><em>Local technical support.</em>',
+    lead: 'We represent international manufacturers with agile, close technical and commercial support focused on customer needs — anticipating trends and enabling access to emerging technologies.',
+    index: 'Portfolio by product area',
+    details: 'View manufacturer',
+    why: {
+      label: 'Why Mastertronics',
+      title: 'The right manufacturer, with people who understand your project.',
+      items: [
+        { icon: 'chip', t: 'Specialized technical support', d: 'We work alongside your engineering team on component selection and application.' },
+        { icon: 'target', t: 'Access to emerging technologies', d: 'We anticipate trends and bring new generations of semiconductors and components to the Latin American market.' },
+        { icon: 'truck', t: 'Integrated logistics', d: 'Products are available through global distributors, with integrated logistics solutions and specialized support.' },
+        { icon: 'users', t: 'Close, responsive service', d: 'A commercial and technical team that is agile and focused on each customer’s needs, since 1991.' },
+      ],
+    },
+    hub: {
+      label: 'Need something beyond the portfolio?',
+      title: 'The China HUB develops the supplier for you.',
+      p: 'From connectors and custom cables to ICs and low-complexity semiconductors, our ISO 9001 unit in China sources, audits and qualifies alternative manufacturers.',
+      cta: 'Discover the China HUB',
+    },
+  },
+}[lang];
+const byCat = categories.map((k) => ({ ...k, list: manufacturers.filter((m) => m.categories.includes(k.key)) }));
+---
+<Base lang={lang} title={c.metaTitle} description={c.desc} alt={routes.manufacturers[other]}>
+  <PageHero label={c.title} title={c.h1} lead={c.lead} crumbs={[{ href: url(lang, 'home'), label: 'Mastertronics' }]} photo="wafer" />
+
+  <section class="section--tight white idx">
+    <div class="container">
+      <p class="idx-h mono reveal">{c.index}</p>
+      <ul class="idx-grid">
+        {byCat.map((k, i) => (
+          <li class="reveal" style={`--d:${(i % 4) * 0.04}s`}>
+            <span class="idx-n mono">{String(i + 1).padStart(2, '0')}</span>
+            <div class="idx-t">
+              <strong>{k.label[lang]}</strong>
+              <span>{k.blurb[lang]}</span>
+            </div>
+            <div class="idx-links">
+              {k.list.map((m) => <a href={`#${m.slug}`}>{m.name}</a>)}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section mlist">
+    <div class="container">
+      <div class="mcards">
+        {manufacturers.map((m, i) => (
+          <article class="mc reveal" id={m.slug} style={`--d:${(i % 2) * 0.06}s`}>
+            <a href={mfrUrl(lang, m.slug)} class="mc-logo" tabindex="-1" aria-hidden="true">
+              <img src={m.logo} alt="" loading="lazy" style={`--s:${m.logoScale ?? 1}`} />
+            </a>
+            <div class="mc-body">
+              <p class="mc-cat mono">{m.categories.map((k) => categories.find((x) => x.key === k)!.label[lang]).join(' · ')}</p>
+              <h2 class="h3"><a href={mfrUrl(lang, m.slug)}>{m.name}</a></h2>
+              <p class="mc-tag">{m.tagline[lang]}</p>
+              <ul class="mc-chips">{m.products[lang].slice(0, 3).map((p) => <li>{p}</li>)}</ul>
+              <a href={mfrUrl(lang, m.slug)} class="link-arrow mc-cta"><span>{c.details}</span><Icon name="arrow" /></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section white why">
+    <div class="container">
+      <div class="why-head">
+        <span class="label reveal">{c.why.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.why.title}</h2>
+      </div>
+      <ul class="why-grid">
+        {c.why.items.map((it, i) => (
+          <li class="reveal" style={`--d:${i * 0.06}s`}>
+            <span class="why-ic"><Icon name={it.icon as any} size={22} /></span>
+            <h3 class="h4">{it.t}</h3>
+            <p>{it.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Distributors lang={lang} />
+
+  <section class="section--tight xhub">
+    <div class="container">
+      <a class="xhub-card dark reveal" href={url(lang, 'chinaHub')}>
+        <div>
+          <span class="label">{c.hub.label}</span>
+          <h2 class="h3">{c.hub.title}</h2>
+          <p>{c.hub.p}</p>
+        </div>
+        <span class="btn btn--lime">{c.hub.cta}<Icon name="arrow" /></span>
+      </a>
+    </div>
+  </section>
+
+  <ContactSection lang={lang} topic="manufacturers" />
+</Base>
+
+<style>
+  .idx { border-top: 1px solid var(--line); }
+  .idx-h { font-size: .75rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 18px; }
+  .idx-grid { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 1px solid var(--ink); }
+  .idx-grid li { display: grid; grid-template-columns: 34px 1fr auto; gap: 14px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .idx-n { font-size: .75rem; color: var(--muted); }
+  .idx-t { display: grid; gap: 2px; }
+  .idx-t strong { font-family: var(--font-display); font-weight: 600; letter-spacing: -.015em; font-size: 1.0625rem; }
+  .idx-t span { font-size: .8125rem; color: var(--muted); }
+  .idx-links { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+  .idx-links a { font-size: .8125rem; font-weight: 550; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--white); transition: background .2s, color .2s, border-color .2s; white-space: nowrap; }
+  .idx-links a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+  @media (max-width: 980px) { .idx-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .idx-grid li { grid-template-columns: 28px 1fr; } .idx-links { grid-column: 2; justify-content: flex-start; } }
+
+  .mcards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .mc { display: grid; grid-template-columns: 220px 1fr; border-radius: 20px; overflow: hidden; background: var(--white); border: 1px solid var(--line); scroll-margin-top: 100px; transition: box-shadow .4s var(--ease), border-color .4s; }
+  .mc:hover { box-shadow: var(--shadow-2); border-color: var(--line-strong); }
+  .mc:target { border-color: var(--ink); box-shadow: 0 0 0 4px var(--lime-glow), var(--shadow-2); }
+  .mc-logo { display: grid; place-items: center; padding: 28px; background: var(--paper); border-right: 1px solid var(--line);
+    background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 14px 14px; }
+  .mc-logo img { max-width: calc(88% * var(--s)); max-height: calc(64px * var(--s)); object-fit: contain; transition: transform .5s var(--ease); }
+  .mc:hover .mc-logo img { transform: scale(1.05); }
+  .mc-body { display: flex; flex-direction: column; gap: 10px; padding: 26px 28px 24px; }
+  .mc-body > * { margin: 0; }
+  .mc-cat { font-size: .6875rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+  .mc h2 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .mc-tag { color: var(--slate); font-size: .9375rem; }
+  .mc-chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .mc-chips li { white-space: nowrap; font-size: .75rem; padding: 5px 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--graphite); }
+  .mc-cta { margin-top: auto !important; padding-top: 8px; align-self: flex-start; }
+  @media (max-width: 1100px) { .mcards { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .mc { grid-template-columns: 1fr; } .mc-logo { height: 140px; border-right: 0; border-bottom: 1px solid var(--line); } }
+
+  .why-head { display: grid; gap: 18px; max-width: 720px; margin-bottom: 56px; }
+  .why-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); }
+  .why-grid li { padding: 28px 24px 8px 0; display: grid; gap: 10px; align-content: start; }
+  .why-grid li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+  .why-ic { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; background: var(--paper); border: 1px solid var(--line); margin-bottom: 8px; }
+  .why-grid p { color: var(--slate); font-size: .9375rem; }
+  @media (max-width: 960px) {
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid li + li:nth-child(3) { padding-left: 0; border-left: 0; }
+    .why-grid li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 560px) {
+    .why-grid { grid-template-columns: 1fr; }
+    .why-grid li + li, .why-grid li + li:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  }
+
+  .xhub { background: var(--white); }
+  .xhub-card {
+    display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end;
+    padding: clamp(28px, 4vw, 52px); border-radius: 22px; position: relative; overflow: hidden;
+    background: radial-gradient(80% 120% at 100% 0%, rgba(222,221,58,.10), transparent 60%), var(--ink);
+  }
+  .xhub-card > div { display: grid; gap: 14px; max-width: 640px; }
+  .xhub-card h2 { color: #fff; }
+  .xhub-card .btn :global(svg) { transition: transform .3s var(--ease); }
+  .xhub-card:hover .btn :global(svg) { transform: translateX(3px); }
+  @media (max-width: 760px) { .xhub-card { grid-template-columns: 1fr; } .xhub-card .btn { justify-self: start; } }
+</style>

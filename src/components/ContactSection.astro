@@ -1,0 +1,242 @@
+---
+import Icon from './Icon.astro';
+import { company } from '../data/company';
+import { type Lang, url } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  topic?: 'general' | 'manufacturers' | 'hub' | 'renewables';
+  title?: string;
+  intro?: string;
+  id?: string;
+  headingLevel?: 'h1' | 'h2';
+}
+const { lang, topic = 'general', id = 'contato', headingLevel = 'h2' } = Astro.props;
+const H = headingLevel;
+
+const copy = {
+  pt: {
+    label: 'Contato',
+    title: 'Vamos conversar sobre o seu projeto',
+    intro: 'Cada parceria começa com uma boa conversa — fale com a nossa equipe e descubra como podemos colaborar.',
+    name: 'Nome', namePh: 'João Silva',
+    company: 'Empresa', companyPh: 'Nome da empresa',
+    email: 'E-mail', emailPh: 'joao.silva@empresa.com.br',
+    phone: 'Telefone', phonePh: '+55 (00) 00000-0000', optional: 'opcional',
+    topic: 'Assunto',
+    topics: { manufacturers: 'Fabricantes e componentes', hub: 'China HUB · desenvolvimento de fornecedores', renewables: 'Energias renováveis · CRRC', general: 'Outro assunto' },
+    message: { general: 'Como podemos ajudar?', manufacturers: 'Como podemos ajudar?', hub: 'Qual insumo você precisa desenvolver?', renewables: 'Descreva melhor seu projeto' },
+    messagePh: 'Escreva mais informações…',
+    consent: 'Concordo com o uso destes dados para retorno do contato, conforme a',
+    policy: 'Política de privacidade',
+    send: 'Envie sua mensagem',
+    sending: 'Enviando…',
+    ok: 'Mensagem enviada. Nossa equipe retornará em breve.',
+    err: 'Não foi possível enviar agora. Escreva para',
+    direct: 'Prefere e-mail?',
+    where: 'Onde estamos',
+    map: 'Ver no mapa',
+  },
+  en: {
+    label: 'Contact',
+    title: 'Let’s talk about your project',
+    intro: 'Every partnership starts with a good conversation — talk to our team and find out how we can collaborate.',
+    name: 'Name', namePh: 'John Smith',
+    company: 'Company', companyPh: 'Company name',
+    email: 'Email', emailPh: 'john.smith@company.com',
+    phone: 'Phone', phonePh: '+1 000 000 0000', optional: 'optional',
+    topic: 'Subject',
+    topics: { manufacturers: 'Manufacturers & components', hub: 'China HUB · supplier development', renewables: 'Renewable energy · CRRC', general: 'Something else' },
+    message: { general: 'How can we help?', manufacturers: 'How can we help?', hub: 'Which part or material do you need to source?', renewables: 'Tell us about your project' },
+    messagePh: 'Share a few details…',
+    consent: 'I agree to the use of this data to reply to my request, as described in the',
+    policy: 'Privacy policy',
+    send: 'Send your message',
+    sending: 'Sending…',
+    ok: 'Message sent. Our team will get back to you shortly.',
+    err: 'We couldn’t send it right now. Please write to',
+    direct: 'Prefer email?',
+    where: 'Where we are',
+    map: 'View on map',
+  },
+}[lang];
+
+const title = Astro.props.title ?? copy.title;
+const intro = Astro.props.intro ?? copy.intro;
+const topicOrder = ['manufacturers', 'hub', 'renewables', 'general'] as const;
+const defaultTopic = topic === 'general' ? 'manufacturers' : topic;
+---
+<section class="contact section" id={id}>
+  <div class="container contact-grid">
+    <div class="contact-aside">
+      <span class="label reveal">{copy.label}</span>
+      <H class="h2 reveal" style="--d:.05s">{title}</H>
+      <p class="lead reveal" style="--d:.1s">{intro}</p>
+
+      <dl class="contact-list reveal" style="--d:.15s">
+        <div>
+          <dt class="mono">{copy.direct}</dt>
+          <dd><a href={`mailto:${company.email}`} class="link-arrow"><span>{company.email}</span><Icon name="arrow-ur" /></a></dd>
+        </div>
+        <div>
+          <dt class="mono">{copy.where}</dt>
+          <dd>
+            {company.address.street}<br />{company.address.city[lang]}
+            <br /><a href={company.address.maps} target="_blank" rel="noopener" class="link-arrow sm"><span>{copy.map}</span><Icon name="arrow-ur" /></a>
+          </dd>
+        </div>
+        <div>
+          <dt class="mono">LinkedIn</dt>
+          <dd><a href={company.linkedin} target="_blank" rel="noopener" class="link-arrow"><span>Mastertronics</span><Icon name="arrow-ur" /></a></dd>
+        </div>
+      </dl>
+    </div>
+
+    <form class="cform reveal" style="--d:.1s" method="POST" action={company.form.endpoint}
+      data-key={company.form.accessKey} data-mail={company.email} data-sending={copy.sending} data-ok={copy.ok} data-err={copy.err} novalidate>
+      <input type="hidden" name="access_key" value={company.form.accessKey} />
+      <input type="hidden" name="subject" value={`Contato pelo site · ${lang.toUpperCase()}`} />
+      <input type="hidden" name="from_name" value="mastertronics.com.br" />
+      <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <fieldset class="cform-topics">
+        <legend class="mono">{copy.topic}</legend>
+        <div class="chips">
+          {topicOrder.map((k) => (
+            <label class="chip">
+              <input type="radio" name="assunto" value={copy.topics[k]} checked={k === defaultTopic} data-topic={k} />
+              <span>{copy.topics[k]}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div class="cform-row">
+        <label class="field">
+          <span>{copy.name}</span>
+          <input type="text" name="nome" placeholder={copy.namePh} required autocomplete="name" />
+        </label>
+        <label class="field">
+          <span>{copy.company}</span>
+          <input type="text" name="empresa" placeholder={copy.companyPh} autocomplete="organization" />
+        </label>
+      </div>
+      <div class="cform-row">
+        <label class="field">
+          <span>{copy.email}</span>
+          <input type="email" name="email" placeholder={copy.emailPh} required autocomplete="email" />
+        </label>
+        <label class="field">
+          <span>{copy.phone} <em>· {copy.optional}</em></span>
+          <input type="tel" name="telefone" placeholder={copy.phonePh} autocomplete="tel" />
+        </label>
+      </div>
+      <label class="field">
+        <span class="msg-label" data-labels={JSON.stringify(copy.message)}>{copy.message[topic]}</span>
+        <textarea name="mensagem" rows="5" placeholder={copy.messagePh} required></textarea>
+      </label>
+      <label class="consent">
+        <input type="checkbox" name="consentimento" value="sim" required />
+        <span>{copy.consent} <a href={url(lang, 'privacy')}>{copy.policy}</a>.</span>
+      </label>
+      <div class="cform-foot">
+        <button type="submit" class="btn btn--primary">{copy.send}<Icon name="arrow" /></button>
+        <p class="cform-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact { background: var(--white); border-top: 1px solid var(--line); }
+  .contact-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(40px, 7vw, 112px); align-items: start; }
+  .contact-aside { position: sticky; top: 120px; display: grid; gap: 22px; }
+  .contact-list { display: grid; gap: 22px; margin-top: 18px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .contact-list dt { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .contact-list dd { font-size: 1rem; line-height: 1.6; }
+  .link-arrow.sm { font-size: 0.875rem; margin-top: 4px; color: var(--slate); }
+
+  .cform { display: grid; gap: 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: clamp(22px, 3.5vw, 40px); }
+  .cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .cform-topics { border: 0; padding: 0; margin: 0 0 6px; }
+  .cform-topics legend { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip input { position: absolute; opacity: 0; pointer-events: none; }
+  .chip span {
+    white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line-strong); background: var(--white); font-size: 0.875rem; font-weight: 500;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .chip span::before { content: ''; width: 6px; height: 6px; border-radius: 1px; background: var(--line-strong); transition: background 0.2s; }
+  .chip:hover span { border-color: var(--ink); }
+  .chip input:checked + span { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .chip input:checked + span::before { background: var(--lime); }
+  .chip input:focus-visible + span { outline: 2px solid var(--lime); outline-offset: 2px; }
+
+  .field { display: grid; gap: 8px; }
+  .field > span { font-size: 0.875rem; font-weight: 550; }
+  .field em { font-style: normal; font-weight: 400; color: var(--muted); }
+  .field input, .field textarea {
+    width: 100%; padding: 13px 15px; border-radius: 10px; border: 1px solid var(--line-strong);
+    background: var(--white); font-size: 1rem; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field textarea { resize: vertical; min-height: 140px; }
+  .field input::placeholder, .field textarea::placeholder { color: #a2a5aa; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px var(--lime-glow); }
+  .cform.was-validated :invalid { border-color: #c2410c; }
+  .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 0.875rem; color: var(--slate); line-height: 1.5; }
+  .consent input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--ink); flex: none; }
+  .consent a { text-decoration: underline; text-underline-offset: 2px; }
+  .cform-foot { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 4px; }
+  .cform-status { font-size: 0.9375rem; color: var(--slate); }
+  .cform-status.ok { color: #3f6212; }
+  .cform-status.err { color: #b91c1c; }
+  .cform-status a { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-aside { position: static; }
+  }
+  @media (max-width: 560px) { .cform-row { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('.cform').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.cform-status')!;
+    const label = form.querySelector<HTMLElement>('.msg-label')!;
+    const labels = JSON.parse(label.dataset.labels || '{}');
+    form.querySelectorAll<HTMLInputElement>('input[name="assunto"]').forEach((r) =>
+      r.addEventListener('change', () => { if (r.checked && labels[r.dataset.topic!]) label.textContent = labels[r.dataset.topic!]; }),
+    );
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      form.classList.add('was-validated');
+      if (!form.checkValidity()) { form.querySelector<HTMLElement>(':invalid')?.focus(); return; }
+      const { key, mail, sending, ok, err } = form.dataset;
+      const data = new FormData(form);
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+
+      // No form service configured yet → hand off to the user's e-mail client.
+      if (!key || key.startsWith('YOUR_')) {
+        const body = [...data.entries()]
+          .filter(([k]) => !['access_key', 'subject', 'from_name', 'botcheck', 'consentimento'].includes(k))
+          .map(([k, v]) => `${k}: ${v}`).join('\n');
+        location.href = `mailto:${mail}?subject=${encodeURIComponent(String(data.get('assunto') || 'Contato'))}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      btn.disabled = true; status.className = 'cform-status'; status.textContent = sending!;
+      try {
+        const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: data });
+        const json = await res.json();
+        if (!res.ok || !json.success) throw new Error(json.message);
+        form.reset(); form.classList.remove('was-validated');
+        status.className = 'cform-status ok'; status.textContent = ok!;
+      } catch {
+        status.className = 'cform-status err';
+        status.innerHTML = `${err} <a href="mailto:${mail}">${mail}</a>.`;
+      } finally { btn.disabled = false; }
+    });
+  });
+</script>

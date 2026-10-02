@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Trace from '../components/Trace.astro';
+---
+<Base lang="pt" title="Página não encontrada" description="A página que você procura não existe." alt="/en/" headerTheme="dark" noindex>
+  <section class="nf dark">
+    <div class="container nf-in">
+      <span class="label">Erro 404</span>
+      <h1 class="display">Sinal perdido.</h1>
+      <p class="lead">Opa! Parece que essa página não existe. <span lang="en">Oops — this page doesn’t exist.</span></p>
+      <div class="nf-ctas">
+        <a href="/" class="btn btn--lime">Voltar ao início<Icon name="arrow" /></a>
+        <a href="/en/" class="btn btn--ghost">Back to home</a>
+      </div>
+    </div>
+    <Trace />
+  </section>
+</Base>
+<style>
+  .nf { min-height: 88vh; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 160px; }
+  .nf-in { display: grid; gap: 24px; justify-items: start; padding-bottom: 80px; }
+  .nf h1 { color: #fff; }
+  .nf .lead span { display: block; color: #7d8187; }
+  .nf-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+</style>

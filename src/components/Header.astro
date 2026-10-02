@@ -1,0 +1,155 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { type Lang, url } from '../i18n/routes';
+import { useT } from '../i18n/ui';
+
+interface Props { lang: Lang; alt: string; theme: 'dark' | 'light'; }
+const { lang, alt, theme } = Astro.props;
+const t = useT(lang);
+const path = Astro.url.pathname;
+const items = [
+  { href: url(lang, 'about'), label: t('nav.about') },
+  { href: url(lang, 'manufacturers'), label: t('nav.manufacturers') },
+  { href: url(lang, 'distributors'), label: t('nav.distributors') },
+  { href: url(lang, 'chinaHub'), label: t('nav.chinaHub') },
+  { href: url(lang, 'renewables'), label: t('nav.renewables') },
+];
+const isActive = (href: string) => path.startsWith(href) && href !== '/' && href !== '/en/';
+---
+<header class:list={['hdr', `hdr--${theme}`]} data-theme={theme}>
+  <div class="container hdr-in">
+    <a href={url(lang, 'home')} class="hdr-logo" aria-label={t('a11y.home')}>
+      <Logo />
+    </a>
+    <nav class="hdr-nav" aria-label={t('a11y.main')}>
+      <ul>
+        {items.map((i) => (
+          <li><a href={i.href} class:list={[isActive(i.href) && 'is-active']} aria-current={isActive(i.href) ? 'page' : undefined}>{i.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="hdr-actions">
+      <a class="hdr-lang" href={alt} hreflang={lang === 'pt' ? 'en' : 'pt-BR'} lang={lang === 'pt' ? 'en' : 'pt-BR'} title={t('lang.switch')}>
+        <Icon name="globe" size={16} /><span>{t('lang.short')}</span>
+      </a>
+      <a class="btn btn--sm hdr-cta" href={url(lang, 'contact')}>{t('nav.contact')}</a>
+      <button class="hdr-burger" aria-expanded="false" aria-controls="mnav" aria-label={t('nav.menu')}>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mnav" id="mnav" hidden>
+    <div class="container">
+      <ul>
+        {items.map((i, n) => (
+          <li style={`--n:${n}`}><a href={i.href}><span class="mono">0{n + 1}</span>{i.label}</a></li>
+        ))}
+        <li style={`--n:${items.length}`}><a href={url(lang, 'contact')}><span class="mono">0{items.length + 1}</span>{t('nav.contact')}</a></li>
+      </ul>
+      <div class="mnav-foot">
+        <a href="mailto:contato@mastertronics.com.br">contato@mastertronics.com.br</a>
+        <a href={alt}>{t('lang.switch')}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease), transform 0.5s var(--ease), color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  .hdr-in { display: flex; align-items: center; gap: 32px; height: 76px; transition: height 0.4s var(--ease); }
+  .hdr-logo { display: block; width: 172px; flex: none; }
+  .hdr-nav { margin-left: auto; }
+  .hdr-nav ul { display: flex; gap: 4px; list-style: none; padding: 0; }
+  .hdr-nav a {
+    position: relative; display: block; padding: 8px 13px; border-radius: 999px;
+    font-size: 0.9375rem; font-weight: 500; letter-spacing: -0.01em;
+    transition: background 0.25s, color 0.25s;
+  }
+  .hdr-nav a:hover { background: rgba(20, 22, 25, 0.05); }
+  .hdr-nav a.is-active::after {
+    content: ''; position: absolute; left: 50%; bottom: 1px; width: 5px; height: 5px; margin-left: -2.5px;
+    background: var(--lime); border-radius: 1px;
+  }
+  .hdr-actions { display: flex; align-items: center; gap: 10px; }
+  .hdr-lang { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; }
+  .hdr-lang:hover { background: rgba(20, 22, 25, 0.05); }
+  .hdr-cta { background: var(--ink); color: #fff; }
+  .hdr-cta:hover { background: var(--graphite); }
+
+  /* Theme: dark (transparent over a dark hero) */
+  .hdr--dark:not(.is-stuck) { color: var(--on-dark); }
+  .hdr--dark:not(.is-stuck) .hdr-nav a:hover,
+  .hdr--dark:not(.is-stuck) .hdr-lang:hover { background: rgba(255, 255, 255, 0.08); }
+  .hdr--dark:not(.is-stuck) .hdr-cta { background: var(--lime); color: var(--ink); }
+  .hdr--dark:not(.is-stuck) .hdr-cta:hover { background: #ebea5a; }
+  .hdr--dark:not(.is-stuck) :global(.logo-word), .hdr--dark:not(.is-stuck) :global(.logo-grey) { fill: #fff; }
+  .hdr--dark:not(.is-stuck) :global(.logo-tag) { fill: rgba(255,255,255,.6); }
+
+  /* Scrolled */
+  .hdr.is-stuck {
+    background: rgba(245, 245, 241, 0.82);
+    backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    border-bottom-color: var(--line);
+  }
+  .hdr.is-stuck .hdr-in { height: 64px; }
+  .hdr.is-hidden { transform: translateY(-100%); }
+
+  .hdr-burger { display: none; width: 44px; height: 44px; border-radius: 999px; position: relative; }
+  .hdr-burger span { position: absolute; left: 13px; right: 13px; height: 1.6px; background: currentColor; transition: transform 0.35s var(--ease), top 0.35s var(--ease); }
+  .hdr-burger span:first-child { top: 18px; }
+  .hdr-burger span:last-child { top: 25px; }
+  .hdr.is-open .hdr-burger span:first-child { top: 21.5px; transform: rotate(45deg); }
+  .hdr.is-open .hdr-burger span:last-child { top: 21.5px; transform: rotate(-45deg); }
+
+  .mnav { position: fixed; inset: 0; top: 0; z-index: -1; background: var(--ink); color: var(--on-dark); padding-top: 96px; overflow: auto; }
+  .mnav ul { list-style: none; padding: 0; border-top: 1px solid var(--line-dark); }
+  .mnav li { border-bottom: 1px solid var(--line-dark); opacity: 0; transform: translateY(12px); transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: calc(var(--n) * 50ms + 80ms); }
+  .hdr.is-open .mnav li { opacity: 1; transform: none; }
+  .mnav ul a { display: flex; align-items: baseline; gap: 18px; padding: 20px 0; font-family: var(--font-display); font-size: 2rem; font-weight: 550; letter-spacing: -0.03em; }
+  .mnav .mono { color: var(--lime); font-size: 0.75rem; }
+  .mnav-foot { display: flex; flex-direction: column; gap: 12px; padding: 32px 0; color: var(--on-dark-muted); }
+  .mnav-foot a { font-size: .9375rem; color: var(--on-dark-muted); }
+  .mnav-foot a:hover { color: #fff; }
+  .hdr.is-open { color: var(--on-dark); }
+  .hdr.is-open .hdr-in { position: relative; }
+  .hdr.is-open :global(.logo-word), .hdr.is-open :global(.logo-grey) { fill: #fff; }
+  .hdr.is-open.is-stuck { background: transparent; border-color: transparent; backdrop-filter: none; }
+
+  @media (max-width: 1120px) {
+    .hdr-nav, .hdr-cta { display: none; }
+    .hdr-burger { display: block; }
+    .hdr-actions { margin-left: auto; }
+    .hdr-logo { width: 150px; }
+  }
+</style>
+
+<script>
+  const hdr = document.querySelector<HTMLElement>('.hdr')!;
+  const burger = hdr.querySelector<HTMLButtonElement>('.hdr-burger')!;
+  const mnav = hdr.querySelector<HTMLElement>('#mnav')!;
+  let lastY = window.scrollY;
+  const onScroll = () => {
+    const y = window.scrollY;
+    hdr.classList.toggle('is-stuck', y > 24);
+    if (!hdr.classList.contains('is-open')) hdr.classList.toggle('is-hidden', y > 480 && y > lastY + 4);
+    if (y < lastY - 4) hdr.classList.remove('is-hidden');
+    lastY = y;
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  const setOpen = (open: boolean) => {
+    if (open) { mnav.hidden = false; requestAnimationFrame(() => hdr.classList.add('is-open')); }
+    else { hdr.classList.remove('is-open'); setTimeout(() => (mnav.hidden = true), 300); }
+    burger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  burger.addEventListener('click', () => setOpen(!hdr.classList.contains('is-open')));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && hdr.classList.contains('is-open')) { setOpen(false); burger.focus(); }
+  });
+</script>

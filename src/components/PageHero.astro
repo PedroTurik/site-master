@@ -1,0 +1,54 @@
+---
+import Trace from './Trace.astro';
+import Photo from './Photo.astro';
+interface Props { label: string; title: string; lead?: string; theme?: 'dark' | 'light'; crumbs?: { href: string; label: string }[]; photo?: string; }
+const { label, title, lead, theme = 'light', crumbs = [], photo } = Astro.props;
+const crumbLabel = Astro.url.pathname.startsWith('/en/') ? 'Breadcrumb' : 'Trilha de navegação';
+---
+<section class:list={['phero', theme === 'dark' ? 'dark' : 'phero--light']}>
+  <div class="phero-grid" aria-hidden="true"></div>
+  <div class:list={['container phero-wrap', photo && 'has-photo']}>
+  <div class="phero-in">
+    {crumbs.length > 0 && (
+      <nav class="crumbs mono reveal" aria-label={crumbLabel}>
+        {crumbs.map((c) => <><a href={c.href}>{c.label}</a><span aria-hidden="true">/</span></>)}
+        <span aria-current="page">{label}</span>
+      </nav>
+    )}
+    {crumbs.length === 0 && <span class="label reveal">{label}</span>}
+    <h1 class="h1 reveal" style="--d:.05s" set:html={title} />
+    {lead && <p class="lead reveal" style="--d:.1s">{lead}</p>}
+    <slot />
+  </div>
+  {photo && <div class="phero-fig reveal" style="--d:.12s"><Photo name={photo} alt="" sizes="(max-width: 900px) 100vw, 42vw" eager /></div>}
+  </div>
+  <Trace class="phero-trace" theme={theme} />
+</section>
+
+<style>
+  .phero { position: relative; overflow: hidden; padding-top: clamp(140px, 15vw, 200px); padding-bottom: 0; isolation: isolate; }
+  .phero--light { background: var(--paper); }
+  .phero-grid {
+    position: absolute; inset: 0; z-index: -1;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 72px 72px; opacity: .55;
+    mask-image: radial-gradient(70% 90% at 70% 0%, #000 20%, transparent 80%);
+  }
+  .dark .phero-grid { background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); opacity: 1; }
+  .phero-in { display: grid; gap: 24px; justify-items: start; align-content: start; padding-bottom: clamp(56px, 7vw, 96px); }
+  .phero-wrap.has-photo { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: end; }
+  .phero-fig { border-radius: 22px 22px 0 0; overflow: hidden; aspect-ratio: 5 / 4; background: var(--ink); align-self: end; }
+  .phero-fig :global(img), .phero-fig :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 900px) { .phero-wrap.has-photo { grid-template-columns: 1fr; gap: 0; } .phero-fig { aspect-ratio: 16 / 9; border-radius: 18px 18px 0 0; } .has-photo .phero-in { padding-bottom: 40px; } }
+  .phero h1 { max-width: 20ch; text-wrap: balance; }
+  .dark.phero h1 { color: #fff; }
+  .phero h1 :global(em) { font-style: normal; color: var(--muted); }
+  .dark.phero h1 :global(em) { color: #8f949b; }
+  .phero .lead { max-width: 60ch; }
+  .crumbs { display: flex; gap: 10px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); flex-wrap: wrap; }
+  .crumbs a:hover { color: var(--ink); }
+  .dark .crumbs a:hover { color: #fff; }
+  .crumbs [aria-current] { color: var(--ink); }
+  .dark .crumbs [aria-current] { color: var(--lime); }
+  .phero :global(.phero-trace) { margin-bottom: -2px; }
+</style>

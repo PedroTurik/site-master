@@ -1,0 +1,85 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { type Lang, url } from '../i18n/routes';
+import { useT } from '../i18n/ui';
+import { company } from '../data/company';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useT(lang);
+const year = new Date().getFullYear();
+const nav = [
+  { href: url(lang, 'about'), label: t('nav.about') },
+  { href: url(lang, 'manufacturers'), label: t('nav.manufacturers') },
+  { href: url(lang, 'distributors'), label: t('nav.distributors') },
+  { href: url(lang, 'chinaHub'), label: t('nav.chinaHub') },
+  { href: url(lang, 'renewables'), label: t('nav.renewables') },
+  { href: url(lang, 'contact'), label: t('nav.contact') },
+];
+---
+<footer class="ftr dark">
+  <div class="container">
+    <div class="ftr-top">
+      <div class="ftr-brand">
+        <a href={url(lang, 'home')} class="ftr-logo" aria-label="Mastertronics"><Logo variant="dark" /></a>
+        <p class="ftr-since mono">{t('footer.since')} · Porto Alegre, {lang === 'pt' ? 'Brasil' : 'Brazil'}</p>
+      </div>
+      <div class="ftr-cols">
+        <div>
+          <p class="ftr-h">{t('footer.nav')}</p>
+          <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+        </div>
+        <div>
+          <p class="ftr-h">{t('footer.contact')}</p>
+          <ul>
+            <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+            <li><a href={company.linkedin} target="_blank" rel="noopener" class="ftr-in"><Icon name="linkedin" size={16} /> LinkedIn</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="ftr-h">{t('footer.address')}</p>
+          <address>
+            {company.address.street}<br />
+            {company.address.city[lang]}<br />
+            {lang === 'pt' ? 'CEP' : 'ZIP'} {company.address.zip}
+          </address>
+        </div>
+      </div>
+    </div>
+    <div class="ftr-wave" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0 50 H420 L470 10 H560 L610 50 H1200" pathLength="1" /></svg>
+    </div>
+    <div class="ftr-bottom">
+      <span>© {year} Mastertronics Representações Ltda. · CNPJ {company.cnpj}</span>
+      <span>{t('footer.rights')}</span>
+      <a href={url(lang, 'privacy')}>{t('footer.privacy')}</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr { padding-top: 96px; padding-bottom: 32px; }
+  .ftr-top { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; }
+  .ftr-logo { display: block; width: 220px; }
+  .ftr-since { margin-top: 20px; color: var(--on-dark-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .ftr-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .ftr-h { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; color: #7d8187; margin-bottom: 18px; }
+  .ftr ul { list-style: none; padding: 0; display: grid; gap: 10px; }
+  .ftr a, .ftr address { color: var(--on-dark); font-style: normal; font-size: 0.9375rem; line-height: 1.6; }
+  .ftr ul a { opacity: 0.85; transition: opacity 0.2s, color 0.2s; }
+  .ftr ul a:hover { opacity: 1; color: var(--lime); }
+  .ftr-in { display: inline-flex; align-items: center; gap: 8px; }
+  .ftr-wave { margin: 80px 0 24px; height: 40px; }
+  .ftr-wave svg { width: 100%; height: 100%; }
+  .ftr-wave path { fill: none; stroke: rgba(255, 255, 255, 0.14); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .ftr-bottom { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 0.8125rem; color: #7d8187; }
+  .ftr-bottom a { font-size: inherit; color: #7d8187; margin-left: auto; }
+  .ftr-bottom a:hover { color: var(--on-dark); }
+  @media (max-width: 860px) {
+    .ftr-top { grid-template-columns: 1fr; }
+    .ftr-cols { grid-template-columns: 1fr 1fr; }
+    .ftr-bottom a { margin-left: 0; }
+  }
+  @media (max-width: 520px) { .ftr-cols { grid-template-columns: 1fr; } }
+</style>

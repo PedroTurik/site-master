@@ -1,0 +1,93 @@
+---
+// Dot-matrix world map with animated trace arcs from Porto Alegre to supplier regions.
+import world from '../data/world-dots.json';
+
+interface Node { id: string; label: string; lon: number; lat: number; kind?: 'hq' | 'hub' | 'mfr'; }
+interface Props { nodes: Node[]; class?: string; theme?: 'dark' | 'light'; labelScale?: number; }
+const { nodes, class: cls = '', theme = 'dark', labelScale = 1 } = Astro.props;
+
+const K = 10; // px per degree
+const W = (world.lonMax - world.lonMin) * K;
+const H = (world.latMax - world.latMin) * K;
+const x = (lon: number) => (lon - world.lonMin) * K;
+const y = (lat: number) => (world.latMax - lat) * K;
+
+const hq = nodes.find((n) => n.kind === 'hq')!;
+const arcs = nodes
+  .filter((n) => n.kind !== 'hq')
+  .map((n, i) => {
+    const x1 = x(hq.lon), y1 = y(hq.lat), x2 = x(n.lon), y2 = y(n.lat);
+    const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+    const dist = Math.hypot(x2 - x1, y2 - y1);
+    const lift = dist * 0.32;
+    return { d: `M${x1},${y1} Q${mx},${my - lift} ${x2},${y2}`, i, hub: n.kind === 'hub' };
+  });
+const r = world.step * K * 0.2;
+---
+<div class:list={['wmap', `wmap--${theme}`, cls]} aria-hidden="true">
+  <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <radialGradient id="wm-glow">
+        <stop offset="0" stop-color="var(--lime)" stop-opacity=".55" />
+        <stop offset="1" stop-color="var(--lime)" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <g class="wmap-dots">
+      {world.dots.map(([lon, lat]) => <circle cx={x(lon)} cy={y(lat)} r={r} />)}
+    </g>
+    <g class="wmap-arcs">
+      {arcs.map((a) => (
+        <>
+          <path class="wmap-arc-base" d={a.d} />
+          <path class:list={['wmap-arc', a.hub && 'is-hub']} d={a.d} pathLength="1" style={`--i:${a.i}`} />
+        </>
+      ))}
+    </g>
+    <g class="wmap-nodes">
+      {nodes.map((n, i) => (
+        <g class:list={['wmap-node', `is-${n.kind ?? 'mfr'}`]} transform={`translate(${x(n.lon)} ${y(n.lat)})`} style={`--i:${i}`}>
+          {n.kind !== 'mfr' && <circle class="wmap-halo" r="46" fill="url(#wm-glow)" />}
+          <circle class="wmap-ring" r={n.kind === 'mfr' ? 9 : 14} />
+          <circle class="wmap-core" r={n.kind === 'mfr' ? 4.5 : 7} />
+        </g>
+      ))}
+    </g>
+    <g class="wmap-labels">
+      {nodes.filter((n) => n.kind !== 'mfr').map((n) => (
+        <text x={x(n.lon) + 26 * labelScale} y={y(n.lat) + 9 * labelScale} style={`font-size:${32 * labelScale}px`}>{n.label}</text>
+      ))}
+    </g>
+  </svg>
+</div>
+
+<style>
+  .wmap svg { width: 100%; height: auto; overflow: visible; }
+  .wmap-dots circle { fill: rgba(255, 255, 255, 0.16); }
+  .wmap--light .wmap-dots circle { fill: rgba(20, 22, 25, 0.16); }
+  .wmap-arc-base { fill: none; stroke: rgba(222, 221, 58, 0.16); stroke-width: 1.5; stroke-dasharray: 4 6; }
+  .wmap--light .wmap-arc-base { stroke: rgba(20, 22, 25, 0.08); }
+  .wmap-arc {
+    fill: none; stroke: var(--lime); stroke-width: 2.4; stroke-linecap: round;
+    stroke-dasharray: 0.14 0.86; stroke-dashoffset: 1;
+    animation: wm-travel 5.5s linear infinite; animation-delay: calc(var(--i) * -0.9s);
+    opacity: 0.9;
+  }
+  .wmap--light .wmap-arc { stroke: var(--ink); }
+  .wmap-arc.is-hub { stroke-width: 3; }
+  @keyframes wm-travel { to { stroke-dashoffset: 0; } }
+  .wmap-core { fill: var(--lime); }
+  .wmap-ring { fill: none; stroke: var(--lime); stroke-width: 1.5; opacity: 0.6; transform-origin: center; animation: wm-pulse 2.8s var(--ease) infinite; animation-delay: calc(var(--i) * 0.3s); }
+  .wmap--light .wmap-core { fill: var(--ink); }
+  .wmap--light .wmap-ring { stroke: var(--ink); }
+  .is-mfr .wmap-core { fill: #fff; }
+  .wmap--light .is-mfr .wmap-core { fill: var(--graphite); }
+  .is-mfr .wmap-ring { stroke: #fff; opacity: 0.35; }
+  @keyframes wm-pulse { 0% { transform: scale(0.6); opacity: 0.8; } 100% { transform: scale(2.4); opacity: 0; } }
+  .wmap-labels text { font-family: var(--font-mono); font-size: 32px; letter-spacing: 0.06em; fill: var(--on-dark); text-transform: uppercase; }
+  .wmap--light .wmap-labels text { fill: var(--ink); }
+  @media (max-width: 760px) { .wmap-labels { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .wmap-arc { animation: none; stroke-dasharray: none; opacity: 0.5; }
+    .wmap-ring { animation: none; }
+  }
+</style>

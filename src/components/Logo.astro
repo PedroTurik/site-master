@@ -1,0 +1,18 @@
+---
+// Official Mastertronics logo (vector from the current brand SVG), split into
+// recolorable parts: .logo-grey (mark), .logo-lime (accent), .logo-word, .logo-tag.
+import parts from './logo-parts.json';
+interface Props { variant?: 'light' | 'dark'; tagline?: boolean; markOnly?: boolean; class?: string; }
+const { variant = 'light', tagline = false, markOnly = false, class: cls } = Astro.props;
+const viewBox = markOnly ? '4 4 514 186' : tagline ? '4 4 800 296' : '4 4 800 244';
+const inner = parts.mark + (markOnly ? '' : parts.word) + (tagline && !markOnly ? parts.tag : '');
+---
+<svg class:list={['logo', `logo--${variant}`, cls]} viewBox={viewBox} role="img" aria-label="Mastertronics" set:html={inner} />
+
+<style is:global>
+  .logo { width: 100%; height: auto; display: block; }
+  .logo .logo-grey, .logo .logo-word, .logo .logo-tag { fill: var(--brand-grey, #7b7c7e); transition: fill 0.4s; }
+  .logo .logo-lime { fill: var(--lime, #dedd3a); }
+  .logo--dark .logo-grey, .logo--dark .logo-word { fill: #ffffff; }
+  .logo--dark .logo-tag { fill: rgba(255, 255, 255, 0.6); }
+</style>

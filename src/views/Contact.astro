@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { type Lang, routes } from '../i18n/routes';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const other = lang === 'pt' ? 'en' : 'pt';
+const c = {
+  pt: { t: 'Contato', d: 'Fale com a Mastertronics sobre fabricantes e componentes, desenvolvimento de fornecedores no China HUB ou energias renováveis com a CRRC.', h: 'Vamos conversar sobre o seu projeto.', i: 'Cada parceria começa com uma boa conversa — fale com a nossa equipe e descubra como podemos colaborar.' },
+  en: { t: 'Contact', d: 'Talk to Mastertronics about our manufacturers and components, supplier development through the China HUB, or renewable energy with CRRC.', h: 'Let’s talk about your project.', i: 'Every partnership starts with a good conversation — talk to our team and find out how we can collaborate.' },
+}[lang];
+---
+<Base lang={lang} title={c.t} description={c.d} alt={routes.contact[other]}>
+  <div class="cpage">
+    <ContactSection lang={lang} headingLevel="h1" title={c.h} intro={c.i} />
+  </div>
+</Base>
+<style>
+  .cpage :global(.contact) { padding-top: clamp(140px, 15vw, 190px); border-top: 0; background: var(--paper); }
+  .cpage :global(.cform) { background: var(--white); }
+</style>

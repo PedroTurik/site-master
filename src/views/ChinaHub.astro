@@ -1,0 +1,273 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import WorldMap from '../components/WorldMap.astro';
+import Trace from '../components/Trace.astro';
+import Photo from '../components/Photo.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { type Lang, url, routes } from '../i18n/routes';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const other = lang === 'pt' ? 'en' : 'pt';
+const hubYears = new Date().getFullYear() - 2001;
+
+const c = {
+  pt: {
+    metaTitle: 'China HUB · Desenvolvimento de fornecedores alternativos na China',
+    desc: 'Unidade ISO 9001 da Mastertronics na China, em operação desde 2001, dedicada à prospecção, auditoria e qualificação de fabricantes alternativos de insumos eletrônicos.',
+    crumb: 'China HUB',
+    h1: 'Fornecedores alternativos, <em>qualificados na origem.</em>',
+    lead: 'HUB à disposição da base de clientes da Mastertronics para o desenvolvimento de fabricantes alternativos de insumos eletrônicos.',
+    chips: ['ISO 9001', 'Desde 2001', 'Confiabilidade', 'Redução de custos'],
+    cta: 'Envie sua demanda',
+    story: {
+      label: 'Trajetória',
+      title: `${hubYears} anos desenvolvendo fornecedores na China.`,
+      items: [
+        { y: '2001', t: 'Início da operação', p: 'Em 2001, iniciamos o suporte a placas de circuito impresso por meio da operação de um hub na China, dedicado ao desenvolvimento, auditoria e qualificação de fabricantes.' },
+        { y: '2020', t: 'Ampliação do escopo', p: 'Em 2020, impulsionados pelos desafios da pandemia, ampliamos a atuação desse hub para incluir a prospecção de fabricantes de outros insumos, como conectores, cabos customizados, componentes magnéticos (indutores e transformadores), baterias, peças plásticas e metálicas customizadas, componentes passivos, além de semicondutores de baixa complexidade, como diodos, transistores, triacs e outros CIs que não estão disponíveis no portfólio dos fabricantes que representamos. Essa operação segue em constante evolução, atendendo às demandas específicas de cada cliente.' },
+        { y: 'Hoje', t: 'Unidade ISO 9001', p: 'Operamos uma unidade ISO 9001 na China, dedicada à qualificação de fornecedores alternativos, com foco em confiabilidade e redução de custos.' },
+      ],
+    },
+    scope: {
+      label: 'Escopo',
+      title: 'O que desenvolvemos para você',
+      sub: 'Insumos além do portfólio dos nossos fabricantes, desenvolvidos conforme a necessidade de cada cliente.',
+      items: [
+        { i: 'layers', t: 'Placas de circuito impresso', d: 'O ponto de partida do HUB, em 2001.' },
+        { i: 'plug', t: 'Conectores', d: 'Padrão e específicos da aplicação.' },
+        { i: 'cable', t: 'Cabos customizados', d: 'Conforme a especificação do cliente.' },
+        { i: 'coil', t: 'Componentes magnéticos', d: 'Indutores e transformadores.' },
+        { i: 'battery', t: 'Baterias', d: 'Para produtos e sistemas eletrônicos.' },
+        { i: 'box', t: 'Peças plásticas e metálicas', d: 'Customizadas conforme projeto.' },
+        { i: 'resistor', t: 'Componentes passivos', d: 'Resistores, capacitores e afins.' },
+        { i: 'bolt', t: 'Semicondutores discretos', d: 'Diodos, transistores, triacs e outros de baixa complexidade.' },
+        { i: 'chip', t: 'CIs além do portfólio', d: 'Circuitos integrados não cobertos pelos nossos fabricantes.' },
+      ],
+    },
+    process: {
+      label: 'Como funciona',
+      title: 'Da demanda ao fornecedor qualificado.',
+      steps: [
+        { t: 'Demanda', d: 'Partimos da especificação e das necessidades específicas do seu projeto.' },
+        { t: 'Prospecção', d: 'Identificamos fabricantes alternativos aptos a atender o insumo.' },
+        { t: 'Auditoria', d: 'Auditamos cada fabricante candidato.' },
+        { t: 'Qualificação', d: 'Qualificamos o fornecedor com foco em confiabilidade e redução de custos.' },
+      ],
+    },
+    why: [
+      { v: 'ISO 9001', l: 'Unidade certificada na China.' },
+      { v: '2001', l: `${hubYears} anos de experiência no mercado chinês.` },
+      { v: 'Sob medida', l: 'Cada desenvolvimento parte da demanda específica do cliente.' },
+    ],
+    contactTitle: 'Qual insumo você precisa desenvolver?',
+    contactIntro: 'Envie a especificação ou descreva a sua necessidade. Nossa equipe avalia a demanda e retorna com os próximos passos.',
+  },
+  en: {
+    metaTitle: 'China HUB · Alternative supplier development in China',
+    desc: 'Mastertronics’ ISO 9001-certified unit in China, operating since 2001, dedicated to sourcing, auditing and qualifying alternative manufacturers of electronic materials.',
+    crumb: 'China HUB',
+    h1: 'Alternative suppliers, <em>qualified at the source.</em>',
+    lead: 'Our hub in China is at the service of Mastertronics’ customers, developing alternative manufacturers of electronic components and materials.',
+    chips: ['ISO 9001', 'Since 2001', 'Reliability', 'Cost reduction'],
+    cta: 'Send us your request',
+    story: {
+      label: 'Our story',
+      title: `${hubYears} years developing suppliers in China.`,
+      items: [
+        { y: '2001', t: 'Operations begin', p: 'In 2001 we opened our hub in China to support printed circuit boards, dedicated to developing, auditing and qualifying manufacturers.' },
+        { y: '2020', t: 'Broader scope', p: 'In 2020, driven by the challenges of the pandemic, we expanded the hub’s operations to include sourcing manufacturers of other materials, such as connectors, custom cables, magnetic components (inductors and transformers), batteries, custom plastic and metal parts, passive components, as well as low-complexity semiconductors such as diodes, transistors, triacs and other ICs that are not available in the portfolio of the manufacturers we represent. This operation continues to evolve, responding to the specific demands of each customer.' },
+        { y: 'Today', t: 'ISO 9001 unit', p: 'We operate an ISO 9001-certified unit in China, dedicated to qualifying alternative suppliers with a focus on reliability and cost reduction.' },
+      ],
+    },
+    scope: {
+      label: 'Scope',
+      title: 'What we develop for you',
+      sub: 'Materials beyond our manufacturers’ portfolio, developed around each customer’s needs.',
+      items: [
+        { i: 'layers', t: 'Printed circuit boards', d: 'Where the HUB started, in 2001.' },
+        { i: 'plug', t: 'Connectors', d: 'Standard and application-specific.' },
+        { i: 'cable', t: 'Custom cables', d: 'Built to the customer’s specification.' },
+        { i: 'coil', t: 'Magnetic components', d: 'Inductors and transformers.' },
+        { i: 'battery', t: 'Batteries', d: 'For electronic products and systems.' },
+        { i: 'box', t: 'Plastic & metal parts', d: 'Customized to your design.' },
+        { i: 'resistor', t: 'Passive components', d: 'Resistors, capacitors and more.' },
+        { i: 'bolt', t: 'Discrete semiconductors', d: 'Diodes, transistors, triacs and other low-complexity devices.' },
+        { i: 'chip', t: 'ICs beyond our portfolio', d: 'Integrated circuits not covered by our manufacturers.' },
+      ],
+    },
+    process: {
+      label: 'How it works',
+      title: 'From request to qualified supplier.',
+      steps: [
+        { t: 'Request', d: 'We start from the specification and the specific needs of your project.' },
+        { t: 'Sourcing', d: 'We identify alternative manufacturers able to supply the part.' },
+        { t: 'Audit', d: 'We audit each candidate manufacturer.' },
+        { t: 'Qualification', d: 'We qualify the supplier with a focus on reliability and cost reduction.' },
+      ],
+    },
+    why: [
+      { v: 'ISO 9001', l: 'A certified unit in China.' },
+      { v: '2001', l: `${hubYears} years of experience in the Chinese market.` },
+      { v: 'Tailored', l: 'Every development starts from the customer’s specific need.' },
+    ],
+    contactTitle: 'Which part do you need to source?',
+    contactIntro: 'Send us the specification or describe what you need. Our team will review the request and get back to you with next steps.',
+  },
+}[lang];
+
+const nodes = [
+  { id: 'poa', label: 'Brasil', lon: -51.2, lat: -30.0, kind: 'hq' as const },
+  { id: 'hub', label: 'China HUB', lon: 113.9, lat: 22.6, kind: 'hub' as const },
+];
+if (lang === 'en') nodes[0].label = 'Brazil';
+---
+<Base lang={lang} title={c.metaTitle} description={c.desc} alt={routes.chinaHub[other]} headerTheme="dark">
+  <section class="hhero dark">
+    <div class="hhero-grid" aria-hidden="true"></div>
+    <div class="container hhero-in">
+      <div class="hhero-copy">
+        <nav class="crumbs mono reveal" aria-label={lang === 'pt' ? 'Trilha de navegação' : 'Breadcrumb'}>
+          <a href={url(lang, 'home')}>Mastertronics</a><span aria-hidden="true">/</span><span aria-current="page">{c.crumb}</span>
+        </nav>
+        <h1 class="h1 reveal" style="--d:.05s" set:html={c.h1} />
+        <p class="lead reveal" style="--d:.1s">{c.lead}</p>
+        <ul class="hchips reveal" style="--d:.14s">{c.chips.map((x) => <li>{x}</li>)}</ul>
+        <a href="#contato" class="btn btn--lime reveal" style="--d:.18s">{c.cta}<Icon name="arrow" /></a>
+      </div>
+      <div class="hhero-map reveal" style="--d:.2s"><WorldMap nodes={nodes} labelScale={1.7} /></div>
+    </div>
+    <Trace />
+  </section>
+
+  <section class="section white story">
+    <div class="container story-grid">
+      <div class="story-head">
+        <span class="label reveal">{c.story.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.story.title}</h2>
+        <div class="story-fig reveal" style="--d:.1s"><Photo name="inspection" alt="" sizes="(max-width: 900px) 100vw, 40vw" /></div>
+      </div>
+      <ol class="tl">
+        {c.story.items.map((it, i) => (
+          <li class="reveal" style={`--d:${i * 0.06}s`}>
+            <span class="tl-y">{it.y}</span>
+            <div>
+              <h3 class="h4">{it.t}</h3>
+              <p>{it.p}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section scope">
+    <div class="container">
+      <div class="scope-head">
+        <span class="label reveal">{c.scope.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.scope.title}</h2>
+        <p class="lead reveal" style="--d:.1s">{c.scope.sub}</p>
+      </div>
+      <ul class="sgrid">
+        {c.scope.items.map((it, i) => (
+          <li class="reveal" style={`--d:${(i % 3) * 0.05}s`}>
+            <span class="s-num mono">{String(i + 1).padStart(2, '0')}</span>
+            <span class="s-ic"><Icon name={it.i as any} size={22} /></span>
+            <h3 class="h4">{it.t}</h3>
+            <p>{it.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section dark process">
+    <div class="container">
+      <div class="scope-head">
+        <span class="label reveal">{c.process.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.process.title}</h2>
+      </div>
+      <ol class="steps">
+        {c.process.steps.map((s, i) => (
+          <li class="reveal" style={`--d:${i * 0.08}s`}>
+            <span class="st-n mono">0{i + 1}</span>
+            <span class="st-dot" aria-hidden="true"></span>
+            <h3 class="h3">{s.t}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+      <dl class="hwhy">
+        {c.why.map((w, i) => <div class="reveal" style={`--d:${i * 0.06}s`}><dt>{w.v}</dt><dd>{w.l}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <ContactSection lang={lang} topic="hub" title={c.contactTitle} intro={c.contactIntro} />
+</Base>
+
+<style>
+  .hhero { position: relative; overflow: hidden; padding-top: clamp(130px, 14vw, 180px); isolation: isolate; }
+  .hhero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(50% 60% at 85% 45%, rgba(222,221,58,.08), transparent 70%); }
+  .hhero-grid { position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(80% 70% at 50% 30%, #000 30%, transparent 100%); }
+  .hhero-in { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+  .hhero h1 { font-size: clamp(2.5rem, 5vw, 4.4rem); max-width: 14ch; }
+  .hhero-copy { display: grid; gap: 24px; justify-items: start; }
+  .hhero h1 { color: #fff; }
+  .hhero h1 :global(em) { font-style: normal; color: #8f949b; }
+  .crumbs { display: flex; gap: 10px; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--on-dark-muted); }
+  .crumbs a:hover { color: #fff; }
+  .crumbs [aria-current] { color: var(--lime); }
+  .hchips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .hchips li { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; padding: 7px 12px 6px; border-radius: 999px; border: 1px solid var(--line-dark); color: var(--on-dark); }
+  .hchips li:first-child { border-color: rgba(222,221,58,.4); color: var(--lime); }
+  .hhero-map { margin-right: -12%; }
+  @media (max-width: 960px) { .hhero-in { grid-template-columns: 1fr; } .hhero-map { display: none; } .hhero { padding-bottom: 24px; } }
+
+  .story-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(40px, 7vw, 110px); align-items: start; }
+  .story-head { display: grid; gap: 18px; position: sticky; top: 110px; }
+  .story-fig { margin-top: 18px; border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--ink); }
+  .story-fig :global(img), .story-fig :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; }
+  .tl { list-style: none; padding: 0; border-left: 1px solid var(--line-strong); }
+  .tl li { position: relative; display: grid; grid-template-columns: 100px 1fr; gap: 20px; padding: 0 0 44px 32px; }
+  .tl li::before { content: ''; position: absolute; left: -5px; top: 10px; width: 9px; height: 9px; border-radius: 2px; background: var(--white); border: 1.5px solid var(--ink); }
+  .tl li:last-child::before { background: var(--lime); border-color: var(--ink); }
+  .tl-y { font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; letter-spacing: -.04em; line-height: 1.1; }
+  .tl h3 { margin-bottom: 8px; }
+  .tl p { color: var(--slate); line-height: 1.7; }
+  @media (max-width: 900px) { .story-grid { grid-template-columns: 1fr; } .story-head { position: static; } }
+  @media (max-width: 560px) { .tl li { grid-template-columns: 1fr; gap: 6px; padding-left: 24px; } }
+
+  .scope-head { display: grid; gap: 18px; max-width: 720px; margin-bottom: 52px; }
+  .process h2 { color: #fff; }
+  .sgrid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .sgrid li { position: relative; display: grid; gap: 8px; align-content: start; padding: 26px; border-radius: 16px; background: var(--white); border: 1px solid var(--line); transition: border-color .3s, box-shadow .3s; }
+  .sgrid li:hover { border-color: var(--line-strong); box-shadow: var(--shadow-1); }
+  .s-num { position: absolute; top: 24px; right: 24px; font-size: .6875rem; color: var(--muted); }
+  .s-ic { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; background: var(--paper); border: 1px solid var(--line); margin-bottom: 10px; }
+  .sgrid li:hover .s-ic { background: var(--lime); border-color: var(--lime); }
+  .sgrid p { color: var(--slate); font-size: .9375rem; }
+  @media (max-width: 900px) { .sgrid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .sgrid { grid-template-columns: 1fr; } }
+
+  .steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+  .steps::before { content: ''; position: absolute; left: 0; right: 0; top: 43px; height: 1px; background: var(--line-dark); }
+  .steps li { position: relative; display: grid; gap: 12px; padding-right: 28px; align-content: start; }
+  .st-n { color: var(--lime); font-size: .75rem; }
+  .st-dot { width: 13px; height: 13px; border-radius: 3px; background: var(--ink); border: 1.5px solid var(--lime); margin: 4px 0 14px; position: relative; z-index: 1; }
+  .steps li:last-child .st-dot { background: var(--lime); }
+  .steps h3 { color: #fff; }
+  .steps p { font-size: .9375rem; }
+  @media (max-width: 860px) {
+    .steps { grid-template-columns: 1fr; gap: 28px; padding-left: 28px; }
+    .steps::before { left: 6px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+    .st-dot { position: absolute; left: -28px; top: 22px; margin: 0; }
+  }
+  .hwhy { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 80px; border-top: 1px solid var(--line-dark); }
+  .hwhy div { padding: 28px 24px 0 0; display: grid; gap: 8px; align-content: start; }
+  .hwhy div + div { padding-left: 24px; border-left: 1px solid var(--line-dark); }
+  .hwhy dt { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -.04em; color: #fff; line-height: 1; }
+  .hwhy dd { color: var(--on-dark-muted); font-size: .9375rem; max-width: 30ch; }
+  @media (max-width: 760px) { .hwhy { grid-template-columns: 1fr; } .hwhy div + div { padding-left: 0; border-left: 0; } .hwhy div { padding-bottom: 20px; border-bottom: 1px solid var(--line-dark); } }
+</style>

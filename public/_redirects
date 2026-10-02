@@ -1,0 +1,6 @@
+# 301 redirects from the previous site (Netlify / Cloudflare Pages format)
+/chinahub            /china-hub/        301
+/en/chinahub         /en/china-hub/     301
+/en/renovaveis       /en/renewables/    301
+/representadas       /fabricantes/      301
+/representadas/*     /fabricantes/:splat 301

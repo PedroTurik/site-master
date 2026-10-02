@@ -1,0 +1,222 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import MfrTile from '../components/MfrTile.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Trace from '../components/Trace.astro';
+import { manufacturers, categories, distributors, type Manufacturer } from '../data/manufacturers';
+import { type Lang, url, mfrUrl } from '../i18n/routes';
+
+interface Props { lang: Lang; m: Manufacturer; }
+const { lang, m } = Astro.props;
+const other = lang === 'pt' ? 'en' : 'pt';
+
+const productImages = import.meta.glob<{ default: ImageMetadata }>('../assets/products/*.png', { eager: true });
+const imgs = (m.images ?? []).map((k) => productImages[`../assets/products/${k}.png`]?.default).filter(Boolean);
+
+const related = manufacturers.filter((x) => x.slug !== m.slug && x.categories.some((c) => m.categories.includes(c))).slice(0, 4);
+const fill = manufacturers.filter((x) => x.slug !== m.slug && !related.includes(x));
+const more = [...related, ...fill].slice(0, 4);
+
+const t = {
+  pt: {
+    crumb: 'Fabricantes', area: 'Área', products: 'Linhas de produto', markets: 'Mercados de atuação',
+    highlights: 'Destaques', site: 'Site oficial', gallery: 'Produtos', more: 'Outros fabricantes', all: 'Ver todos',
+    with: 'Onde comprar', where: 'Como comprar através dos distribuidores',
+    withText: `A Mastertronics representa a ${m.name}, com suporte técnico e comercial local e acesso aos produtos por meio dos nossos distribuidores parceiros.`,
+    ask: 'Solicitar informações', contactTitle: `Fale conosco sobre a ${m.name}`,
+    contactIntro: 'Conte-nos sobre a sua aplicação. Nossa equipe técnica retorna com as linhas de produto, documentação e o melhor caminho de compra.',
+    meta: `${m.name} · Representação no Brasil`,
+  },
+  en: {
+    crumb: 'Manufacturers', area: 'Area', products: 'Product lines', markets: 'Markets',
+    highlights: 'Highlights', site: 'Official website', gallery: 'Products', more: 'Other manufacturers', all: 'See all',
+    with: 'Where to buy', where: 'How to buy through our distributors',
+    withText: `Mastertronics represents ${m.name}, with local technical and commercial support and product availability through our distribution partners.`,
+    ask: 'Request information', contactTitle: `Talk to us about ${m.name}`,
+    contactIntro: 'Tell us about your application. Our technical team will get back to you with the right product lines, documentation and the best purchasing route.',
+    meta: `${m.name} · Representation in Brazil`,
+  },
+}[lang];
+const catNames = m.categories.map((k) => categories.find((c) => c.key === k)!.label[lang]);
+const desc = m.description[lang];
+---
+<Base lang={lang} title={t.meta} description={desc.length > 158 ? desc.slice(0, 155).replace(/\s+\S*$/, '') + '…' : desc} alt={mfrUrl(other, m.slug)}>
+  <section class="mhero">
+    <div class="mhero-grid" aria-hidden="true"></div>
+    <div class="container mhero-in">
+      <nav class="crumbs mono reveal" aria-label={lang === 'pt' ? 'Trilha de navegação' : 'Breadcrumb'}>
+        <a href={url(lang, 'home')}>Mastertronics</a><span aria-hidden="true">/</span>
+        <a href={url(lang, 'manufacturers')}>{t.crumb}</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{m.name}</span>
+      </nav>
+      <div class="mhero-main">
+        <div class="mhero-copy">
+          <h1 class="h1 reveal" style="--d:.05s">{m.name}</h1>
+          <p class="mlegal mono reveal" style="--d:.08s">{m.legal}</p>
+          <p class="lead reveal" style="--d:.12s">{desc}</p>
+          <div class="mctas reveal" style="--d:.16s">
+            <a href="#contato" class="btn btn--primary">{t.ask}<Icon name="arrow" /></a>
+            <a href={m.site.href} target="_blank" rel="noopener" class="btn btn--ghost">{t.site}<Icon name="arrow-ur" /></a>
+          </div>
+        </div>
+        <aside class="mcard reveal" style="--d:.1s">
+          <div class="mcard-logo"><img src={m.logo} alt={m.legal} style={`--s:${m.logoScale ?? 1}`} /></div>
+          <dl class="mcard-dl">
+            <div><dt class="mono">{t.area}</dt><dd>{catNames.join(', ')}</dd></div>
+            <div><dt class="mono">Web</dt><dd><a href={m.site.href} target="_blank" rel="noopener">{m.site.label} ↗</a></dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+    <Trace theme="light" />
+  </section>
+
+  {m.facts && (
+    <section class="facts white">
+      <div class="container">
+        <dl class="facts-grid">
+          {m.facts[lang].map((f, i) => (
+            <div class="reveal" style={`--d:${i * 0.06}s`}><dt>{f.value}</dt><dd>{f.label}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <section class="section white mbody">
+    <div class="container mbody-grid">
+      <div class="mblock reveal">
+        <h2 class="mono mh">{t.products}</h2>
+        <ul class="plist">{m.products[lang].map((p) => <li><span class="pdot"></span>{p}</li>)}</ul>
+      </div>
+      <div class="mblock reveal" style="--d:.06s">
+        <h2 class="mono mh">{t.markets}</h2>
+        <ul class="mkts">{m.markets[lang].map((p) => <li>{p}</li>)}</ul>
+        {m.highlights && (
+          <>
+            <h2 class="mono mh mh2">{t.highlights}</h2>
+            <ul class="hl">{m.highlights[lang].map((h) => <li><Icon name="check" size={16} />{h}</li>)}</ul>
+          </>
+        )}
+      </div>
+    </div>
+
+    {imgs.length > 0 && (
+      <div class="container">
+        <h2 class="mono mh gal-h reveal">{t.gallery}</h2>
+        <div class:list={['gal', `gal--${imgs.length}`]}>
+          {imgs.map((img, i) => (
+            <figure class="reveal" style={`--d:${i * 0.05}s`}>
+              <Image src={img!} alt={`${m.name} — ${t.gallery.toLowerCase()} ${i + 1}`} widths={[320, 640]} sizes="(max-width: 720px) 50vw, 25vw" />
+            </figure>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="container">
+      <div class="with reveal">
+        <div class="with-copy">
+          <span class="label">{t.with}</span>
+          <p>{t.withText}</p>
+          <a href={url(lang, 'distributors')} class="link-arrow"><span>{t.where}</span><Icon name="arrow" /></a>
+        </div>
+        <ul class="with-logos">
+          {distributors.map((d) => <li><img src={d.logo} alt={d.name} loading="lazy" /></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight more">
+    <div class="container">
+      <div class="more-head">
+        <h2 class="h3">{t.more}</h2>
+        <a href={url(lang, 'manufacturers')} class="link-arrow"><span>{t.all}</span><Icon name="arrow" /></a>
+      </div>
+      <div class="more-grid">
+        {more.map((x) => <MfrTile m={x} lang={lang} compact />)}
+      </div>
+    </div>
+  </section>
+
+  <ContactSection lang={lang} topic="manufacturers" title={t.contactTitle} intro={t.contactIntro} />
+</Base>
+
+<style>
+  .mhero { position: relative; background: var(--paper); padding-top: clamp(130px, 14vw, 180px); overflow: hidden; isolation: isolate; }
+  .mhero-grid {
+    position: absolute; inset: 0; z-index: -1; opacity: .55;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 72px 72px; mask-image: radial-gradient(70% 90% at 80% 0%, #000 20%, transparent 80%);
+  }
+  .mhero-in { display: grid; gap: 36px; padding-bottom: clamp(48px, 6vw, 80px); }
+  .crumbs { display: flex; gap: 10px; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); flex-wrap: wrap; }
+  .crumbs a:hover { color: var(--ink); }
+  .crumbs [aria-current] { color: var(--ink); }
+  .mhero-main { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .mhero-copy { display: grid; gap: 20px; justify-items: start; }
+  .mnew { font-size: .6875rem; text-transform: uppercase; letter-spacing: .08em; padding: 6px 10px 5px; border-radius: 999px; background: var(--ink); color: var(--lime); }
+  .mlegal { color: var(--muted); font-size: .8125rem; margin-top: -8px; }
+  .mhero .lead { font-size: 1.125rem; color: var(--slate); }
+  .mctas { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+  .mcard { background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-1); }
+  .mcard-logo { height: 220px; display: grid; place-items: center; padding: 32px; border-bottom: 1px solid var(--line);
+    background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 16px 16px; }
+  .mcard-logo img { max-width: calc(72% * var(--s)); max-height: calc(84px * var(--s)); object-fit: contain; }
+  .mcard-dl { display: grid; }
+  .mcard-dl div { display: grid; grid-template-columns: 90px 1fr; gap: 12px; padding: 16px 22px; }
+  .mcard-dl div + div { border-top: 1px solid var(--line); }
+  .mcard-dl dt { font-size: .6875rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding-top: 3px; }
+  .mcard-dl dd { font-size: .9375rem; }
+  .mcard-dl a:hover { text-decoration: underline; }
+  @media (max-width: 900px) { .mhero-main { grid-template-columns: 1fr; } .mcard-logo { height: 170px; } }
+
+  .facts { border-top: 1px solid var(--line); }
+  .facts-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .facts-grid div { padding: 36px 28px 36px 0; display: grid; gap: 8px; align-content: start; }
+  .facts-grid div + div { padding-left: 28px; border-left: 1px solid var(--line); }
+  .facts-grid dt { font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 600; letter-spacing: -.04em; line-height: 1; }
+  .facts-grid dd { color: var(--slate); font-size: .9375rem; max-width: 32ch; }
+  @media (max-width: 760px) { .facts-grid { grid-template-columns: 1fr; } .facts-grid div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } .facts-grid div { padding: 24px 0; } }
+
+  .mbody { border-top: 1px solid var(--line); padding-top: clamp(56px, 7vw, 96px); }
+  .mbody-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); }
+  .mh { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 500; margin-bottom: 16px; }
+  .mh2 { margin-top: 40px; }
+  .plist { list-style: none; padding: 0; border-top: 1px solid var(--ink); }
+  .plist li { display: flex; gap: 14px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--line); font-family: var(--font-display); font-weight: 550; font-size: 1.0625rem; letter-spacing: -.01em; }
+  .pdot { width: 7px; height: 7px; border-radius: 1px; background: var(--ink); flex: none; }
+  .plist li:hover .pdot { background: var(--lime); }
+  .mkts { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .mkts li { padding: 8px 14px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); font-size: .875rem; }
+  .hl { list-style: none; padding: 0; display: grid; gap: 14px; }
+  .hl li { display: grid; grid-template-columns: 18px 1fr; gap: 12px; color: var(--slate); }
+  .hl li :global(svg) { margin-top: 4px; color: var(--lime-ink); }
+  @media (max-width: 860px) { .mbody-grid { grid-template-columns: 1fr; } }
+
+  .gal-h { margin-top: 72px; }
+  .gal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .gal figure { aspect-ratio: 1; border-radius: 16px; background: var(--white); border: 1px solid var(--line); display: grid; place-items: center; padding: 24px; overflow: hidden; }
+  .gal.gal--1 { grid-template-columns: 1fr; }
+  .gal.gal--1 figure { aspect-ratio: 5 / 1.2; }
+  .gal figure :global(img) { max-height: 100%; width: auto; object-fit: contain; mix-blend-mode: multiply; transition: transform .6s var(--ease); }
+  .gal figure:hover :global(img) { transform: scale(1.05); }
+  @media (max-width: 720px) { .gal { grid-template-columns: 1fr 1fr; } .gal--1 { grid-template-columns: 1fr; } }
+
+  .with { margin-top: 72px; padding: 30px 32px; border-radius: 20px; background: var(--paper); border: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items: center; }
+  .with-copy { display: grid; gap: 12px; justify-items: start; }
+  .with-copy p { color: var(--slate); }
+  .with-logos { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .with-logos li { display: grid; place-items: center; height: 86px; padding: 14px; border-radius: 12px; background: var(--white); border: 1px solid var(--line); }
+  .with-logos img { max-height: 34px; max-width: 90%; object-fit: contain; }
+  @media (max-width: 900px) { .with { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .with-logos { grid-template-columns: 1fr 1fr; } .with { padding: 22px; } }
+
+  .more { background: var(--paper); border-top: 1px solid var(--line); }
+  .more-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 28px; gap: 16px; }
+  .more-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 1000px) { .more-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

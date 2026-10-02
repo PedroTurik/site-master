@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Lang } from '../i18n/routes';
+import { useT } from '../i18n/ui';
+import { company } from '../data/company';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  alt: string;               // path of the same page in the other language
+  headerTheme?: 'dark' | 'light';
+  ogImage?: string;
+  noindex?: boolean;
+}
+const { lang, title, description, alt, headerTheme = 'light', noindex = false } = Astro.props;
+const ogImage = Astro.props.ogImage ?? (lang === 'en' ? '/og-en.png' : '/og.png');
+const t = useT(lang);
+const site = Astro.site!;
+const canonical = new URL(Astro.url.pathname, site).href;
+const altHref = new URL(alt, site).href;
+const fullTitle = title.includes('Mastertronics') ? title : `${title} · Mastertronics`;
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Mastertronics Representações Ltda.',
+  alternateName: 'Mastertronics',
+  url: site.href,
+  logo: new URL('/brand/mastertronics-logo.png', site).href,
+  foundingDate: '1991',
+  email: 'contato@mastertronics.com.br',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Rua Santa Terezinha, 253 / 202',
+    addressLocality: 'Porto Alegre',
+    addressRegion: 'RS',
+    postalCode: '90040-180',
+    addressCountry: 'BR',
+  },
+  sameAs: [company.linkedin],
+};
+---
+<!doctype html>
+<html lang={lang === 'pt' ? 'pt-BR' : 'en'} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : (
+      <>
+        <link rel="canonical" href={canonical} />
+        <link rel="alternate" hreflang={lang === 'pt' ? 'pt-BR' : 'en'} href={canonical} />
+        <link rel="alternate" hreflang={lang === 'pt' ? 'en' : 'pt-BR'} href={altHref} />
+        <link rel="alternate" hreflang="x-default" href={lang === 'pt' ? canonical : altHref} />
+      </>
+    )}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#141619" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mastertronics" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, site).href} />
+    <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(org)} />
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{t('nav.skip')}</a>
+    <Header lang={lang} alt={alt} theme={headerTheme} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

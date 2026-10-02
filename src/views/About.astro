@@ -4,7 +4,6 @@ import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
 import WorldMap from '../components/WorldMap.astro';
 import Trace from '../components/Trace.astro';
-import Distributors from '../components/Distributors.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { manufacturers } from '../data/manufacturers';
 import { company } from '../data/company';
@@ -15,31 +14,34 @@ const { lang } = Astro.props;
 const other = lang === 'pt' ? 'en' : 'pt';
 const years = new Date().getFullYear() - company.founded;
 const n = manufacturers.length;
+const hubYears = new Date().getFullYear() - 2001;
 
 const c = {
   pt: {
-    metaTitle: 'Empresa · Excelência em Soluções Eletrônicas desde 1991',
-    desc: 'Desde 1991, a Mastertronics conecta a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos.',
+    metaTitle: 'Empresa · Solução técnica e logística em eletrônica desde 1991',
+    desc: 'A Mastertronics é uma solução técnica e logística para a indústria eletrônica da América Latina: representação de fabricantes globais, China HUB e energia renovável com a CRRC, desde 1991.',
     crumb: 'Empresa',
-    h1: 'Excelência em <em>Soluções Eletrônicas</em>',
-    lead: 'Fabricantes globais de semicondutores e componentes, desenvolvimento de fornecedores na China e soluções em energia renovável, com suporte técnico local desde 1991.',
+    h1: 'Solução técnica e logística, <em>em várias frentes.</em>',
+    lead: 'Representação de fabricantes globais, fábricas desenvolvidas e cargas consolidadas na China e soluções em energia renovável. Desde 1991, cada vez mais próximos dos nossos clientes.',
     heroCaption: 'Porto Alegre · sede da Mastertronics',
     intro: 'Quem somos',
+    fronts: ['Representação', '', 'China HUB', 'Energia · CRRC'],
     text: [
-      'Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Representamos fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes.',
-      'Somos parceiros estratégicos da Arrow Electronics, Future Electronics, Macnica DHW e Richardson RFPD, disponibilizando os produtos dos fabricantes que representamos por meio desses distribuidores globais e garantindo soluções logísticas integradas com suporte técnico especializado.',
-      'Nosso portfólio de produtos inclui semicondutores para eletrônica de potência (MOSFETs, IGBTs, SiC, diodos e transistores), memórias NOR e NAND (incluindo SSD, eMMC e UFS) e DRAM (SDRAM, DDR1, DDR2, DDR3(L) e LPDDR), displays customizados (TFT com touchscreen e monocromáticos), sensores MEMS (magnetômetros, acelerômetros, chaves Hall e IMUs), optoacopladores e drivers isolados para IGBT/MOSFET, e sensores de corrente e tensão (Hall e fluxgate) para aplicações industriais e de energia. Também operamos uma unidade ISO 9001 na China (nosso China HUB), dedicada à qualificação de fornecedores alternativos, com foco em confiabilidade e redução de custos.',
+      'Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Hoje, somos uma solução técnica e logística para os nossos clientes, em várias frentes — e estamos cada vez mais próximos de cada um deles.',
+      'Na representação, atuamos ao lado de fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes. O cliente compra pelo canal de distribuição — com parceiros como Arrow Electronics, Future Electronics, Macnica DHW e Richardson RFPD — ou direto da fábrica.',
+      'Nosso portfólio de produtos inclui semicondutores para eletrônica de potência (MOSFETs, IGBTs, SiC, diodos e transistores), memórias NOR e NAND (incluindo SSD, eMMC e UFS) e DRAM (SDRAM, DDR1, DDR2, DDR3(L) e LPDDR), displays customizados (TFT com touchscreen e monocromáticos), sensores MEMS (magnetômetros, acelerômetros, chaves Hall e IMUs), optoacopladores e drivers isolados para IGBT/MOSFET, e sensores de corrente e tensão (Hall e fluxgate) para aplicações industriais e de energia.',
+      'Com o China HUB, nossa unidade ISO 9001 na China, desenvolvemos fábricas e consolidamos as cargas dessas fábricas. A Mastertronics é o fornecedor e o exportador para o cliente — ou a fábrica exporta direto, na compra direto de fábrica. Comprando direto da fábrica, sem intermediários nem brokers, damos garantia, rastreabilidade e suporte técnico às peças.',
       'Em parceria estratégica com o grupo CRRC, oferecemos sistemas completos para energias renováveis, reforçando nosso compromisso com a sustentabilidade e a eletrônica aplicada à geração limpa, ao armazenamento em sistemas BESS e à produção de hidrogênio verde, em linha com as metas de descarbonização.',
     ],
     mosaic: [
-      { photo: 'wafer', t: 'Fabricantes globais', k: 'manufacturers' as const },
+      { photo: 'wafer', t: 'Representação de fabricantes', k: 'manufacturers' as const },
       { photo: 'qualification', t: 'China HUB', k: 'chinaHub' as const },
       { photo: 'wind-fog', t: 'Energia renovável', k: 'renewables' as const },
     ],
     nums: [
       { v: '1991', l: 'Ano de fundação' },
       { v: String(n), l: 'Fabricantes globais' },
-      { v: '4', l: 'Distribuidores globais parceiros' },
+      { v: `${hubYears} anos`, l: 'De China HUB: fábricas e consolidação' },
       { v: 'ISO 9001', l: 'Unidade própria na China' },
       { v: 'CRRC', l: 'Parceira estratégica em energia' },
     ],
@@ -49,9 +51,9 @@ const c = {
       items: [
         { i: 'users', t: 'Relacionamento de longo prazo', d: `${years} anos ao lado da indústria eletroeletrônica, acompanhando cada projeto do desenvolvimento à produção.` },
         { i: 'chip', t: 'Suporte técnico especializado', d: 'Apoio à especificação e à aplicação dos componentes, com agilidade e proximidade.' },
-        { i: 'layers', t: 'Fabricantes de referência', d: 'Portfólio com líderes globais em potência, memórias, sensores, optoeletrônica, displays e magnéticos.' },
-        { i: 'truck', t: 'Distribuidores globais', d: 'Compra através de Arrow, Future, Macnica DHW e Richardson RFPD, com logística integrada.' },
-        { i: 'shield', t: 'Presença na China', d: 'Unidade ISO 9001 para desenvolver e qualificar fornecedores alternativos, com foco em confiabilidade e custo.' },
+        { i: 'layers', t: 'Fabricantes de referência', d: 'Líderes globais em potência, memórias, sensores, optoeletrônica, displays e magnéticos, pelo canal de distribuição ou direto da fábrica.' },
+        { i: 'truck', t: 'Logística na China', d: 'Unidade ISO 9001 que desenvolve fábricas e consolida as cargas, com exportação pela Mastertronics ou direto da fábrica.' },
+        { i: 'shield', t: 'Fornecedor que responde pela peça', d: 'Direto da fábrica, sem intermediários nem brokers: garantia, rastreabilidade e suporte técnico.' },
         { i: 'sun', t: 'Soluções em energia', d: 'Sistemas completos para geração, armazenamento BESS e hidrogênio verde, com a tecnologia CRRC.' },
       ],
     },
@@ -62,34 +64,36 @@ const c = {
       list: [
         { k: 'Sede', v: 'Porto Alegre · RS · Brasil' },
         { k: 'Atendimento', v: 'Brasil e América Latina' },
-        { k: 'China HUB', v: 'Unidade ISO 9001 na China' },
+        { k: 'China HUB', v: 'Fábricas e consolidação de cargas na China' },
         { k: 'Fabricantes', v: 'Taiwan, China, Hong Kong e Reino Unido' },
       ],
     },
   },
   en: {
-    metaTitle: 'Company · Excellence in Electronic Solutions since 1991',
-    desc: 'Since 1991, Mastertronics has connected Latin America’s electrical and electronics industry with leading global solutions in semiconductors and electronic components.',
+    metaTitle: 'Company · Technical and logistics solutions in electronics since 1991',
+    desc: 'Mastertronics is a technical and logistics solution for Latin America’s electronics industry: manufacturer representation, the China HUB and renewable energy with CRRC, since 1991.',
     crumb: 'Company',
-    h1: 'Excellence in <em>Electronic Solutions</em>',
-    lead: 'Global semiconductor and component manufacturers, supplier development in China and renewable energy solutions, with local technical support since 1991.',
+    h1: 'Technical and logistics solutions, <em>on several fronts.</em>',
+    lead: 'Global manufacturer representation, factories developed and cargo consolidated in China, and renewable energy solutions. Since 1991, ever closer to our customers.',
     heroCaption: 'Porto Alegre · Mastertronics headquarters',
     intro: 'Who we are',
+    fronts: ['Representation', '', 'China HUB', 'Energy · CRRC'],
     text: [
-      'Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. We represent international manufacturers with agile, close technical and commercial support focused on customer needs — anticipating trends and enabling access to emerging technologies.',
-      'We are strategic partners of Arrow Electronics, Future Electronics, Macnica DHW and Richardson RFPD, making our manufacturers’ products available through these global distributors and ensuring integrated logistics solutions with specialized technical support.',
-      'Our product portfolio includes semiconductors for power electronics (MOSFETs, IGBTs, SiC, diodes and transistors), NOR and NAND flash memories (including SSD, eMMC and UFS) and DRAM (SDRAM, DDR1, DDR2, DDR3(L) and LPDDR), custom displays (TFT with touchscreen and monochrome), MEMS sensors (magnetometers, accelerometers, Hall switches and IMUs), optocouplers and isolated IGBT/MOSFET gate drivers, and current and voltage sensors (Hall and fluxgate) for industrial and energy applications. We also operate an ISO 9001-certified unit in China (our China HUB), dedicated to qualifying alternative suppliers with a focus on reliability and cost reduction.',
+      'Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. Today we are a technical and logistics solution for our customers, on several fronts — and closer to each of them than ever.',
+      'In representation, we work alongside international manufacturers with agile, close technical and commercial support focused on customer needs, anticipating trends and enabling access to emerging technologies. Customers buy through the distribution channel — with partners such as Arrow Electronics, Future Electronics, Macnica DHW and Richardson RFPD — or direct from the factory.',
+      'Our product portfolio includes semiconductors for power electronics (MOSFETs, IGBTs, SiC, diodes and transistors), NOR and NAND flash memories (including SSD, eMMC and UFS) and DRAM (SDRAM, DDR1, DDR2, DDR3(L) and LPDDR), custom displays (TFT with touchscreen and monochrome), MEMS sensors (magnetometers, accelerometers, Hall switches and IMUs), optocouplers and isolated IGBT/MOSFET gate drivers, and current and voltage sensors (Hall and fluxgate) for industrial and energy applications.',
+      'Through the China HUB, our ISO 9001-certified unit in China, we develop factories and consolidate the cargo from those factories. Mastertronics is the supplier and the exporter to the customer — or the factory exports directly when the customer buys direct from the factory. Buying direct from the factory, with no middlemen or brokers, we provide warranty, traceability and technical support for the parts.',
       'In strategic partnership with the CRRC group, we offer complete renewable energy systems, reinforcing our commitment to sustainability and to electronics applied to clean energy generation, BESS storage and green hydrogen production, in line with decarbonization goals.',
     ],
     mosaic: [
-      { photo: 'wafer', t: 'Global manufacturers', k: 'manufacturers' as const },
+      { photo: 'wafer', t: 'Manufacturer representation', k: 'manufacturers' as const },
       { photo: 'qualification', t: 'China HUB', k: 'chinaHub' as const },
       { photo: 'wind-fog', t: 'Renewable energy', k: 'renewables' as const },
     ],
     nums: [
       { v: '1991', l: 'Year founded' },
       { v: String(n), l: 'Global manufacturers' },
-      { v: '4', l: 'Global distribution partners' },
+      { v: `${hubYears} years`, l: 'Of China HUB: factories and consolidation' },
       { v: 'ISO 9001', l: 'Our own unit in China' },
       { v: 'CRRC', l: 'Strategic energy partner' },
     ],
@@ -99,9 +103,9 @@ const c = {
       items: [
         { i: 'users', t: 'Long-term relationships', d: `${years} years alongside the electronics industry, with long-term support for every project.` },
         { i: 'chip', t: 'Specialized technical support', d: 'Support with component specification and application, with agility and a close relationship.' },
-        { i: 'layers', t: 'Leading manufacturers', d: 'A portfolio of global leaders in power, memory, sensors, optoelectronics, displays and magnetics.' },
-        { i: 'truck', t: 'Global distributors', d: 'Purchase through Arrow, Future, Macnica DHW and Richardson RFPD, with integrated logistics.' },
-        { i: 'shield', t: 'Presence in China', d: 'An ISO 9001 unit to develop and qualify alternative suppliers, focused on reliability and cost.' },
+        { i: 'layers', t: 'Leading manufacturers', d: 'Global leaders in power, memory, sensors, optoelectronics, displays and magnetics, through distribution or direct from the factory.' },
+        { i: 'truck', t: 'Logistics in China', d: 'An ISO 9001 unit that develops factories and consolidates cargo, exported by Mastertronics or directly by the factory.' },
+        { i: 'shield', t: 'A supplier that answers for the part', d: 'Direct from the factory, with no middlemen or brokers: warranty, traceability and technical support.' },
         { i: 'sun', t: 'Energy solutions', d: 'Complete systems for generation, BESS storage and green hydrogen, with CRRC technology.' },
       ],
     },
@@ -112,7 +116,7 @@ const c = {
       list: [
         { k: 'Headquarters', v: 'Porto Alegre · RS · Brazil' },
         { k: 'Coverage', v: 'Brazil and Latin America' },
-        { k: 'China HUB', v: 'ISO 9001 unit in China' },
+        { k: 'China HUB', v: 'Factories and cargo consolidation in China' },
         { k: 'Manufacturers', v: 'Taiwan, China, Hong Kong and the UK' },
       ],
     },
@@ -150,7 +154,12 @@ const nodes = [
         <p class="intro-lead reveal" style="--d:.05s">{c.text[0]}</p>
       </div>
       <div class="intro-r prose">
-        {c.text.slice(1).map((p, i) => <p class="reveal" style={`--d:${i * 0.05}s`}>{p}</p>)}
+        {c.text.slice(1).map((p, i) => (
+          <>
+            {c.fronts[i] && <p class="intro-k mono reveal">{c.fronts[i]}</p>}
+            <p class="reveal" style={`--d:${i * 0.05}s`}>{p}</p>
+          </>
+        ))}
       </div>
     </div>
     <div class="container">
@@ -205,7 +214,6 @@ const nodes = [
     </div>
   </section>
 
-  <Distributors lang={lang} />
   <ContactSection lang={lang} />
 </Base>
 
@@ -226,6 +234,10 @@ const nodes = [
   .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 110px); align-items: start; }
   .intro-l { display: grid; gap: 22px; position: sticky; top: 110px; }
   .intro-lead { font-family: var(--font-display); font-size: clamp(1.4rem, 2.2vw, 1.875rem); line-height: 1.3; letter-spacing: -.025em; font-weight: 500; text-wrap: pretty; }
+  .prose .intro-k { display: flex; align-items: center; gap: 10px; font-size: .6875rem; text-transform: uppercase; letter-spacing: .07em; color: var(--ink); font-weight: 500; }
+  .prose .intro-k::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .prose p + .intro-k { margin-top: 2.2em; }
+  .prose .intro-k + p { margin-top: .6em; }
   @media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; } .intro-l { position: static; } }
 
   .mosaic { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 14px; margin-top: clamp(56px, 7vw, 96px); }

@@ -4,3 +4,8 @@
 /en/renovaveis       /en/renewables/    301
 /representadas       /fabricantes/      301
 /representadas/*     /fabricantes/:splat 301
+# Distributors page merged into the manufacturers page (2026-10)
+/distribuidores      /fabricantes/#distribuicao        301
+/distribuidores/     /fabricantes/#distribuicao        301
+/en/distributors     /en/manufacturers/#distribution   301
+/en/distributors/    /en/manufacturers/#distribution   301

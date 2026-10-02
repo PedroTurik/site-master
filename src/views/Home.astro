@@ -5,8 +5,8 @@ import MfrTile from '../components/MfrTile.astro';
 import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
 import ContactSection from '../components/ContactSection.astro';
-import Distributors from '../components/Distributors.astro';
-import { manufacturers, distributors } from '../data/manufacturers';
+import Trace from '../components/Trace.astro';
+import { manufacturers } from '../data/manufacturers';
 import { company } from '../data/company';
 import { type Lang, url } from '../i18n/routes';
 
@@ -14,41 +14,72 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const n = manufacturers.length;
 const years = new Date().getFullYear() - company.founded;
+const hubYears = new Date().getFullYear() - 2001;
 
 const c = {
   pt: {
     meta: {
-      title: 'Mastertronics · Semicondutores e componentes eletrônicos desde 1991',
-      desc: 'Desde 1991 conectamos a indústria eletroeletrônica da América Latina aos principais fabricantes globais de semicondutores e componentes eletrônicos, com suporte técnico local, distribuidores globais, China HUB ISO 9001 e energia renovável com a CRRC.',
+      title: 'Mastertronics · Solução técnica e logística em componentes eletrônicos',
+      desc: 'Solução técnica e logística para a indústria eletrônica desde 1991: representação de fabricantes globais de semicondutores e componentes e China HUB ISO 9001, que desenvolve fábricas e consolida cargas na China.',
     },
     hero: {
       label: `Desde 1991 · ${years} anos de mercado`,
-      title: ['Desenvolvendo soluções', 'eletrônicas juntos.'],
-      sub: 'Representamos fabricantes globais de semicondutores e componentes eletrônicos no Brasil e na América Latina, com suporte técnico local e compra através dos maiores distribuidores do mundo.',
+      title: ['Solução técnica e logística', 'para a indústria eletrônica.'],
+      sub: 'Somos o fornecedor técnico e logístico da sua engenharia e do seu suprimento: representamos fabricantes globais de semicondutores e componentes e, pelo China HUB, desenvolvemos fábricas e consolidamos cargas na China.',
       cta1: 'Fale com um especialista',
-      cta2: 'Conheça os fabricantes',
+      cta2: 'Como atuamos',
     },
     stats: [
       { v: '1991', l: 'No mercado desde a fundação, em Porto Alegre' },
-      { v: String(n), l: 'Fabricantes globais no portfólio' },
-      { v: '4', l: 'Distribuidores globais parceiros' },
-      { v: 'ISO 9001', l: 'China HUB, em operação desde 2001' },
+      { v: String(n), l: 'Fabricantes globais representados' },
+      { v: `${hubYears} anos`, l: 'Desenvolvendo fábricas e consolidando cargas na China' },
+      { v: 'ISO 9001', l: 'China HUB, unidade certificada desde 2001' },
     ],
+    route: 'Consolidação · Exportação',
     marquee: 'Fabricantes que representamos no Brasil e na América Latina',
-    via: 'Disponíveis através de',
-    areas: {
-      label: 'Soluções',
-      title: 'Tudo o que a sua engenharia e o seu suprimento precisam, em um só parceiro.',
+    fronts: {
+      label: 'Como atuamos',
+      title: 'Uma solução técnica e logística, em duas frentes.',
+      sub: 'Do semicondutor de potência à peça customizada, a Mastertronics fornece com suporte técnico local, pelos fabricantes que representamos ou pelas fábricas que desenvolvemos na China.',
       items: [
-        { photo: 'pcb', tag: 'Semicondutores e componentes', title: 'Fabricantes globais com suporte local', text: 'Representamos fabricantes internacionais de semicondutores e componentes eletrônicos, com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes.', cta: 'Ver fabricantes', key: 'manufacturers' as const },
-        { photo: 'factory', tag: 'China HUB', title: 'Fornecedores alternativos qualificados na origem', text: 'Unidade ISO 9001 na China dedicada ao desenvolvimento, auditoria e qualificação de fabricantes alternativos, com foco em confiabilidade e redução de custos.', cta: 'Conhecer o China HUB', key: 'chinaHub' as const },
-        { photo: 'solar', tag: 'Energia renovável', title: 'Sistemas completos com tecnologia CRRC', text: 'Geração solar e eólica, armazenamento BESS e hidrogênio verde, em parceria estratégica com a CRRC, líder global da Fortune 500.', cta: 'Ver soluções em energia', key: 'renewables' as const },
+        {
+          photo: 'pcb', n: '01', tag: 'Representação de fabricantes',
+          title: 'Fabricantes globais, com suporte técnico local.',
+          text: 'Representamos fabricantes internacionais de semicondutores e componentes eletrônicos. Você compra pelo canal de distribuição ou direto da fábrica, sempre com o nosso suporte técnico e comercial.',
+          spec: [
+            { k: 'Portfólio', v: `Semicondutores e componentes de ${n} fabricantes globais` },
+            { k: 'Compra', v: 'Canal de distribuição ou direto da fábrica' },
+            { k: 'Mastertronics', v: 'Suporte técnico e comercial, próximo do seu projeto' },
+          ],
+          cta: 'Ver fabricantes', key: 'manufacturers' as const,
+        },
+        {
+          photo: 'port', n: '02', tag: 'China HUB',
+          title: 'Fábricas desenvolvidas e cargas consolidadas na China.',
+          text: 'Desenvolvemos fábricas na China para os insumos que o seu projeto precisa e consolidamos as cargas dessas fábricas. O fornecedor é a Mastertronics, que exporta para você — ou a fábrica exporta direto, na compra direto de fábrica.',
+          spec: [
+            { k: 'Fábricas', v: 'Prospectadas, auditadas e qualificadas pelo HUB' },
+            { k: 'Logística', v: 'Consolidação das cargas na China' },
+            { k: 'Exportação', v: 'Pela Mastertronics ou direto da fábrica' },
+          ],
+          cta: 'Conhecer o China HUB', key: 'chinaHub' as const,
+        },
+      ],
+    },
+    direct: {
+      label: 'Direto da fábrica',
+      title: 'Fornecedor somos nós. E respondemos pela peça.',
+      p: 'Compramos direto da fábrica, sem intermediários nem brokers. Por isso a Mastertronics responde por cada peça que fornece, com três garantias:',
+      items: [
+        { i: 'shield', t: 'Garantia', d: 'Garantia das peças fornecidas, dada pela própria Mastertronics.' },
+        { i: 'route', t: 'Rastreabilidade', d: 'Origem conhecida: cada peça vem de uma fábrica que desenvolvemos e auditamos.' },
+        { i: 'chip', t: 'Suporte técnico', d: 'Apoio técnico na especificação e na aplicação das peças, com agilidade e proximidade.' },
       ],
     },
     about: {
       label: 'A Mastertronics',
-      title: 'Excelência em Soluções Eletrônicas',
-      p1: 'Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Representamos fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes.',
+      title: 'Cada vez mais próximos de cada cliente.',
+      p1: 'Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Hoje, somos uma solução técnica e logística em várias frentes, com atendimento ágil e próximo, antecipando tendências e viabilizando acesso a tecnologias emergentes.',
       p2: 'Nosso portfólio inclui semicondutores de potência, memórias, displays customizados, sensores MEMS, optoacopladores e sensores de corrente e tensão para aplicações industriais e de energia.',
       more: 'Conheça a empresa',
       badge: `${years} anos`,
@@ -62,10 +93,10 @@ const c = {
     },
     hub: {
       label: 'China HUB',
-      title: 'Nosso braço na China para desenvolver o que o seu projeto precisa.',
-      p0: 'Em 2001, iniciamos o suporte a placas de circuito impresso por meio da operação de um hub na China, dedicado ao desenvolvimento, auditoria e qualificação de fabricantes.',
-      p: 'Hoje, prospectamos fabricantes de conectores, cabos customizados, componentes magnéticos, baterias, peças plásticas e metálicas customizadas, componentes passivos e semicondutores de baixa complexidade — insumos que não estão no portfólio dos nossos fabricantes, atendendo às demandas específicas de cada cliente.',
-      steps: ['Demanda', 'Prospecção', 'Auditoria', 'Qualificação'],
+      title: 'Nosso braço na China: fábricas desenvolvidas, cargas consolidadas.',
+      p0: 'Em 2001, iniciamos o suporte a placas de circuito impresso por meio da operação de um hub na China, dedicado ao desenvolvimento, auditoria e qualificação de fábricas.',
+      p: 'Hoje, desenvolvemos fábricas de conectores, cabos customizados, componentes magnéticos, baterias, peças plásticas e metálicas customizadas, componentes passivos e semicondutores de baixa complexidade — e consolidamos na China as cargas dessas fábricas até a exportação.',
+      steps: ['Demanda', 'Fábrica', 'Qualificação', 'Consolidação', 'Exportação'],
       cta: 'Como funciona o China HUB',
       badge: 'Unidade certificada na China',
       since: 'Desde',
@@ -85,37 +116,67 @@ const c = {
   },
   en: {
     meta: {
-      title: 'Mastertronics · Semiconductors and electronic components since 1991',
-      desc: 'Since 1991 we have connected Latin America’s electronics industry with leading global semiconductor and electronic component manufacturers, with local technical support, global distributors, an ISO 9001 China HUB and renewable energy with CRRC.',
+      title: 'Mastertronics · Technical and logistics solutions in electronic components',
+      desc: 'A technical and logistics solution for the electronics industry since 1991: representation of global semiconductor and component manufacturers and an ISO 9001 China HUB that develops factories and consolidates cargo in China.',
     },
     hero: {
       label: `Since 1991 · ${years} years in the market`,
-      title: ['Developing electronics', 'together.'],
-      sub: 'We represent global semiconductor and electronic component manufacturers in Brazil and Latin America, with local technical support and purchasing through the world’s largest distributors.',
+      title: ['Technical and logistics solutions', 'for the electronics industry.'],
+      sub: 'We are the technical and logistics supplier behind your engineering and sourcing: we represent global semiconductor and component manufacturers and, through our China HUB, develop factories and consolidate cargo in China.',
       cta1: 'Talk to a specialist',
-      cta2: 'Explore our manufacturers',
+      cta2: 'How we work',
     },
     stats: [
       { v: '1991', l: 'In the market since our founding in Porto Alegre' },
-      { v: String(n), l: 'Global manufacturers in our portfolio' },
-      { v: '4', l: 'Global distribution partners' },
-      { v: 'ISO 9001', l: 'China HUB, operating since 2001' },
+      { v: String(n), l: 'Global manufacturers represented' },
+      { v: `${hubYears} years`, l: 'Developing factories and consolidating cargo in China' },
+      { v: 'ISO 9001', l: 'China HUB, a certified unit since 2001' },
     ],
+    route: 'Consolidation · Export',
     marquee: 'Manufacturers we represent in Brazil and Latin America',
-    via: 'Available through',
-    areas: {
-      label: 'Solutions',
-      title: 'Everything your engineering and sourcing teams need, from one partner.',
+    fronts: {
+      label: 'How we work',
+      title: 'One technical and logistics solution, on two fronts.',
+      sub: 'From power semiconductors to custom parts, Mastertronics supplies with local technical support — through the manufacturers we represent or the factories we develop in China.',
       items: [
-        { photo: 'pcb', tag: 'Semiconductors & components', title: 'Global manufacturers, local support', text: 'We represent international semiconductor and electronic component manufacturers, with agile, close technical and commercial support focused on customer needs.', cta: 'See manufacturers', key: 'manufacturers' as const },
-        { photo: 'factory', tag: 'China HUB', title: 'Alternative suppliers, qualified at the source', text: 'An ISO 9001-certified unit in China dedicated to developing, auditing and qualifying alternative manufacturers, with a focus on reliability and cost reduction.', cta: 'Discover the China HUB', key: 'chinaHub' as const },
-        { photo: 'solar', tag: 'Renewable energy', title: 'Complete systems with CRRC technology', text: 'Solar and wind generation, BESS storage and green hydrogen, in strategic partnership with CRRC, a Fortune 500 global leader.', cta: 'See energy solutions', key: 'renewables' as const },
+        {
+          photo: 'pcb', n: '01', tag: 'Manufacturer representation',
+          title: 'Global manufacturers, local technical support.',
+          text: 'We represent international semiconductor and electronic component manufacturers. You buy through the distribution channel or direct from the factory, always with our technical and commercial support.',
+          spec: [
+            { k: 'Portfolio', v: `Semiconductors and components from ${n} global manufacturers` },
+            { k: 'Purchase', v: 'Distribution channel or direct from the factory' },
+            { k: 'Mastertronics', v: 'Technical and commercial support, close to your project' },
+          ],
+          cta: 'See manufacturers', key: 'manufacturers' as const,
+        },
+        {
+          photo: 'port', n: '02', tag: 'China HUB',
+          title: 'Factories developed and cargo consolidated in China.',
+          text: 'We develop factories in China for the parts your project needs and consolidate the cargo from those factories. Mastertronics is the supplier and exports to you — or the factory exports directly when you buy direct from the factory.',
+          spec: [
+            { k: 'Factories', v: 'Sourced, audited and qualified by the HUB' },
+            { k: 'Logistics', v: 'Cargo consolidation in China' },
+            { k: 'Export', v: 'By Mastertronics or direct from the factory' },
+          ],
+          cta: 'Discover the China HUB', key: 'chinaHub' as const,
+        },
+      ],
+    },
+    direct: {
+      label: 'Direct from the factory',
+      title: 'We are the supplier. And we stand behind every part.',
+      p: 'We buy direct from the factory, with no middlemen or brokers. That is why Mastertronics answers for every part it supplies, with three guarantees:',
+      items: [
+        { i: 'shield', t: 'Warranty', d: 'A warranty on the parts we supply, given by Mastertronics itself.' },
+        { i: 'route', t: 'Traceability', d: 'Known origin: every part comes from a factory we have developed and audited.' },
+        { i: 'chip', t: 'Technical support', d: 'Technical support on part specification and application, agile and close at hand.' },
       ],
     },
     about: {
       label: 'Mastertronics',
-      title: 'Excellence in Electronic Solutions',
-      p1: 'Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. We represent international manufacturers with agile, close technical and commercial support focused on customer needs — anticipating trends and enabling access to emerging technologies.',
+      title: 'Closer to every customer.',
+      p1: 'Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. Today we are a technical and logistics solution on several fronts, with agile, close service — anticipating trends and enabling access to emerging technologies.',
       p2: 'Our portfolio includes power semiconductors, memory, custom displays, MEMS sensors, optocouplers and current and voltage sensors for industrial and energy applications.',
       more: 'About the company',
       badge: `${years} years`,
@@ -129,10 +190,10 @@ const c = {
     },
     hub: {
       label: 'China HUB',
-      title: 'Our arm in China, developing what your project needs.',
-      p0: 'In 2001 we opened our hub in China to support printed circuit boards, dedicated to developing, auditing and qualifying manufacturers.',
-      p: 'Today we source manufacturers of connectors, custom cables, magnetic components, batteries, custom plastic and metal parts, passive components and low-complexity semiconductors — parts outside our manufacturers’ portfolio, tailored to each customer’s needs.',
-      steps: ['Request', 'Sourcing', 'Audit', 'Qualification'],
+      title: 'Our arm in China: factories developed, cargo consolidated.',
+      p0: 'In 2001 we opened our hub in China to support printed circuit boards, dedicated to developing, auditing and qualifying factories.',
+      p: 'Today we develop factories for connectors, custom cables, magnetic components, batteries, custom plastic and metal parts, passive components and low-complexity semiconductors — and consolidate the cargo from those factories in China, all the way to export.',
+      steps: ['Request', 'Factory', 'Qualification', 'Consolidation', 'Export'],
       cta: 'How the China HUB works',
       badge: 'Certified unit in China',
       since: 'Since',
@@ -174,10 +235,10 @@ const marquee = [...manufacturers, ...manufacturers];
         <p class="lead reveal" style="--d:.14s">{c.hero.sub}</p>
         <div class="hero-ctas reveal" style="--d:.2s">
           <a href={url(lang, 'contact')} class="btn btn--lime">{c.hero.cta1}<Icon name="arrow" /></a>
-          <a href={url(lang, 'manufacturers')} class="btn btn--ghost">{c.hero.cta2}</a>
+          <a href="#frentes" class="btn btn--ghost">{c.hero.cta2}</a>
         </div>
       </div>
-      <div class="hero-map reveal" style="--d:.25s"><WorldMap nodes={mapNodes} /></div>
+      <div class="hero-map reveal" style="--d:.25s"><WorldMap nodes={mapNodes} route={c.route} /></div>
     </div>
     <div class="container">
       <dl class="stats">
@@ -205,32 +266,63 @@ const marquee = [...manufacturers, ...manufacturers];
         ))}
       </ul>
     </div>
-    <div class="mq-dist container">
-      <p class="mono">{c.via}</p>
-      <ul>{distributors.map((d) => <li><a href={url(lang, 'distributors')}><img src={d.logo} alt={d.name} loading="lazy" /></a></li>)}</ul>
+  </section>
+
+  <!-- FRONTS -->
+  <section class="section fronts" id="frentes">
+    <div class="container">
+      <div class="shead shead--split">
+        <div>
+          <span class="label reveal">{c.fronts.label}</span>
+          <h2 class="h2 reveal" style="--d:.05s">{c.fronts.title}</h2>
+        </div>
+        <p class="lead reveal" style="--d:.1s">{c.fronts.sub}</p>
+      </div>
+      <div class="fgrid">
+        {c.fronts.items.map((f, i) => (
+          <article class="front reveal" style={`--d:${i * 0.08}s`}>
+            <div class="front-img">
+              <Photo name={f.photo} alt="" sizes="(max-width: 900px) 100vw, 50vw" />
+              <span class="front-n mono">{f.n}</span>
+            </div>
+            <div class="front-body">
+              <span class="front-tag mono">{f.tag}</span>
+              <h3 class="front-title">{f.title}</h3>
+              <p class="front-text">{f.text}</p>
+              <dl class="front-spec">
+                {f.spec.map((r) => <div><dt class="mono">{r.k}</dt><dd>{r.v}</dd></div>)}
+              </dl>
+              <a href={url(lang, f.key)} class="link-arrow front-cta"><span>{f.cta}</span><Icon name="arrow" /></a>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- SOLUTIONS -->
-  <section class="section areas">
+  <!-- DIRECT FROM THE FACTORY -->
+  <section class="section dark direct">
     <div class="container">
-      <div class="shead">
-        <span class="label reveal">{c.areas.label}</span>
-        <h2 class="h2 reveal" style="--d:.05s">{c.areas.title}</h2>
+      <div class="shead shead--split direct-head">
+        <div>
+          <span class="label reveal">{c.direct.label}</span>
+          <h2 class="h2 reveal" style="--d:.05s">{c.direct.title}</h2>
+        </div>
+        <p class="lead reveal" style="--d:.1s">{c.direct.p}</p>
       </div>
-      <div class="agrid">
-        {c.areas.items.map((a, i) => (
-          <a href={url(lang, a.key)} class="acard reveal" style={`--d:${i * 0.08}s`}>
-            <span class="acard-img"><Photo name={a.photo} alt="" sizes="(max-width: 900px) 100vw, 33vw" /></span>
-            <span class="acard-body">
-              <span class="acard-tag mono">{a.tag}</span>
-              <span class="acard-title">{a.title}</span>
-              <span class="acard-text">{a.text}</span>
-              <span class="link-arrow acard-cta"><span>{a.cta}</span><Icon name="arrow" /></span>
-            </span>
-          </a>
+    </div>
+    <Trace class="direct-trace" />
+    <div class="container">
+      <ol class="direct-list">
+        {c.direct.items.map((g, i) => (
+          <li class="reveal" style={`--d:${i * 0.08}s`}>
+            <span class="direct-ic"><Icon name={g.i as any} size={22} /></span>
+            <span class="direct-n mono">0{i + 1}</span>
+            <h3 class="h3">{g.t}</h3>
+            <p>{g.d}</p>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   </section>
 
@@ -255,8 +347,6 @@ const marquee = [...manufacturers, ...manufacturers];
       </div>
     </div>
   </section>
-
-  <Distributors lang={lang} />
 
   <!-- MANUFACTURERS -->
   <section class="section mfr">
@@ -324,11 +414,11 @@ const marquee = [...manufacturers, ...manufacturers];
   .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 50% at 78% 55%, rgba(222,221,58,.07), transparent 70%), radial-gradient(50% 60% at 10% 0%, rgba(255,255,255,.05), transparent 70%); }
   .hero-grid { position: absolute; inset: 0; z-index: -1; opacity: .5; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(80% 70% at 50% 40%, #000 30%, transparent 100%); }
   .hero-in { position: relative; min-height: 560px; }
-  .hero-copy { position: relative; z-index: 2; display: grid; gap: 26px; max-width: 760px; }
-  .hero-copy .display { font-size: clamp(2.6rem, 6.2vw, 5.4rem); }
+  .hero-copy { position: relative; z-index: 2; display: grid; gap: 26px; max-width: 880px; }
+  .hero-copy .display { font-size: clamp(2.4rem, 4.8vw, 4.2rem); }
   .hero h1 { color: #fff; }
   .hero-soft { color: #8f949b; }
-  .hero .lead { max-width: 560px; }
+  .hero .lead { max-width: 590px; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
   .hero-map { position: absolute; z-index: 1; pointer-events: none; width: min(1180px, 88vw); right: calc(var(--gutter) * -1 - 4vw); top: -10px; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%); mask-image: linear-gradient(90deg, transparent 0%, #000 34%); }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-dark); margin-top: 24px; }
@@ -345,7 +435,7 @@ const marquee = [...manufacturers, ...manufacturers];
   }
 
   /* MARQUEE */
-  .mq { background: var(--white); border-bottom: 1px solid var(--line); padding: 34px 0 30px; overflow: hidden; }
+  .mq { background: var(--white); border-bottom: 1px solid var(--line); padding: 34px 0 32px; overflow: hidden; }
   .mq-h { text-align: center; font-size: .6875rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 22px; padding-inline: var(--gutter); }
   .mq-track-wrap { mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
   .mq-track { list-style: none; padding: 0; display: flex; width: max-content; animation: mq 60s linear infinite; }
@@ -354,11 +444,6 @@ const marquee = [...manufacturers, ...manufacturers];
   .mq-track a { display: grid; place-items: center; width: 210px; height: 64px; padding: 0 28px; }
   .mq-track img { max-height: calc(38px * var(--s)); max-width: 100%; object-fit: contain; }
   @keyframes mq { to { transform: translateX(-50%); } }
-  .mq-dist { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line); flex-wrap: wrap; }
-  .mq-dist p { font-size: .6875rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-  .mq-dist ul { list-style: none; padding: 0; display: flex; align-items: center; gap: clamp(20px, 4vw, 52px); flex-wrap: wrap; justify-content: center; }
-  .mq-dist img { height: 30px; width: auto; max-width: 150px; object-fit: contain; }
-  @media (max-width: 560px) { .mq-dist img { height: 24px; max-width: 120px; } .mq-dist { gap: 16px; } }
   @media (prefers-reduced-motion: reduce) { .mq-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; } .mq-track li[aria-hidden] { display: none; } }
 
   /* SECTION HEAD */
@@ -366,20 +451,56 @@ const marquee = [...manufacturers, ...manufacturers];
   .shead--row { max-width: none; display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
   .shead--row > div { display: grid; gap: 18px; max-width: 680px; }
 
-  /* SOLUTIONS */
-  .agrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .acard { display: grid; grid-template-rows: auto 1fr; border-radius: 20px; overflow: hidden; background: var(--white); border: 1px solid var(--line); transition: box-shadow .4s var(--ease), transform .4s var(--ease); }
-  .acard:hover { box-shadow: var(--shadow-2); transform: translateY(-3px); }
-  .acard-img { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink); }
-  .acard-img :global(img), .acard-img :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-  .acard:hover .acard-img :global(img) { transform: scale(1.05); }
-  .acard-body { display: grid; gap: 10px; align-content: start; padding: 26px 26px 28px; }
-  .acard-tag { font-size: .6875rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-  .acard-title { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; letter-spacing: -.03em; line-height: 1.15; }
-  .acard-text { color: var(--slate); font-size: .9375rem; }
-  .acard-cta { margin-top: 8px; }
-  @media (max-width: 960px) { .agrid { grid-template-columns: 1fr; } .acard { grid-template-columns: 1fr 1.2fr; grid-template-rows: none; } .acard-img { aspect-ratio: auto; min-height: 100%; } }
-  @media (max-width: 620px) { .acard { grid-template-columns: 1fr; } .acard-img { aspect-ratio: 16 / 10; } }
+  .shead--split { max-width: none; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 6vw, 96px); align-items: end; }
+  .shead--split > div { display: grid; gap: 18px; }
+  .shead--split .lead { font-size: 1.0625rem; }
+  @media (max-width: 900px) { .shead--split { grid-template-columns: 1fr; } }
+
+  /* FRONTS */
+  .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .front { position: relative; display: grid; grid-template-rows: auto 1fr; border-radius: 22px; overflow: hidden; background: var(--white); border: 1px solid var(--line); transition: box-shadow .4s var(--ease), transform .4s var(--ease), border-color .4s; }
+  .front:hover { box-shadow: var(--shadow-2); transform: translateY(-3px); border-color: var(--line-strong); }
+  .front-img { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--ink); }
+  .front-img :global(img), .front-img :global(.photo-missing) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .front:hover .front-img :global(img) { transform: scale(1.04); }
+  .front-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,22,25,.45), transparent 40%); }
+  .front-n { position: absolute; z-index: 1; top: 18px; left: 20px; display: inline-grid; place-items: center; min-width: 38px; height: 26px; padding: 0 9px; border-radius: 6px; font-size: .75rem; background: var(--lime); color: var(--ink); font-weight: 600; }
+  .front-body { display: flex; flex-direction: column; gap: 14px; padding: clamp(24px, 3vw, 36px); }
+  .front-tag { font-size: .6875rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+  .front-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.5rem, 2.2vw, 1.875rem); letter-spacing: -.03em; line-height: 1.12; }
+  .front-text { color: var(--slate); font-size: 1rem; line-height: 1.65; }
+  .front-spec { display: grid; margin-top: 6px; border-top: 1px solid var(--ink); }
+  .front-spec div { display: grid; grid-template-columns: 128px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .front-spec dt { font-size: .6875rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); padding-top: 3px; }
+  .front-spec dd { font-size: .9375rem; font-weight: 550; line-height: 1.45; }
+  .front-cta { margin-top: auto; padding-top: 10px; align-self: flex-start; }
+  /* whole card is clickable through the CTA */
+  .front-cta::after { content: ''; position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
+  .front-cta:focus-visible { outline: none; }
+  .front:has(.front-cta:focus-visible) { outline: 2px solid var(--lime); outline-offset: 3px; }
+  .front:hover .front-cta span { background-size: 100% 1px; }
+  .front:hover .front-cta :global(svg) { transform: translateX(4px); }
+  @media (max-width: 900px) { .fgrid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .front-spec div { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* DIRECT FROM THE FACTORY */
+  .direct { position: relative; overflow: hidden; isolation: isolate; }
+  .direct::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(45% 60% at 0% 100%, rgba(222,221,58,.07), transparent 70%); }
+  .direct h2 { color: #fff; max-width: 15ch; }
+  .direct-head { margin-bottom: clamp(24px, 3vw, 40px); }
+  .direct-trace { margin-bottom: clamp(36px, 4.5vw, 64px); }
+  .direct-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .direct-list li { position: relative; display: grid; grid-template-columns: auto 1fr; column-gap: 16px; row-gap: 12px; align-content: start; padding: 4px 32px 4px 0; }
+  .direct-list li + li { padding-left: 32px; border-left: 1px solid var(--line-dark); }
+  .direct-ic { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 12px; background: var(--lime); color: var(--ink); }
+  .direct-n { align-self: center; justify-self: end; color: var(--on-dark-muted); font-size: .75rem; }
+  .direct-list h3 { grid-column: 1 / -1; color: #fff; margin-top: 10px; }
+  .direct-list p { grid-column: 1 / -1; font-size: .9375rem; line-height: 1.6; max-width: 34ch; }
+  @media (max-width: 860px) {
+    .direct-list { grid-template-columns: 1fr; }
+    .direct-list li, .direct-list li + li { padding: 26px 0; border-left: 0; border-top: 1px solid var(--line-dark); }
+    .direct-list li:first-child { border-top: 0; padding-top: 0; }
+  }
 
   /* ABOUT */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 110px); align-items: center; }
@@ -411,12 +532,11 @@ const marquee = [...manufacturers, ...manufacturers];
   .hub h2 { color: #fff; }
   .hub-p { display: grid; gap: 1em; font-size: 1.0625rem; line-height: 1.7; }
   .hub-p p:first-child { color: var(--on-dark); }
-  .hub-steps { list-style: none; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line-dark); border-radius: 14px; overflow: hidden; }
-  .hub-steps li { display: grid; gap: 6px; padding: 14px 16px; font-weight: 550; color: #fff; font-size: .9375rem; }
-  .hub-steps li + li { border-left: 1px solid var(--line-dark); }
+  .hub-steps { list-style: none; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 6px; }
+  .hub-steps li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 12px; border-radius: 999px; border: 1px solid var(--line-dark); font-weight: 550; color: #fff; font-size: .875rem; }
+  .hub-steps li:last-child { border-color: rgba(222,221,58,.45); }
   .hub-steps .mono { color: var(--lime); font-size: .6875rem; }
   @media (max-width: 900px) { .hub-grid { grid-template-columns: 1fr; } .hub-fig { aspect-ratio: 16 / 11; } }
-  @media (max-width: 520px) { .hub-steps { grid-template-columns: 1fr 1fr; } .hub-steps li + li:nth-child(3) { border-left: 0; } .hub-steps li:nth-child(n+3) { border-top: 1px solid var(--line-dark); } }
 
   /* ENERGY */
   .energy { position: relative; overflow: hidden; isolation: isolate; padding-block: clamp(110px, 13vw, 180px) clamp(56px, 6vw, 80px); }

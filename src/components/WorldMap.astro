@@ -1,10 +1,11 @@
 ---
-// Dot-matrix world map with animated trace arcs from Porto Alegre to supplier regions.
+// Dot-matrix world map with animated trace arcs from Porto Alegre to manufacturer regions.
 import world from '../data/world-dots.json';
 
 interface Node { id: string; label: string; lon: number; lat: number; kind?: 'hq' | 'hub' | 'mfr'; }
-interface Props { nodes: Node[]; class?: string; theme?: 'dark' | 'light'; labelScale?: number; }
-const { nodes, class: cls = '', theme = 'dark', labelScale = 1 } = Astro.props;
+// `route` turns the hub arc into the logistics route (China HUB → HQ) and labels it at its apex.
+interface Props { nodes: Node[]; class?: string; theme?: 'dark' | 'light'; labelScale?: number; route?: string; }
+const { nodes, class: cls = '', theme = 'dark', labelScale = 1, route } = Astro.props;
 
 const K = 10; // px per degree
 const W = (world.lonMax - world.lonMin) * K;
@@ -16,12 +17,19 @@ const hq = nodes.find((n) => n.kind === 'hq')!;
 const arcs = nodes
   .filter((n) => n.kind !== 'hq')
   .map((n, i) => {
-    const x1 = x(hq.lon), y1 = y(hq.lat), x2 = x(n.lon), y2 = y(n.lat);
+    const hub = n.kind === 'hub';
+    const isRoute = hub && !!route;
+    // The route runs from the hub to HQ, so its travelling dash flows towards Brazil.
+    const [a, b] = isRoute ? [n, hq] : [hq, n];
+    const x1 = x(a.lon), y1 = y(a.lat), x2 = x(b.lon), y2 = y(b.lat);
     const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
     const dist = Math.hypot(x2 - x1, y2 - y1);
     const lift = dist * 0.32;
-    return { d: `M${x1},${y1} Q${mx},${my - lift} ${x2},${y2}`, i, hub: n.kind === 'hub' };
+    const cy = my - lift;
+    const apex = { x: (x1 + 2 * mx + x2) / 4, y: (y1 + 2 * cy + y2) / 4 };
+    return { d: `M${x1},${y1} Q${mx},${cy} ${x2},${y2}`, i, hub, isRoute, apex };
   });
+const routeArc = arcs.find((a) => a.isRoute);
 const r = world.step * K * 0.2;
 ---
 <div class:list={['wmap', `wmap--${theme}`, cls]} aria-hidden="true">
@@ -39,10 +47,16 @@ const r = world.step * K * 0.2;
       {arcs.map((a) => (
         <>
           <path class="wmap-arc-base" d={a.d} />
-          <path class:list={['wmap-arc', a.hub && 'is-hub']} d={a.d} pathLength="1" style={`--i:${a.i}`} />
+          <path class:list={['wmap-arc', a.hub && 'is-hub', a.isRoute && 'is-route']} d={a.d} pathLength="1" style={`--i:${a.i}`} />
         </>
       ))}
     </g>
+    {routeArc && (
+      <g class="wmap-route" transform={`translate(${routeArc.apex.x} ${routeArc.apex.y})`}>
+        <rect class="wmap-route-mark" x="-7" y="-7" width="14" height="14" rx="2.5" transform="rotate(45)" />
+        <text y={-26 * labelScale} text-anchor="middle" style={`font-size:${26 * labelScale}px`}>{route}</text>
+      </g>
+    )}
     <g class="wmap-nodes">
       {nodes.map((n, i) => (
         <g class:list={['wmap-node', `is-${n.kind ?? 'mfr'}`]} transform={`translate(${x(n.lon)} ${y(n.lat)})`} style={`--i:${i}`}>
@@ -74,6 +88,11 @@ const r = world.step * K * 0.2;
   }
   .wmap--light .wmap-arc { stroke: var(--ink); }
   .wmap-arc.is-hub { stroke-width: 3; }
+  .wmap-arc.is-route { stroke-width: 3.4; stroke-dasharray: 0.1 0.04 0.06 0.8; animation-duration: 4.2s; animation-delay: 0s; opacity: 1; }
+  .wmap-route-mark { fill: var(--ink); stroke: var(--lime); stroke-width: 2.5; }
+  .wmap--light .wmap-route-mark { fill: var(--white); stroke: var(--ink); }
+  .wmap-route text { font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; fill: var(--lime); }
+  .wmap--light .wmap-route text { fill: var(--ink); }
   @keyframes wm-travel { to { stroke-dashoffset: 0; } }
   .wmap-core { fill: var(--lime); }
   .wmap-ring { fill: none; stroke: var(--lime); stroke-width: 1.5; opacity: 0.6; transform-origin: center; animation: wm-pulse 2.8s var(--ease) infinite; animation-delay: calc(var(--i) * 0.3s); }
@@ -85,9 +104,10 @@ const r = world.step * K * 0.2;
   @keyframes wm-pulse { 0% { transform: scale(0.6); opacity: 0.8; } 100% { transform: scale(2.4); opacity: 0; } }
   .wmap-labels text { font-family: var(--font-mono); font-size: 32px; letter-spacing: 0.06em; fill: var(--on-dark); text-transform: uppercase; }
   .wmap--light .wmap-labels text { fill: var(--ink); }
-  @media (max-width: 760px) { .wmap-labels { display: none; } }
+  @media (max-width: 760px) { .wmap-labels, .wmap-route text { display: none; } }
   @media (prefers-reduced-motion: reduce) {
     .wmap-arc { animation: none; stroke-dasharray: none; opacity: 0.5; }
+    .wmap-arc.is-route { opacity: 0.95; }
     .wmap-ring { animation: none; }
   }
 </style>

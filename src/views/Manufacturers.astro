@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
-import Distributors from '../components/Distributors.astro';
+import DistributionPartners from '../components/DistributionPartners.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { manufacturers, categories } from '../data/manufacturers';
 import { type Lang, url, routes, mfrUrl } from '../i18n/routes';
@@ -17,7 +17,7 @@ const c = {
     metaTitle: 'Fabricantes · Semicondutores e componentes eletrônicos',
     desc: 'Fabricantes globais de semicondutores de potência, memórias, displays, sensores, optoacopladores, cristais e magnéticos, com representação e suporte técnico da Mastertronics no Brasil e na América Latina.',
     h1: 'Fabricantes globais.<br><em>Suporte técnico local.</em>',
-    lead: 'Representamos fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes.',
+    lead: 'Representamos fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes. Você compra pelo canal de distribuição ou direto da fábrica, sempre com a Mastertronics ao lado do seu projeto.',
     index: 'Portfólio por área de produto',
     details: 'Ver fabricante',
     why: {
@@ -26,14 +26,14 @@ const c = {
       items: [
         { icon: 'chip', t: 'Suporte técnico especializado', d: 'Acompanhamos a escolha e a aplicação dos componentes junto ao seu time de engenharia.' },
         { icon: 'target', t: 'Acesso a tecnologias emergentes', d: 'Antecipamos tendências e trazemos ao mercado latino-americano as novas gerações de semicondutores e componentes.' },
-        { icon: 'truck', t: 'Logística integrada', d: 'Os produtos são disponibilizados por distribuidores globais, com soluções logísticas integradas e suporte especializado.' },
+        { icon: 'truck', t: 'Mais de uma via de compra', d: 'Canal de distribuição ou direto da fábrica: a via de compra é definida com cada cliente, com soluções logísticas integradas.' },
         { icon: 'users', t: 'Atendimento próximo', d: 'Equipe comercial e técnica com agilidade e foco nas necessidades de cada cliente, desde 1991.' },
       ],
     },
     hub: {
       label: 'Precisa de algo além do portfólio?',
-      title: 'O China HUB desenvolve o fornecedor para você.',
-      p: 'De conectores e cabos customizados a CIs e semicondutores de baixa complexidade, nossa unidade ISO 9001 na China prospecta, audita e qualifica fabricantes alternativos.',
+      title: 'O China HUB desenvolve a fábrica e consolida a carga.',
+      p: 'De conectores e cabos customizados a CIs e semicondutores de baixa complexidade, nossa unidade ISO 9001 na China desenvolve, audita e qualifica fábricas e consolida as cargas até a exportação.',
       cta: 'Conhecer o China HUB',
     },
   },
@@ -42,7 +42,7 @@ const c = {
     metaTitle: 'Manufacturers · Semiconductors and electronic components',
     desc: 'Global manufacturers of power semiconductors, memory, displays, sensors, optocouplers, crystals and magnetics, with Mastertronics representation and technical support in Brazil and Latin America.',
     h1: 'Global manufacturers.<br><em>Local technical support.</em>',
-    lead: 'We represent international manufacturers with agile, close technical and commercial support focused on customer needs — anticipating trends and enabling access to emerging technologies.',
+    lead: 'We represent international manufacturers with agile, close technical and commercial support focused on customer needs. You buy through the distribution channel or direct from the factory, with Mastertronics alongside your project.',
     index: 'Portfolio by product area',
     details: 'View manufacturer',
     why: {
@@ -51,14 +51,14 @@ const c = {
       items: [
         { icon: 'chip', t: 'Specialized technical support', d: 'We work alongside your engineering team on component selection and application.' },
         { icon: 'target', t: 'Access to emerging technologies', d: 'We anticipate trends and bring new generations of semiconductors and components to the Latin American market.' },
-        { icon: 'truck', t: 'Integrated logistics', d: 'Products are available through global distributors, with integrated logistics solutions and specialized support.' },
+        { icon: 'truck', t: 'More than one purchase route', d: 'Distribution channel or direct from the factory: the purchase route is defined with each customer, with integrated logistics solutions.' },
         { icon: 'users', t: 'Close, responsive service', d: 'A commercial and technical team that is agile and focused on each customer’s needs, since 1991.' },
       ],
     },
     hub: {
       label: 'Need something beyond the portfolio?',
-      title: 'The China HUB develops the supplier for you.',
-      p: 'From connectors and custom cables to ICs and low-complexity semiconductors, our ISO 9001 unit in China sources, audits and qualifies alternative manufacturers.',
+      title: 'The China HUB develops the factory and consolidates the cargo.',
+      p: 'From connectors and custom cables to ICs and low-complexity semiconductors, our ISO 9001 unit in China develops, audits and qualifies factories and consolidates the cargo all the way to export.',
       cta: 'Discover the China HUB',
     },
   },
@@ -127,7 +127,7 @@ const byCat = categories.map((k) => ({ ...k, list: manufacturers.filter((m) => m
     </div>
   </section>
 
-  <Distributors lang={lang} />
+  <DistributionPartners lang={lang} />
 
   <section class="section--tight xhub">
     <div class="container">

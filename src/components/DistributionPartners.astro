@@ -1,0 +1,72 @@
+---
+// Distribution is one purchase channel among others — a compact partner band, not a buying guide.
+import Icon from './Icon.astro';
+import { distributors } from '../data/manufacturers';
+import { type Lang, distributionAnchor } from '../i18n/routes';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const c = {
+  pt: {
+    label: 'Parceiros de distribuição',
+    title: 'Canal de distribuição ou direto da fábrica.',
+    p: 'Os produtos dos fabricantes que representamos também estão disponíveis através de distribuidores globais parceiros. A via de compra — distribuidor ou direto da fábrica — é definida com cada cliente.',
+    routes: ['Canal de distribuição', 'Direto da fábrica'],
+    visit: 'Visitar site',
+  },
+  en: {
+    label: 'Distribution partners',
+    title: 'Through distribution or direct from the factory.',
+    p: 'Products from the manufacturers we represent are also available through our global distribution partners. The purchase route — distributor or direct from the factory — is defined with each customer.',
+    routes: ['Distribution channel', 'Direct from the factory'],
+    visit: 'Visit website',
+  },
+}[lang];
+---
+<section class="dp section--tight" id={distributionAnchor[lang]}>
+  <div class="container dp-in">
+    <div class="dp-copy">
+      <span class="label reveal">{c.label}</span>
+      <h2 class="h3 reveal" style="--d:.05s">{c.title}</h2>
+      <p class="reveal" style="--d:.1s">{c.p}</p>
+      <ul class="dp-routes reveal" style="--d:.14s">
+        {c.routes.map((r) => <li><Icon name="check" size={14} />{r}</li>)}
+      </ul>
+    </div>
+    <ul class="dp-grid">
+      {distributors.map((d, i) => (
+        <li class="reveal" style={`--d:${i * 0.05}s`}>
+          <a href={d.href} target="_blank" rel="noopener" class="dp-card" title={d.about[lang]}>
+            <img src={d.logo} alt={d.name} loading="lazy" />
+            <span class="dp-visit mono">{c.visit}<Icon name="arrow-ur" size={13} /></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .dp { background: var(--white); border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+  .dp-in { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .dp-copy { display: grid; gap: 16px; justify-items: start; }
+  .dp-copy p { color: var(--slate); max-width: 52ch; }
+  .dp-routes { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .dp-routes li { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px 7px 11px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: .8125rem; font-weight: 550; }
+  .dp-routes :global(svg) { color: var(--lime-ink); }
+
+  .dp-grid { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .dp-card {
+    position: relative; display: grid; place-items: center; height: 124px; padding: 22px 26px 30px; border-radius: 16px;
+    background: var(--paper); border: 1px solid var(--line);
+    transition: border-color .3s, background .3s, box-shadow .3s;
+  }
+  .dp-card img { max-height: 40px; max-width: 78%; object-fit: contain; transition: transform .5s var(--ease); }
+  .dp-card:hover { background: var(--white); border-color: var(--line-strong); box-shadow: var(--shadow-1); }
+  .dp-card:hover img { transform: scale(1.04); }
+  .dp-visit { position: absolute; left: 0; right: 0; bottom: 10px; display: inline-flex; justify-content: center; align-items: center; gap: 5px; font-size: .625rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); opacity: 0; transform: translateY(3px); transition: opacity .3s, transform .3s var(--ease); }
+  .dp-card:hover .dp-visit, .dp-card:focus-visible .dp-visit { opacity: 1; transform: none; }
+  @media (hover: none) { .dp-visit { opacity: 1; transform: none; } }
+  @media (max-width: 900px) { .dp-in { grid-template-columns: 1fr; } }
+  @media (max-width: 420px) { .dp-card { height: 100px; padding: 16px 16px 26px; } }
+</style>

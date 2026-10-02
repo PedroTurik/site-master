@@ -5,6 +5,7 @@ import WorldMap from '../components/WorldMap.astro';
 import Trace from '../components/Trace.astro';
 import Photo from '../components/Photo.astro';
 import ContactSection from '../components/ContactSection.astro';
+import ConsolidationFlow from '../components/ConsolidationFlow.astro';
 import { type Lang, url, routes } from '../i18n/routes';
 
 interface Props { lang: Lang; }
@@ -14,26 +15,27 @@ const hubYears = new Date().getFullYear() - 2001;
 
 const c = {
   pt: {
-    metaTitle: 'China HUB · Desenvolvimento de fornecedores alternativos na China',
-    desc: 'Unidade ISO 9001 da Mastertronics na China, em operação desde 2001, dedicada à prospecção, auditoria e qualificação de fabricantes alternativos de insumos eletrônicos.',
+    metaTitle: 'China HUB · Fábricas e consolidação de cargas na China',
+    desc: 'Unidade ISO 9001 da Mastertronics na China, desde 2001: desenvolvimento, auditoria e qualificação de fábricas, consolidação de cargas e compra direto da fábrica com garantia, rastreabilidade e suporte técnico.',
     crumb: 'China HUB',
-    h1: 'Fornecedores alternativos, <em>qualificados na origem.</em>',
-    lead: 'HUB à disposição da base de clientes da Mastertronics para o desenvolvimento de fabricantes alternativos de insumos eletrônicos.',
-    chips: ['ISO 9001', 'Desde 2001', 'Confiabilidade', 'Redução de custos'],
+    h1: 'Fábricas desenvolvidas na China, <em>com logística até você.</em>',
+    lead: 'O China HUB desenvolve, audita e qualifica fábricas na China para os clientes da Mastertronics e consolida as cargas dessas fábricas. A Mastertronics é o fornecedor e exporta para você — ou a fábrica exporta direto, na compra direto de fábrica.',
+    chips: ['ISO 9001', 'Desde 2001', 'Direto da fábrica', 'Consolidação de cargas'],
     cta: 'Envie sua demanda',
+    route: 'Consolidação · Exportação',
     story: {
       label: 'Trajetória',
-      title: `${hubYears} anos desenvolvendo fornecedores na China.`,
+      title: `${hubYears} anos desenvolvendo fábricas na China.`,
       items: [
-        { y: '2001', t: 'Início da operação', p: 'Em 2001, iniciamos o suporte a placas de circuito impresso por meio da operação de um hub na China, dedicado ao desenvolvimento, auditoria e qualificação de fabricantes.' },
-        { y: '2020', t: 'Ampliação do escopo', p: 'Em 2020, impulsionados pelos desafios da pandemia, ampliamos a atuação desse hub para incluir a prospecção de fabricantes de outros insumos, como conectores, cabos customizados, componentes magnéticos (indutores e transformadores), baterias, peças plásticas e metálicas customizadas, componentes passivos, além de semicondutores de baixa complexidade, como diodos, transistores, triacs e outros CIs que não estão disponíveis no portfólio dos fabricantes que representamos. Essa operação segue em constante evolução, atendendo às demandas específicas de cada cliente.' },
-        { y: 'Hoje', t: 'Unidade ISO 9001', p: 'Operamos uma unidade ISO 9001 na China, dedicada à qualificação de fornecedores alternativos, com foco em confiabilidade e redução de custos.' },
+        { y: '2001', t: 'Início da operação', p: 'Em 2001, iniciamos o suporte a placas de circuito impresso por meio da operação de um hub na China, dedicado ao desenvolvimento, auditoria e qualificação de fábricas.' },
+        { y: '2020', t: 'Ampliação do escopo', p: 'Em 2020, impulsionados pelos desafios da pandemia, ampliamos a atuação desse hub para incluir a prospecção de fábricas de outros insumos, como conectores, cabos customizados, componentes magnéticos (indutores e transformadores), baterias, peças plásticas e metálicas customizadas, componentes passivos, além de semicondutores de baixa complexidade, como diodos, transistores, triacs e outros CIs que não estão disponíveis no portfólio dos fabricantes que representamos. Essa operação segue em constante evolução, atendendo às demandas específicas de cada cliente.' },
+        { y: 'Hoje', t: 'Fábricas e logística', p: 'Operamos uma unidade ISO 9001 na China que desenvolve e qualifica fábricas e consolida as cargas dessas fábricas até a exportação, com foco em confiabilidade e redução de custos.' },
       ],
     },
     scope: {
       label: 'Escopo',
       title: 'O que desenvolvemos para você',
-      sub: 'Insumos além do portfólio dos nossos fabricantes, desenvolvidos conforme a necessidade de cada cliente.',
+      sub: 'Fábricas de insumos além do portfólio dos fabricantes que representamos, desenvolvidas conforme a necessidade de cada cliente.',
       items: [
         { i: 'layers', t: 'Placas de circuito impresso', d: 'O ponto de partida do HUB, em 2001.' },
         { i: 'plug', t: 'Conectores', d: 'Padrão e específicos da aplicação.' },
@@ -48,12 +50,13 @@ const c = {
     },
     process: {
       label: 'Como funciona',
-      title: 'Da demanda ao fornecedor qualificado.',
+      title: 'Da demanda à exportação.',
       steps: [
         { t: 'Demanda', d: 'Partimos da especificação e das necessidades específicas do seu projeto.' },
-        { t: 'Prospecção', d: 'Identificamos fabricantes alternativos aptos a atender o insumo.' },
-        { t: 'Auditoria', d: 'Auditamos cada fabricante candidato.' },
-        { t: 'Qualificação', d: 'Qualificamos o fornecedor com foco em confiabilidade e redução de custos.' },
+        { t: 'Desenvolvimento da fábrica', d: 'Prospectamos fábricas aptas a produzir a peça e auditamos cada candidata.' },
+        { t: 'Qualificação', d: 'Qualificamos a fábrica com foco em confiabilidade e redução de custos.' },
+        { t: 'Produção & consolidação', d: 'As fábricas produzem e o China HUB consolida as cargas na China.' },
+        { t: 'Exportação', d: 'A Mastertronics exporta para você — ou a fábrica exporta direto, na compra direto de fábrica.' },
       ],
     },
     why: [
@@ -61,30 +64,48 @@ const c = {
       { v: '2001', l: `${hubYears} anos de experiência no mercado chinês.` },
       { v: 'Sob medida', l: 'Cada desenvolvimento parte da demanda específica do cliente.' },
     ],
-    contactTitle: 'Qual insumo você precisa desenvolver?',
+    flow: {
+      label: 'Logística',
+      title: 'Consolidação de cargas na China.',
+      p: 'As peças produzidas pelas fábricas que desenvolvemos são reunidas e consolidadas no China HUB antes da exportação. A Mastertronics é o fornecedor e o exportador para o cliente — ou, na compra direto de fábrica, a própria fábrica exporta direto.',
+    },
+    direct: {
+      label: 'Direto da fábrica',
+      title: 'Sem distribuidores chineses. Sem brokers.',
+      p: 'Compramos direto das fábricas que desenvolvemos. Sem intermediários entre você e a fábrica, a Mastertronics responde pela peça que fornece.',
+      cols: ['', 'Distribuidores chineses e brokers', 'Direto da fábrica, com a Mastertronics'],
+      rows: [
+        { k: 'Origem', a: 'Intermediários entre você e a fábrica', b: 'Fábrica desenvolvida e auditada pelo China HUB' },
+        { k: 'Garantia', a: 'Varia conforme cada intermediário', b: 'Garantia das peças, dada pela Mastertronics' },
+        { k: 'Rastreabilidade', a: 'Cadeia com elos difíceis de verificar', b: 'Rastreabilidade da fábrica até você' },
+        { k: 'Suporte técnico', a: 'Nem sempre disponível', b: 'Suporte técnico das peças, com a nossa equipe' },
+      ],
+    },
+    contactTitle: 'Qual peça ou produto você precisa?',
     contactIntro: 'Envie a especificação ou descreva a sua necessidade. Nossa equipe avalia a demanda e retorna com os próximos passos.',
   },
   en: {
-    metaTitle: 'China HUB · Alternative supplier development in China',
-    desc: 'Mastertronics’ ISO 9001-certified unit in China, operating since 2001, dedicated to sourcing, auditing and qualifying alternative manufacturers of electronic materials.',
+    metaTitle: 'China HUB · Factories and cargo consolidation in China',
+    desc: 'Mastertronics’ ISO 9001-certified unit in China, since 2001: factory development, auditing and qualification, cargo consolidation and direct-from-factory supply with warranty, traceability and technical support.',
     crumb: 'China HUB',
-    h1: 'Alternative suppliers, <em>qualified at the source.</em>',
-    lead: 'Our hub in China is at the service of Mastertronics’ customers, developing alternative manufacturers of electronic components and materials.',
-    chips: ['ISO 9001', 'Since 2001', 'Reliability', 'Cost reduction'],
+    h1: 'Factories developed in China, <em>with logistics all the way to you.</em>',
+    lead: 'The China HUB develops, audits and qualifies factories in China for Mastertronics’ customers and consolidates the cargo from those factories. Mastertronics is the supplier and exports to you — or the factory exports directly when you buy direct from the factory.',
+    chips: ['ISO 9001', 'Since 2001', 'Direct from the factory', 'Cargo consolidation'],
     cta: 'Send us your request',
+    route: 'Consolidation · Export',
     story: {
       label: 'Our story',
-      title: `${hubYears} years developing suppliers in China.`,
+      title: `${hubYears} years developing factories in China.`,
       items: [
-        { y: '2001', t: 'Operations begin', p: 'In 2001 we opened our hub in China to support printed circuit boards, dedicated to developing, auditing and qualifying manufacturers.' },
-        { y: '2020', t: 'Broader scope', p: 'In 2020, driven by the challenges of the pandemic, we expanded the hub’s operations to include sourcing manufacturers of other materials, such as connectors, custom cables, magnetic components (inductors and transformers), batteries, custom plastic and metal parts, passive components, as well as low-complexity semiconductors such as diodes, transistors, triacs and other ICs that are not available in the portfolio of the manufacturers we represent. This operation continues to evolve, responding to the specific demands of each customer.' },
-        { y: 'Today', t: 'ISO 9001 unit', p: 'We operate an ISO 9001-certified unit in China, dedicated to qualifying alternative suppliers with a focus on reliability and cost reduction.' },
+        { y: '2001', t: 'Operations begin', p: 'In 2001 we opened our hub in China to support printed circuit boards, dedicated to developing, auditing and qualifying factories.' },
+        { y: '2020', t: 'Broader scope', p: 'In 2020, driven by the challenges of the pandemic, we expanded the hub’s operations to include sourcing factories for other materials, such as connectors, custom cables, magnetic components (inductors and transformers), batteries, custom plastic and metal parts, passive components, as well as low-complexity semiconductors such as diodes, transistors, triacs and other ICs that are not available in the portfolio of the manufacturers we represent. This operation continues to evolve, responding to the specific demands of each customer.' },
+        { y: 'Today', t: 'Factories and logistics', p: 'We operate an ISO 9001-certified unit in China that develops and qualifies factories and consolidates their cargo all the way to export, with a focus on reliability and cost reduction.' },
       ],
     },
     scope: {
       label: 'Scope',
       title: 'What we develop for you',
-      sub: 'Materials beyond our manufacturers’ portfolio, developed around each customer’s needs.',
+      sub: 'Factories for materials beyond the portfolio of the manufacturers we represent, developed around each customer’s needs.',
       items: [
         { i: 'layers', t: 'Printed circuit boards', d: 'Where the HUB started, in 2001.' },
         { i: 'plug', t: 'Connectors', d: 'Standard and application-specific.' },
@@ -99,12 +120,13 @@ const c = {
     },
     process: {
       label: 'How it works',
-      title: 'From request to qualified supplier.',
+      title: 'From request to export.',
       steps: [
         { t: 'Request', d: 'We start from the specification and the specific needs of your project.' },
-        { t: 'Sourcing', d: 'We identify alternative manufacturers able to supply the part.' },
-        { t: 'Audit', d: 'We audit each candidate manufacturer.' },
-        { t: 'Qualification', d: 'We qualify the supplier with a focus on reliability and cost reduction.' },
+        { t: 'Factory development', d: 'We source factories able to make the part and audit each candidate.' },
+        { t: 'Qualification', d: 'We qualify the factory with a focus on reliability and cost reduction.' },
+        { t: 'Production & consolidation', d: 'The factories produce and the China HUB consolidates the cargo in China.' },
+        { t: 'Export', d: 'Mastertronics exports to you — or the factory exports directly when you buy direct from the factory.' },
       ],
     },
     why: [
@@ -112,7 +134,24 @@ const c = {
       { v: '2001', l: `${hubYears} years of experience in the Chinese market.` },
       { v: 'Tailored', l: 'Every development starts from the customer’s specific need.' },
     ],
-    contactTitle: 'Which part do you need to source?',
+    flow: {
+      label: 'Logistics',
+      title: 'Cargo consolidation in China.',
+      p: 'Parts made by the factories we develop are gathered and consolidated at the China HUB before export. Mastertronics is the supplier and the exporter to the customer — or, when you buy direct from the factory, the factory exports directly.',
+    },
+    direct: {
+      label: 'Direct from the factory',
+      title: 'No Chinese distributors. No brokers.',
+      p: 'We buy direct from the factories we develop. With no middlemen between you and the factory, Mastertronics stands behind the parts it supplies.',
+      cols: ['', 'Chinese distributors and brokers', 'Direct from the factory, with Mastertronics'],
+      rows: [
+        { k: 'Origin', a: 'Middlemen between you and the factory', b: 'A factory developed and audited by the China HUB' },
+        { k: 'Warranty', a: 'Varies with each middleman', b: 'A warranty on the parts, given by Mastertronics' },
+        { k: 'Traceability', a: 'A chain with links that are hard to verify', b: 'Traceability from the factory to you' },
+        { k: 'Technical support', a: 'Not always available', b: 'Technical support on the parts, from our team' },
+      ],
+    },
+    contactTitle: 'Which part or product do you need?',
     contactIntro: 'Send us the specification or describe what you need. Our team will review the request and get back to you with next steps.',
   },
 }[lang];
@@ -136,7 +175,7 @@ if (lang === 'en') nodes[0].label = 'Brazil';
         <ul class="hchips reveal" style="--d:.14s">{c.chips.map((x) => <li>{x}</li>)}</ul>
         <a href="#contato" class="btn btn--lime reveal" style="--d:.18s">{c.cta}<Icon name="arrow" /></a>
       </div>
-      <div class="hhero-map reveal" style="--d:.2s"><WorldMap nodes={nodes} labelScale={1.7} /></div>
+      <div class="hhero-map reveal" style="--d:.2s"><WorldMap nodes={nodes} labelScale={1.7} route={c.route} /></div>
     </div>
     <Trace />
   </section>
@@ -193,7 +232,7 @@ if (lang === 'en') nodes[0].label = 'Brazil';
           <li class="reveal" style={`--d:${i * 0.08}s`}>
             <span class="st-n mono">0{i + 1}</span>
             <span class="st-dot" aria-hidden="true"></span>
-            <h3 class="h3">{s.t}</h3>
+            <h3 class="st-t">{s.t}</h3>
             <p>{s.d}</p>
           </li>
         ))}
@@ -201,6 +240,49 @@ if (lang === 'en') nodes[0].label = 'Brazil';
       <dl class="hwhy">
         {c.why.map((w, i) => <div class="reveal" style={`--d:${i * 0.06}s`}><dt>{w.v}</dt><dd>{w.l}</dd></div>)}
       </dl>
+    </div>
+  </section>
+
+  <section class="section white flow">
+    <div class="container">
+      <div class="split-head">
+        <div>
+          <span class="label reveal">{c.flow.label}</span>
+          <h2 class="h2 reveal" style="--d:.05s">{c.flow.title}</h2>
+        </div>
+        <p class="lead reveal" style="--d:.1s">{c.flow.p}</p>
+      </div>
+      <div class="reveal" style="--d:.1s"><ConsolidationFlow lang={lang} /></div>
+    </div>
+  </section>
+
+  <section class="section direct">
+    <div class="container direct-grid">
+      <div class="direct-head">
+        <span class="label reveal">{c.direct.label}</span>
+        <h2 class="h2 reveal" style="--d:.05s">{c.direct.title}</h2>
+        <p class="lead reveal" style="--d:.1s">{c.direct.p}</p>
+      </div>
+      <div class="cmp-wrap reveal" style="--d:.1s">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col" class="cmp-a">{c.direct.cols[1]}</th>
+              <th scope="col" class="cmp-b">{c.direct.cols[2]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {c.direct.rows.map((r) => (
+              <tr>
+                <th scope="row" class="mono">{r.k}</th>
+                <td class="cmp-a" data-col={c.direct.cols[1]}><Icon name="minus" size={16} /><span>{r.a}</span></td>
+                <td class="cmp-b" data-col={c.direct.cols[2]}><Icon name="check" size={16} /><span>{r.b}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -251,14 +333,15 @@ if (lang === 'en') nodes[0].label = 'Brazil';
   @media (max-width: 900px) { .sgrid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .sgrid { grid-template-columns: 1fr; } }
 
-  .steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+  .steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
   .steps::before { content: ''; position: absolute; left: 0; right: 0; top: 43px; height: 1px; background: var(--line-dark); }
-  .steps li { position: relative; display: grid; gap: 12px; padding-right: 28px; align-content: start; }
+  .steps li { position: relative; display: grid; gap: 12px; padding-right: 24px; align-content: start; }
   .st-n { color: var(--lime); font-size: .75rem; }
   .st-dot { width: 13px; height: 13px; border-radius: 3px; background: var(--ink); border: 1.5px solid var(--lime); margin: 4px 0 14px; position: relative; z-index: 1; }
   .steps li:last-child .st-dot { background: var(--lime); }
-  .steps h3 { color: #fff; }
+  .st-t { color: #fff; font-size: clamp(1.15rem, 1.5vw, 1.375rem); letter-spacing: -.025em; line-height: 1.15; }
   .steps p { font-size: .9375rem; }
+  @media (max-width: 1060px) and (min-width: 861px) { .steps { grid-template-columns: repeat(3, 1fr); row-gap: 44px; } .steps::before { display: none; } }
   @media (max-width: 860px) {
     .steps { grid-template-columns: 1fr; gap: 28px; padding-left: 28px; }
     .steps::before { left: 6px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
@@ -270,4 +353,42 @@ if (lang === 'en') nodes[0].label = 'Brazil';
   .hwhy dt { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -.04em; color: #fff; line-height: 1; }
   .hwhy dd { color: var(--on-dark-muted); font-size: .9375rem; max-width: 30ch; }
   @media (max-width: 760px) { .hwhy { grid-template-columns: 1fr; } .hwhy div + div { padding-left: 0; border-left: 0; } .hwhy div { padding-bottom: 20px; border-bottom: 1px solid var(--line-dark); } }
+
+  .split-head { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 6vw, 96px); align-items: end; margin-bottom: clamp(36px, 5vw, 56px); }
+  .split-head > div { display: grid; gap: 18px; }
+  .split-head .lead { font-size: 1.0625rem; }
+  @media (max-width: 900px) { .split-head { grid-template-columns: 1fr; } }
+
+  .direct { background: var(--paper); }
+  .direct-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
+  .direct-head { display: grid; gap: 20px; }
+  .cmp { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .9375rem; }
+  .cmp th, .cmp td { text-align: left; vertical-align: middle; padding: 16px 18px; }
+  .cmp thead th { font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -.015em; line-height: 1.25; padding-block: 20px; }
+  .cmp tbody th { font-size: .6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); padding-left: 0; width: 22%; border-top: 1px solid var(--line); }
+  .cmp tbody td { border-top: 1px solid var(--line); }
+  .cmp td :global(svg) { display: inline-block; vertical-align: -3px; margin-right: 10px; flex: none; }
+  .cmp td { line-height: 1.45; }
+  .cmp .cmp-a { color: var(--muted); width: 36%; }
+  .cmp td.cmp-a :global(svg) { color: var(--line-strong); }
+  /* The Mastertronics column reads as one raised card */
+  .cmp .cmp-b { background: var(--ink); color: #fff; font-weight: 550; border-top-color: var(--line-dark); }
+  .cmp td.cmp-b :global(svg) { color: var(--lime); }
+  .cmp thead .cmp-b { border-radius: 18px 18px 0 0; color: #fff; box-shadow: inset 0 3px 0 var(--lime); }
+  .cmp thead .cmp-b, .cmp thead .cmp-a { border-top: 0; }
+  .cmp tbody tr:last-child .cmp-b { border-radius: 0 0 18px 18px; }
+  .cmp thead .cmp-a { color: var(--slate); }
+  @media (max-width: 1000px) { .direct-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    .cmp thead { display: none; }
+    .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; width: auto !important; }
+    .cmp tr { padding: 16px 0 6px; border-top: 1px solid var(--line); }
+    .cmp tbody th { border: 0; padding: 0 0 10px; }
+    .cmp td { display: grid; grid-template-columns: auto 1fr; padding: 12px 14px; border-radius: 12px; margin-bottom: 8px; border: 0 !important; }
+    .cmp td::before { content: attr(data-col); grid-column: 2; grid-row: 1; font-family: var(--font-mono); font-size: .625rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; opacity: .7; font-weight: 400; }
+    .cmp td :global(svg) { grid-column: 1; grid-row: 2; margin-top: 2px; }
+    .cmp td span { grid-column: 2; grid-row: 2; }
+    .cmp .cmp-a { background: var(--white); }
+    .cmp tbody tr:last-child .cmp-b { border-radius: 12px; }
+  }
 </style>

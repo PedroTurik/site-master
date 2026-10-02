@@ -1,0 +1,184 @@
+---
+// China HUB logistics: several factories → HUB consolidation → customer, plus the direct-from-factory export mode.
+import Icon from './Icon.astro';
+import type { Lang } from '../i18n/routes';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const c = {
+  pt: {
+    factory: 'Fábrica',
+    factorySub: 'Desenvolvida pelo HUB',
+    hub: 'China HUB',
+    hubSub: 'Consolidação de cargas',
+    client: 'Cliente',
+    clientSub: 'Brasil e América Latina',
+    modes: [
+      { n: '01', t: 'A Mastertronics exporta', tag: 'Exportador: Mastertronics', d: 'Você compra da Mastertronics, o fornecedor. As cargas das fábricas são consolidadas no China HUB e exportadas por nós.', edge: 'Exportação Mastertronics' },
+      { n: '02', t: 'Direto da fábrica', tag: 'Exportador: a fábrica', d: 'Na compra direto de fábrica, a fábrica desenvolvida pelo HUB exporta direto para você.', edge: 'Exportação direta da fábrica' },
+    ],
+  },
+  en: {
+    factory: 'Factory',
+    factorySub: 'Developed by the HUB',
+    hub: 'China HUB',
+    hubSub: 'Cargo consolidation',
+    client: 'Customer',
+    clientSub: 'Brazil and Latin America',
+    modes: [
+      { n: '01', t: 'Mastertronics exports', tag: 'Exporter: Mastertronics', d: 'You buy from Mastertronics, the supplier. Cargo from the factories is consolidated at the China HUB and exported by us.', edge: 'Exported by Mastertronics' },
+      { n: '02', t: 'Direct from the factory', tag: 'Exporter: the factory', d: 'When you buy direct from the factory, the factory developed by the HUB exports directly to you.', edge: 'Exported directly by the factory' },
+    ],
+  },
+}[lang];
+const [m1, m2] = c.modes;
+---
+<div class="cf dark">
+  <div class="cf-lane">
+    <div class="cf-head">
+      <p class="cf-mode"><span class="mono">{m1.n}</span>{m1.t}</p>
+      <p class="cf-tag mono">{m1.tag}</p>
+      <p class="cf-desc">{m1.d}</p>
+    </div>
+    <ol class="cf-row">
+      <li class="cf-col cf-factories">
+        <ul>
+          {[1, 2, 3].map((i) => (
+            <li class="cf-node cf-node--factory">
+              <span class="cf-ic"><Icon name="factory" size={18} /></span>
+              <span class="cf-txt"><strong>{c.factory} 0{i}</strong></span>
+            </li>
+          ))}
+        </ul>
+      </li>
+      <li class="cf-col cf-merge" aria-hidden="true">
+        <svg viewBox="0 0 64 172" preserveAspectRatio="none">
+          <path class="cf-base" d="M0 26 C32 26 32 86 64 86 M0 86 H64 M0 146 C32 146 32 86 64 86" />
+          <path class="cf-run" pathLength="1" d="M0 26 C32 26 32 86 64 86" />
+          <path class="cf-run" pathLength="1" d="M0 86 H64" style="--i:1" />
+          <path class="cf-run" pathLength="1" d="M0 146 C32 146 32 86 64 86" style="--i:2" />
+        </svg>
+      </li>
+      <li class="cf-col">
+        <div class="cf-node cf-node--hub">
+          <span class="cf-ic"><Icon name="box" size={20} /></span>
+          <span class="cf-txt"><strong>{c.hub}</strong><span>{c.hubSub}</span></span>
+        </div>
+      </li>
+      <li class="cf-col cf-edge">
+        <span class="cf-edge-l mono">{m1.edge}</span>
+        <svg viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true">
+          <path class="cf-base" d="M0 1 H100" /><path class="cf-run" pathLength="1" d="M0 1 H100" style="--i:3" />
+        </svg>
+        <span class="cf-arrow" aria-hidden="true"></span>
+      </li>
+      <li class="cf-col">
+        <div class="cf-node cf-node--client">
+          <span class="cf-ic"><Icon name="pin" size={18} /></span>
+          <span class="cf-txt"><strong>{c.client}</strong><span>{c.clientSub}</span></span>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="cf-lane cf-lane--direct">
+    <div class="cf-head">
+      <p class="cf-mode"><span class="mono">{m2.n}</span>{m2.t}</p>
+      <p class="cf-tag mono">{m2.tag}</p>
+      <p class="cf-desc">{m2.d}</p>
+    </div>
+    <ol class="cf-row">
+      <li class="cf-col">
+        <div class="cf-node cf-node--factory">
+          <span class="cf-ic"><Icon name="factory" size={18} /></span>
+          <span class="cf-txt"><strong>{c.factory}</strong><span>{c.factorySub}</span></span>
+        </div>
+      </li>
+      <li class="cf-col cf-edge cf-edge--long">
+        <span class="cf-edge-l mono">{m2.edge}</span>
+        <svg viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true">
+          <path class="cf-base cf-base--dash" d="M0 1 H100" />
+        </svg>
+        <span class="cf-arrow" aria-hidden="true"></span>
+      </li>
+      <li class="cf-col">
+        <div class="cf-node cf-node--client">
+          <span class="cf-ic"><Icon name="pin" size={18} /></span>
+          <span class="cf-txt"><strong>{c.client}</strong><span>{c.clientSub}</span></span>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<style>
+  .cf {
+    border-radius: 24px; overflow: hidden; position: relative; isolation: isolate;
+    background: radial-gradient(60% 80% at 50% 0%, rgba(222,221,58,.06), transparent 70%), var(--ink);
+  }
+  .cf::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .6; background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 18px 18px; mask-image: linear-gradient(180deg, #000, transparent 85%); }
+  .cf-lane { display: grid; grid-template-columns: minmax(200px, 270px) 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; padding: clamp(26px, 3.5vw, 44px); }
+  .cf-lane--direct { border-top: 1px dashed rgba(255,255,255,.16); background: rgba(255,255,255,.015); }
+
+  .cf-head { display: grid; gap: 8px; align-content: start; }
+  .cf .cf-mode { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -.02em; color: #fff; }
+  .cf-mode .mono { color: var(--lime); font-size: .75rem; }
+  .cf .cf-tag { justify-self: start; font-size: .625rem; text-transform: uppercase; letter-spacing: .07em; padding: 5px 9px 4px; border-radius: 6px; border: 1px solid rgba(222,221,58,.35); color: var(--lime); }
+  .cf .cf-lane--direct .cf-tag { border-color: rgba(255,255,255,.22); color: var(--on-dark); }
+  .cf-desc { font-size: .875rem; line-height: 1.55; }
+
+  /* Flow row: factories | merge | hub | edge | customer */
+  .cf-row { list-style: none; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr) minmax(96px, .9fr) minmax(0, 1.1fr); align-items: center; }
+  .cf-edge--long { grid-column: 2 / 5; }
+  .cf-col { min-width: 0; }
+  .cf-factories ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+
+  .cf-node { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px 8px 8px; border-radius: 12px; border: 1px solid var(--line-dark); background: rgba(255,255,255,.035); }
+  .cf-factories .cf-node { height: 52px; }
+  .cf-ic { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: rgba(255,255,255,.07); color: var(--on-dark); }
+  .cf-txt { display: grid; min-width: 0; line-height: 1.25; }
+  .cf-txt strong { font-size: .875rem; font-weight: 600; color: #fff; }
+  .cf-txt span { font-size: .75rem; color: var(--on-dark-muted); }
+  .cf-node--hub { min-height: 76px; padding: 12px 14px 12px 12px; border-color: rgba(222,221,58,.5); background: rgba(222,221,58,.07); box-shadow: 0 0 0 5px rgba(222,221,58,.05); }
+  .cf-node--hub .cf-ic { width: 40px; height: 40px; background: var(--lime); color: var(--ink); }
+  .cf-node--hub strong { font-size: 1rem; }
+  .cf-node--client { border-color: rgba(255,255,255,.24); }
+  .cf-node--client .cf-ic { background: #fff; color: var(--ink); }
+
+  .cf-merge svg { width: 100%; height: 172px; overflow: visible; }
+  .cf svg path { fill: none; vector-effect: non-scaling-stroke; }
+  .cf-base { stroke: rgba(222,221,58,.32); stroke-width: 1.5; }
+  .cf-base--dash { stroke: rgba(255,255,255,.4); stroke-dasharray: 5 6; }
+  .cf-run { stroke: var(--lime); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 0.16 0.84; stroke-dashoffset: 1; animation: cf-run 3.2s linear infinite; animation-delay: calc(var(--i, 0) * -0.8s); }
+  @keyframes cf-run { to { stroke-dashoffset: 0; } }
+
+  .cf-edge { position: relative; display: grid; align-items: center; height: 76px; padding-right: 10px; }
+  .cf-edge svg { width: 100%; height: 2px; overflow: visible; }
+  .cf-edge-l { position: absolute; left: 10px; right: 18px; bottom: calc(50% + 10px); font-size: .625rem; text-transform: uppercase; letter-spacing: .06em; line-height: 1.35; color: var(--on-dark-muted); text-align: center; }
+  .cf-arrow { position: absolute; right: 4px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-top: 1.5px solid var(--lime); border-right: 1.5px solid var(--lime); transform: rotate(45deg); }
+  .cf-lane--direct .cf-arrow { border-color: rgba(255,255,255,.55); }
+
+  @media (max-width: 1080px) {
+    .cf-lane { grid-template-columns: 1fr; }
+    .cf-head { max-width: 560px; }
+  }
+  /* Stacked: the flow runs top → bottom */
+  @media (max-width: 720px) {
+    .cf-row { grid-template-columns: 1fr; }
+    .cf-edge--long { grid-column: auto; }
+    .cf-factories ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cf-factories .cf-node { flex-direction: column; justify-content: center; gap: 6px; height: auto; padding: 12px 6px; text-align: center; }
+    .cf-factories .cf-txt strong { font-size: .75rem; }
+    .cf-merge { position: relative; height: 34px; }
+    .cf-merge svg { display: none; }
+    .cf-merge::before { content: ''; position: absolute; left: 16.66%; right: 16.66%; top: 0; height: 14px; border: 1.5px solid rgba(222,221,58,.45); border-top: 0; border-radius: 0 0 8px 8px; }
+    .cf-merge::after { content: ''; position: absolute; left: 50%; top: 14px; bottom: 0; width: 1.5px; margin-left: -.75px; background: rgba(222,221,58,.45); }
+    .cf-edge, .cf-edge--long { height: auto; min-height: 64px; padding: 10px 0 10px 50%; }
+    .cf-edge svg { display: none; }
+    .cf-edge::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1.5px; margin-left: -.75px; background: rgba(222,221,58,.5); }
+    .cf-lane--direct .cf-edge::before { background: repeating-linear-gradient(180deg, rgba(255,255,255,.4) 0 5px, transparent 5px 11px); }
+    .cf-edge-l { position: static; text-align: left; padding-left: 16px; }
+    .cf-arrow { right: auto; left: 50%; top: auto; bottom: 2px; margin: 0 0 0 -4.5px; transform: rotate(135deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .cf-run { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; opacity: .7; } }
+</style>

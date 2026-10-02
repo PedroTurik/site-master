@@ -15,7 +15,7 @@ pnpm preview    # serve dist/
 
 1. **Contact form** — create a free access key at [web3forms.com](https://web3forms.com) for `contato@mastertronics.com.br` and paste it in `src/data/company.ts` → `form.accessKey`. Until then, submitting the form opens the visitor's e-mail client with the message pre-filled (nothing is lost).
 2. Confirm the contact e-mail (`contato@` — the old EN site showed `contact@`).
-3. Old URLs `/chinahub`, `/en/chinahub`, `/en/renovaveis` and `/representadas/*` already redirect to the new pages.
+3. Old URLs `/chinahub`, `/en/chinahub`, `/en/renovaveis`, `/representadas/*` and `/distribuidores` (`/en/distributors`) already redirect to the new pages (`public/_redirects`).
 
 ## Editing content
 
@@ -23,7 +23,7 @@ pnpm preview    # serve dist/
 |---|---|
 | Company info, e-mail, address, CNPJ, LinkedIn, form key | `src/data/company.ts` |
 | Manufacturers (texts, logos, categories, product lines, markets, facts) | `src/data/manufacturers.ts` |
-| Distributors (logos, descriptions) | `src/data/manufacturers.ts` → `distributors` |
+| Distribution partners (logos, descriptions — shown on `/fabricantes/#distribuicao`) | `src/data/manufacturers.ts` → `distributors` |
 | Photos | `src/assets/photos/<name>.jpg`, used via `<Photo name="…">` — credits in `PHOTO-CREDITS.md` (Unsplash/Pexels licenses, no attribution required) |
 | Page copy (PT + EN side by side) | `src/views/*.astro` (top of each file) |
 | Navigation / shared labels | `src/i18n/ui.ts` |

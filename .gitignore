@@ -3,3 +3,5 @@ dist/
 .astro/
 qa/out/
 qa/contact.png
+.vercel/
+.env

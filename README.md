@@ -9,7 +9,7 @@ pnpm build      # static output in dist/
 pnpm preview    # serve dist/
 ```
 
-`dist/` is plain HTML/CSS/JS and can be hosted anywhere (Netlify, Vercel, Cloudflare Pages, or uploaded to any web server / cPanel).
+Hosted on Vercel (`@astrojs/vercel` adapter). Every page is prerendered static HTML; the only server code is `/api/admin/*` (text editor, below).
 
 ## Before going live
 
@@ -17,7 +17,26 @@ pnpm preview    # serve dist/
 2. Confirm the contact e-mail (`contato@` — the old EN site showed `contact@`).
 3. Old URLs `/chinahub`, `/en/chinahub`, `/en/renovaveis`, `/representadas/*` and `/distribuidores` (`/en/distributors`) already redirect to the new pages (`public/_redirects`).
 
-## Editing content
+## Editing texts without code (`/admin`)
+
+All page copy and UI labels live in `src/content/*.json` (PT + EN). Open **`/admin`**, enter the password, edit, **Salvar**. The save becomes a commit on `main` through the GitHub API, and Vercel redeploys — the change is live in ~1–2 min. Every edit is in git history, so it can be reverted.
+
+- Only text can change: keys, list sizes and internal ids (photo names, icons, links) are locked, and the server rejects anything else.
+- `{years}`, `{n}`, `{hubYears}`, `{name}`… are filled at build time (years since 1991, number of manufacturers, …). Keep them in the text.
+- If someone else saved the same page in the meantime, the save is refused and the editor asks to reload.
+
+**Setup (once)** — in Vercel → Project → Settings → Environment Variables (Production):
+
+| Variable | Value |
+|---|---|
+| `ADMIN_PASSWORD` | the editor password (long, unique) |
+| `GITHUB_TOKEN` | GitHub *fine-grained* token, repository access: only this repo, permission **Contents: Read and write** |
+| `GITHUB_REPO` | optional, default `PedroTurik/site-master` |
+| `GITHUB_BRANCH` | optional, default `main` |
+
+Changing the password = editing the variable and redeploying. To run the editor locally, put the same variables in `.env` (git-ignored) — saves then commit to the real repo.
+
+## Editing content in code
 
 | What | Where |
 |---|---|
@@ -25,8 +44,8 @@ pnpm preview    # serve dist/
 | Manufacturers (texts, logos, categories, product lines, markets, facts) | `src/data/manufacturers.ts` |
 | Distribution partners (logos, descriptions — shown on `/fabricantes/#distribuicao`) | `src/data/manufacturers.ts` → `distributors` |
 | Photos | `src/assets/photos/<name>.jpg`, used via `<Photo name="…">` — credits in `PHOTO-CREDITS.md` (Unsplash/Pexels licenses, no attribution required) |
-| Page copy (PT + EN side by side) | `src/views/*.astro` (top of each file) |
-| Navigation / shared labels | `src/i18n/ui.ts` |
+| Page copy (PT + EN side by side) — also editable at `/admin` | `src/content/<page>.json` (layout in `src/views/*.astro`) |
+| Navigation / shared labels — also editable at `/admin` | `src/content/ui.json` |
 | URLs per language | `src/i18n/routes.ts` |
 
 **Add a manufacturer:** drop its logo (transparent PNG or SVG) in `public/logos/`, optional product images in `src/assets/products/`, then add an entry to `manufacturers` in `src/data/manufacturers.ts` (and its slug to `order`). Its page (`/fabricantes/<slug>/` and `/en/manufacturers/<slug>/`), home tile, logo marquee, portfolio index and counters are generated automatically.
@@ -36,11 +55,13 @@ pnpm preview    # serve dist/
 ```
 src/
   components/   Header, Footer, Logo (inline vector), WorldMap, Trace, ContactSection, …
+  content/      page copy + UI labels as JSON (edited via /admin)
   data/         company.ts, manufacturers.ts, world-dots.json (generated)
+  lib/          content placeholders, /admin validation + GitHub commit helpers
   i18n/         routes + UI strings
   layouts/      Base.astro (SEO, hreflang, JSON-LD)
   views/        one file per page, shared by PT and EN routes
-  pages/        thin route files (PT at root, EN under /en)
+  pages/        thin route files (PT at root, EN under /en), admin.astro, api/admin/*
 public/         logos, favicon, OG images
 scripts/        build-map.mjs — regenerates the dot-matrix world map
 qa/             screenshot + brand-asset scripts (Playwright, dev only)

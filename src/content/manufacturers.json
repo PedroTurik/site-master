@@ -1,0 +1,84 @@
+{
+  "pt": {
+    "title": "Fabricantes",
+    "metaTitle": "Fabricantes · Semicondutores e componentes eletrônicos",
+    "desc": "Fabricantes globais de semicondutores de potência, memórias, displays, sensores, optoacopladores, cristais e magnéticos, com representação e suporte técnico da Mastertronics no Brasil e na América Latina.",
+    "h1": "Fabricantes globais.<br><em>Suporte técnico local.</em>",
+    "lead": "Representamos fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes. Você compra pelo canal de distribuição ou direto da fábrica, sempre com a Mastertronics ao lado do seu projeto.",
+    "index": "Portfólio por área de produto",
+    "details": "Ver fabricante",
+    "why": {
+      "label": "Por que a Mastertronics",
+      "title": "O fabricante certo, com quem entende do seu projeto.",
+      "items": [
+        {
+          "icon": "chip",
+          "t": "Suporte técnico especializado",
+          "d": "Acompanhamos a escolha e a aplicação dos componentes junto ao seu time de engenharia."
+        },
+        {
+          "icon": "target",
+          "t": "Acesso a tecnologias emergentes",
+          "d": "Antecipamos tendências e trazemos ao mercado latino-americano as novas gerações de semicondutores e componentes."
+        },
+        {
+          "icon": "truck",
+          "t": "Mais de uma via de compra",
+          "d": "Canal de distribuição ou direto da fábrica: a via de compra é definida com cada cliente, com soluções logísticas integradas."
+        },
+        {
+          "icon": "users",
+          "t": "Atendimento próximo",
+          "d": "Equipe comercial e técnica com agilidade e foco nas necessidades de cada cliente, desde 1991."
+        }
+      ]
+    },
+    "hub": {
+      "label": "Precisa de algo além do portfólio?",
+      "title": "O China HUB desenvolve a fábrica e consolida a carga.",
+      "p": "De conectores e cabos customizados a CIs e semicondutores de baixa complexidade, nossa unidade ISO 9001 na China desenvolve, audita e qualifica fábricas e consolida as cargas até a exportação.",
+      "cta": "Conhecer o China HUB"
+    }
+  },
+  "en": {
+    "title": "Manufacturers",
+    "metaTitle": "Manufacturers · Semiconductors and electronic components",
+    "desc": "Global manufacturers of power semiconductors, memory, displays, sensors, optocouplers, crystals and magnetics, with Mastertronics representation and technical support in Brazil and Latin America.",
+    "h1": "Global manufacturers.<br><em>Local technical support.</em>",
+    "lead": "We represent international manufacturers with agile, close technical and commercial support focused on customer needs. You buy through the distribution channel or direct from the factory, with Mastertronics alongside your project.",
+    "index": "Portfolio by product area",
+    "details": "View manufacturer",
+    "why": {
+      "label": "Why Mastertronics",
+      "title": "The right manufacturer, with people who understand your project.",
+      "items": [
+        {
+          "icon": "chip",
+          "t": "Specialized technical support",
+          "d": "We work alongside your engineering team on component selection and application."
+        },
+        {
+          "icon": "target",
+          "t": "Access to emerging technologies",
+          "d": "We anticipate trends and bring new generations of semiconductors and components to the Latin American market."
+        },
+        {
+          "icon": "truck",
+          "t": "More than one purchase route",
+          "d": "Distribution channel or direct from the factory: the purchase route is defined with each customer, with integrated logistics solutions."
+        },
+        {
+          "icon": "users",
+          "t": "Close, responsive service",
+          "d": "A commercial and technical team that is agile and focused on each customer’s needs, since 1991."
+        }
+      ]
+    },
+    "hub": {
+      "label": "Need something beyond the portfolio?",
+      "title": "The China HUB develops the factory and consolidates the cargo.",
+      "p": "From connectors and custom cables to ICs and low-complexity semiconductors, our ISO 9001 unit in China develops, audits and qualifies factories and consolidates the cargo all the way to export.",
+      "cta": "Discover the China HUB"
+    }
+  }
+}

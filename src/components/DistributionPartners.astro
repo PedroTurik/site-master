@@ -1,27 +1,14 @@
 ---
 // Distribution is one purchase channel among others — a compact partner band, not a buying guide.
 import Icon from './Icon.astro';
+import distributionPartnersContent from '../content/distribution-partners.json';
+import { fill } from '../lib/content';
 import { distributors } from '../data/manufacturers';
 import { type Lang, distributionAnchor } from '../i18n/routes';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
-const c = {
-  pt: {
-    label: 'Parceiros de distribuição',
-    title: 'Canal de distribuição ou direto da fábrica.',
-    p: 'Os produtos dos fabricantes que representamos também estão disponíveis através de distribuidores globais parceiros. A via de compra — distribuidor ou direto da fábrica — é definida com cada cliente.',
-    routes: ['Canal de distribuição', 'Direto da fábrica'],
-    visit: 'Visitar site',
-  },
-  en: {
-    label: 'Distribution partners',
-    title: 'Through distribution or direct from the factory.',
-    p: 'Products from the manufacturers we represent are also available through our global distribution partners. The purchase route — distributor or direct from the factory — is defined with each customer.',
-    routes: ['Distribution channel', 'Direct from the factory'],
-    visit: 'Visit website',
-  },
-}[lang];
+const c = fill(distributionPartnersContent, {})[lang];
 ---
 <section class="dp section--tight" id={distributionAnchor[lang]}>
   <div class="container dp-in">

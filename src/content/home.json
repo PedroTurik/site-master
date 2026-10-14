@@ -1,0 +1,334 @@
+{
+  "pt": {
+    "meta": {
+      "title": "Mastertronics · Solução técnica e logística em componentes eletrônicos",
+      "desc": "Solução técnica e logística para a indústria eletrônica desde 1991: representação de fabricantes globais de semicondutores e componentes e China HUB ISO 9001, que desenvolve fábricas e consolida cargas na China."
+    },
+    "hero": {
+      "label": "Desde 1991 · {years} anos de mercado",
+      "title": [
+        "Solução técnica e logística",
+        "para a indústria eletrônica."
+      ],
+      "sub": "Somos o fornecedor técnico e logístico da sua engenharia e do seu suprimento: representamos fabricantes globais de semicondutores e componentes e, pelo China HUB, desenvolvemos fábricas e consolidamos cargas na China.",
+      "cta1": "Fale com um especialista",
+      "cta2": "Como atuamos"
+    },
+    "stats": [
+      {
+        "v": "1991",
+        "l": "No mercado desde a fundação, em Porto Alegre"
+      },
+      {
+        "v": "{n}",
+        "l": "Fabricantes globais representados"
+      },
+      {
+        "v": "{hubYears} anos",
+        "l": "Desenvolvendo fábricas e consolidando cargas na China"
+      },
+      {
+        "v": "ISO 9001",
+        "l": "China HUB, unidade certificada desde 2001"
+      }
+    ],
+    "route": "Consolidação · Exportação",
+    "marquee": "Fabricantes que representamos no Brasil e na América Latina",
+    "fronts": {
+      "label": "Como atuamos",
+      "title": "Uma solução técnica e logística, em duas frentes.",
+      "sub": "Do semicondutor de potência à peça customizada, a Mastertronics fornece com suporte técnico local, pelos fabricantes que representamos ou pelas fábricas que desenvolvemos na China.",
+      "items": [
+        {
+          "photo": "pcb",
+          "n": "01",
+          "tag": "Representação de fabricantes",
+          "title": "Fabricantes globais, com suporte técnico local.",
+          "text": "Representamos fabricantes internacionais de semicondutores e componentes eletrônicos. Você compra pelo canal de distribuição ou direto da fábrica, sempre com o nosso suporte técnico e comercial.",
+          "spec": [
+            {
+              "k": "Portfólio",
+              "v": "Semicondutores e componentes de {n} fabricantes globais"
+            },
+            {
+              "k": "Compra",
+              "v": "Canal de distribuição ou direto da fábrica"
+            },
+            {
+              "k": "Mastertronics",
+              "v": "Suporte técnico e comercial, próximo do seu projeto"
+            }
+          ],
+          "cta": "Ver fabricantes",
+          "key": "manufacturers"
+        },
+        {
+          "photo": "port",
+          "n": "02",
+          "tag": "China HUB",
+          "title": "Fábricas desenvolvidas e cargas consolidadas na China.",
+          "text": "Desenvolvemos fábricas na China para os insumos que o seu projeto precisa e consolidamos as cargas dessas fábricas. O fornecedor é a Mastertronics, que exporta para você — ou a fábrica exporta direto, na compra direto de fábrica.",
+          "spec": [
+            {
+              "k": "Fábricas",
+              "v": "Prospectadas, auditadas e qualificadas pelo HUB"
+            },
+            {
+              "k": "Logística",
+              "v": "Consolidação das cargas na China"
+            },
+            {
+              "k": "Exportação",
+              "v": "Pela Mastertronics ou direto da fábrica"
+            }
+          ],
+          "cta": "Conhecer o China HUB",
+          "key": "chinaHub"
+        }
+      ]
+    },
+    "direct": {
+      "label": "Direto da fábrica",
+      "title": "Fornecedor somos nós. E respondemos pela peça.",
+      "p": "Compramos direto da fábrica, sem intermediários nem brokers. Por isso a Mastertronics responde por cada peça que fornece, com três garantias:",
+      "items": [
+        {
+          "i": "shield",
+          "t": "Garantia",
+          "d": "Garantia das peças fornecidas, dada pela própria Mastertronics."
+        },
+        {
+          "i": "route",
+          "t": "Rastreabilidade",
+          "d": "Origem conhecida: cada peça vem de uma fábrica que desenvolvemos e auditamos."
+        },
+        {
+          "i": "chip",
+          "t": "Suporte técnico",
+          "d": "Apoio técnico na especificação e na aplicação das peças, com agilidade e proximidade."
+        }
+      ]
+    },
+    "about": {
+      "label": "A Mastertronics",
+      "title": "Cada vez mais próximos de cada cliente.",
+      "p1": "Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Hoje, somos uma solução técnica e logística em várias frentes, com atendimento ágil e próximo, antecipando tendências e viabilizando acesso a tecnologias emergentes.",
+      "p2": "Nosso portfólio inclui semicondutores de potência, memórias, displays customizados, sensores MEMS, optoacopladores e sensores de corrente e tensão para aplicações industriais e de energia.",
+      "more": "Conheça a empresa",
+      "badge": "{years} anos",
+      "badgeL": "conectando a indústria à tecnologia global"
+    },
+    "mfr": {
+      "label": "Portfólio",
+      "title": "Nossos fabricantes",
+      "sub": "Líderes globais em semicondutores de potência, memórias, sensores, optoeletrônica, displays, cristais e magnéticos.",
+      "all": "Ver todos os fabricantes"
+    },
+    "hub": {
+      "label": "China HUB",
+      "title": "Nosso braço na China: fábricas desenvolvidas, cargas consolidadas.",
+      "p0": "Em 2001, iniciamos o suporte a placas de circuito impresso por meio da operação de um hub na China, dedicado ao desenvolvimento, auditoria e qualificação de fábricas.",
+      "p": "Hoje, desenvolvemos fábricas de conectores, cabos customizados, componentes magnéticos, baterias, peças plásticas e metálicas customizadas, componentes passivos e semicondutores de baixa complexidade — e consolidamos na China as cargas dessas fábricas até a exportação.",
+      "steps": [
+        "Demanda",
+        "Fábrica",
+        "Qualificação",
+        "Consolidação",
+        "Exportação"
+      ],
+      "cta": "Como funciona o China HUB",
+      "badge": "Unidade certificada na China",
+      "since": "Desde"
+    },
+    "energy": {
+      "label": "Energia renovável · Mastertronics & CRRC",
+      "title": "A escala da CRRC para a infraestrutura de energia do Brasil.",
+      "p": "Parceria estratégica com as divisões Times Electric e ZhuZhou Institute Comprehensive Energy da CRRC: consultoria, suporte técnico e soluções completas em geração, armazenamento e hidrogênio verde.",
+      "stats": [
+        {
+          "v": "Fortune 500",
+          "l": "Líder global"
+        },
+        {
+          "v": "+48 GWh",
+          "l": "Em BESS implantados · Top 3 global"
+        },
+        {
+          "v": "+70 GW",
+          "l": "Top 3 em inversores solares na China"
+        },
+        {
+          "v": "Top 1",
+          "l": "Mercado eólico na China"
+        }
+      ],
+      "cta": "Soluções em energia"
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "Mastertronics · Technical and logistics solutions in electronic components",
+      "desc": "A technical and logistics solution for the electronics industry since 1991: representation of global semiconductor and component manufacturers and an ISO 9001 China HUB that develops factories and consolidates cargo in China."
+    },
+    "hero": {
+      "label": "Since 1991 · {years} years in the market",
+      "title": [
+        "Technical and logistics solutions",
+        "for the electronics industry."
+      ],
+      "sub": "We are the technical and logistics supplier behind your engineering and sourcing: we represent global semiconductor and component manufacturers and, through our China HUB, develop factories and consolidate cargo in China.",
+      "cta1": "Talk to a specialist",
+      "cta2": "How we work"
+    },
+    "stats": [
+      {
+        "v": "1991",
+        "l": "In the market since our founding in Porto Alegre"
+      },
+      {
+        "v": "{n}",
+        "l": "Global manufacturers represented"
+      },
+      {
+        "v": "{hubYears} years",
+        "l": "Developing factories and consolidating cargo in China"
+      },
+      {
+        "v": "ISO 9001",
+        "l": "China HUB, a certified unit since 2001"
+      }
+    ],
+    "route": "Consolidation · Export",
+    "marquee": "Manufacturers we represent in Brazil and Latin America",
+    "fronts": {
+      "label": "How we work",
+      "title": "One technical and logistics solution, on two fronts.",
+      "sub": "From power semiconductors to custom parts, Mastertronics supplies with local technical support — through the manufacturers we represent or the factories we develop in China.",
+      "items": [
+        {
+          "photo": "pcb",
+          "n": "01",
+          "tag": "Manufacturer representation",
+          "title": "Global manufacturers, local technical support.",
+          "text": "We represent international semiconductor and electronic component manufacturers. You buy through the distribution channel or direct from the factory, always with our technical and commercial support.",
+          "spec": [
+            {
+              "k": "Portfolio",
+              "v": "Semiconductors and components from {n} global manufacturers"
+            },
+            {
+              "k": "Purchase",
+              "v": "Distribution channel or direct from the factory"
+            },
+            {
+              "k": "Mastertronics",
+              "v": "Technical and commercial support, close to your project"
+            }
+          ],
+          "cta": "See manufacturers",
+          "key": "manufacturers"
+        },
+        {
+          "photo": "port",
+          "n": "02",
+          "tag": "China HUB",
+          "title": "Factories developed and cargo consolidated in China.",
+          "text": "We develop factories in China for the parts your project needs and consolidate the cargo from those factories. Mastertronics is the supplier and exports to you — or the factory exports directly when you buy direct from the factory.",
+          "spec": [
+            {
+              "k": "Factories",
+              "v": "Sourced, audited and qualified by the HUB"
+            },
+            {
+              "k": "Logistics",
+              "v": "Cargo consolidation in China"
+            },
+            {
+              "k": "Export",
+              "v": "By Mastertronics or direct from the factory"
+            }
+          ],
+          "cta": "Discover the China HUB",
+          "key": "chinaHub"
+        }
+      ]
+    },
+    "direct": {
+      "label": "Direct from the factory",
+      "title": "We are the supplier. And we stand behind every part.",
+      "p": "We buy direct from the factory, with no middlemen or brokers. That is why Mastertronics answers for every part it supplies, with three guarantees:",
+      "items": [
+        {
+          "i": "shield",
+          "t": "Warranty",
+          "d": "A warranty on the parts we supply, given by Mastertronics itself."
+        },
+        {
+          "i": "route",
+          "t": "Traceability",
+          "d": "Known origin: every part comes from a factory we have developed and audited."
+        },
+        {
+          "i": "chip",
+          "t": "Technical support",
+          "d": "Technical support on part specification and application, agile and close at hand."
+        }
+      ]
+    },
+    "about": {
+      "label": "Mastertronics",
+      "title": "Closer to every customer.",
+      "p1": "Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. Today we are a technical and logistics solution on several fronts, with agile, close service — anticipating trends and enabling access to emerging technologies.",
+      "p2": "Our portfolio includes power semiconductors, memory, custom displays, MEMS sensors, optocouplers and current and voltage sensors for industrial and energy applications.",
+      "more": "About the company",
+      "badge": "{years} years",
+      "badgeL": "connecting industry to global technology"
+    },
+    "mfr": {
+      "label": "Portfolio",
+      "title": "Our manufacturers",
+      "sub": "Global leaders in power semiconductors, memory, sensors, optoelectronics, displays, crystals and magnetics.",
+      "all": "See all manufacturers"
+    },
+    "hub": {
+      "label": "China HUB",
+      "title": "Our arm in China: factories developed, cargo consolidated.",
+      "p0": "In 2001 we opened our hub in China to support printed circuit boards, dedicated to developing, auditing and qualifying factories.",
+      "p": "Today we develop factories for connectors, custom cables, magnetic components, batteries, custom plastic and metal parts, passive components and low-complexity semiconductors — and consolidate the cargo from those factories in China, all the way to export.",
+      "steps": [
+        "Request",
+        "Factory",
+        "Qualification",
+        "Consolidation",
+        "Export"
+      ],
+      "cta": "How the China HUB works",
+      "badge": "Certified unit in China",
+      "since": "Since"
+    },
+    "energy": {
+      "label": "Renewable energy · Mastertronics & CRRC",
+      "title": "CRRC’s scale for Brazil’s energy infrastructure.",
+      "p": "A strategic partnership with CRRC’s Times Electric and ZhuZhou Institute Comprehensive Energy divisions: consulting, technical support and complete solutions in generation, storage and green hydrogen.",
+      "stats": [
+        {
+          "v": "Fortune 500",
+          "l": "Global leader"
+        },
+        {
+          "v": "48+ GWh",
+          "l": "Of BESS deployed · Top 3 worldwide"
+        },
+        {
+          "v": "70+ GW",
+          "l": "Top 3 in solar inverters in China"
+        },
+        {
+          "v": "No. 1",
+          "l": "Wind market in China"
+        }
+      ],
+      "cta": "Energy solutions"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "pt": {
+    "crumb": "Fabricantes",
+    "area": "Área",
+    "products": "Linhas de produto",
+    "markets": "Mercados de atuação",
+    "highlights": "Destaques",
+    "site": "Site oficial",
+    "gallery": "Produtos",
+    "more": "Outros fabricantes",
+    "all": "Ver todos",
+    "with": "Vias de compra",
+    "where": "Parceiros de distribuição",
+    "withText": "A Mastertronics representa a {name}, com suporte técnico e comercial local. Você compra pelo canal de distribuição ou direto da fábrica — a via é definida com cada cliente.",
+    "ask": "Solicitar informações",
+    "contactTitle": "Fale conosco sobre a {name}",
+    "contactIntro": "Conte-nos sobre a sua aplicação. Nossa equipe técnica retorna com as linhas de produto, documentação e o melhor caminho de compra.",
+    "meta": "{name} · Representação no Brasil"
+  },
+  "en": {
+    "crumb": "Manufacturers",
+    "area": "Area",
+    "products": "Product lines",
+    "markets": "Markets",
+    "highlights": "Highlights",
+    "site": "Official website",
+    "gallery": "Products",
+    "more": "Other manufacturers",
+    "all": "See all",
+    "with": "Purchase routes",
+    "where": "Distribution partners",
+    "withText": "Mastertronics represents {name}, with local technical and commercial support. You buy through the distribution channel or direct from the factory — the route is defined with each customer.",
+    "ask": "Request information",
+    "contactTitle": "Talk to us about {name}",
+    "contactIntro": "Tell us about your application. Our technical team will get back to you with the right product lines, documentation and the best purchasing route.",
+    "meta": "{name} · Representation in Brazil"
+  }
+}

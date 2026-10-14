@@ -1,0 +1,76 @@
+{
+  "pt": {
+    "label": "Contato",
+    "title": "Vamos conversar sobre o seu projeto",
+    "intro": "Cada parceria começa com uma boa conversa — fale com a nossa equipe e descubra como podemos colaborar.",
+    "name": "Nome",
+    "namePh": "João Silva",
+    "company": "Empresa",
+    "companyPh": "Nome da empresa",
+    "email": "E-mail",
+    "emailPh": "joao.silva@empresa.com.br",
+    "phone": "Telefone",
+    "phonePh": "+55 (00) 00000-0000",
+    "optional": "opcional",
+    "topic": "Assunto",
+    "topics": {
+      "manufacturers": "Fabricantes e componentes",
+      "hub": "China HUB · fábricas e consolidação",
+      "renewables": "Energias renováveis · CRRC",
+      "general": "Outro assunto"
+    },
+    "message": {
+      "general": "Como podemos ajudar?",
+      "manufacturers": "Como podemos ajudar?",
+      "hub": "Qual peça ou produto você precisa?",
+      "renewables": "Descreva melhor seu projeto"
+    },
+    "messagePh": "Escreva mais informações…",
+    "consent": "Concordo com o uso destes dados para retorno do contato, conforme a",
+    "policy": "Política de privacidade",
+    "send": "Envie sua mensagem",
+    "sending": "Enviando…",
+    "ok": "Mensagem enviada. Nossa equipe retornará em breve.",
+    "err": "Não foi possível enviar agora. Escreva para",
+    "direct": "Prefere e-mail?",
+    "where": "Onde estamos",
+    "map": "Ver no mapa"
+  },
+  "en": {
+    "label": "Contact",
+    "title": "Let’s talk about your project",
+    "intro": "Every partnership starts with a good conversation — talk to our team and find out how we can collaborate.",
+    "name": "Name",
+    "namePh": "John Smith",
+    "company": "Company",
+    "companyPh": "Company name",
+    "email": "Email",
+    "emailPh": "john.smith@company.com",
+    "phone": "Phone",
+    "phonePh": "+1 000 000 0000",
+    "optional": "optional",
+    "topic": "Subject",
+    "topics": {
+      "manufacturers": "Manufacturers & components",
+      "hub": "China HUB · factories & consolidation",
+      "renewables": "Renewable energy · CRRC",
+      "general": "Something else"
+    },
+    "message": {
+      "general": "How can we help?",
+      "manufacturers": "How can we help?",
+      "hub": "Which part or product do you need?",
+      "renewables": "Tell us about your project"
+    },
+    "messagePh": "Share a few details…",
+    "consent": "I agree to the use of this data to reply to my request, as described in the",
+    "policy": "Privacy policy",
+    "send": "Send your message",
+    "sending": "Sending…",
+    "ok": "Message sent. Our team will get back to you shortly.",
+    "err": "We couldn’t send it right now. Please write to",
+    "direct": "Prefer email?",
+    "where": "Where we are",
+    "map": "View on map"
+  }
+}

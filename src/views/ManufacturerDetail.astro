@@ -1,5 +1,7 @@
 ---
 import { Image } from 'astro:assets';
+import manufacturerDetailContent from '../content/manufacturer-detail.json';
+import { fill as fillCopy } from '../lib/content';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import MfrTile from '../components/MfrTile.astro';
@@ -19,26 +21,7 @@ const related = manufacturers.filter((x) => x.slug !== m.slug && x.categories.so
 const fill = manufacturers.filter((x) => x.slug !== m.slug && !related.includes(x));
 const more = [...related, ...fill].slice(0, 4);
 
-const t = {
-  pt: {
-    crumb: 'Fabricantes', area: 'Área', products: 'Linhas de produto', markets: 'Mercados de atuação',
-    highlights: 'Destaques', site: 'Site oficial', gallery: 'Produtos', more: 'Outros fabricantes', all: 'Ver todos',
-    with: 'Vias de compra', where: 'Parceiros de distribuição',
-    withText: `A Mastertronics representa a ${m.name}, com suporte técnico e comercial local. Você compra pelo canal de distribuição ou direto da fábrica — a via é definida com cada cliente.`,
-    ask: 'Solicitar informações', contactTitle: `Fale conosco sobre a ${m.name}`,
-    contactIntro: 'Conte-nos sobre a sua aplicação. Nossa equipe técnica retorna com as linhas de produto, documentação e o melhor caminho de compra.',
-    meta: `${m.name} · Representação no Brasil`,
-  },
-  en: {
-    crumb: 'Manufacturers', area: 'Area', products: 'Product lines', markets: 'Markets',
-    highlights: 'Highlights', site: 'Official website', gallery: 'Products', more: 'Other manufacturers', all: 'See all',
-    with: 'Purchase routes', where: 'Distribution partners',
-    withText: `Mastertronics represents ${m.name}, with local technical and commercial support. You buy through the distribution channel or direct from the factory — the route is defined with each customer.`,
-    ask: 'Request information', contactTitle: `Talk to us about ${m.name}`,
-    contactIntro: 'Tell us about your application. Our technical team will get back to you with the right product lines, documentation and the best purchasing route.',
-    meta: `${m.name} · Representation in Brazil`,
-  },
-}[lang];
+const t = fillCopy(manufacturerDetailContent, { name: m.name })[lang];
 const catNames = m.categories.map((k) => categories.find((c) => c.key === k)!.label[lang]);
 const desc = m.description[lang];
 ---

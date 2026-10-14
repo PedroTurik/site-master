@@ -1,9 +1,20 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://mastertronics.com.br',
   trailingSlash: 'ignore',
+  // Pages stay static; only /api/admin/* runs as a Vercel function (text editing at /admin).
+  adapter: vercel(),
+  env: {
+    schema: {
+      ADMIN_PASSWORD: envField.string({ context: 'server', access: 'secret', optional: true }),
+      GITHUB_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      GITHUB_REPO: envField.string({ context: 'server', access: 'secret', default: 'PedroTurik/site-master' }),
+      GITHUB_BRANCH: envField.string({ context: 'server', access: 'secret', default: 'main' }),
+    },
+  },
   // Legacy URLs from the previous (Framer) site
   redirects: {
     '/chinahub': '/china-hub/',
@@ -22,6 +33,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      filter: (page) => !page.includes('/admin'),
       i18n: { defaultLocale: 'pt', locales: { pt: 'pt-BR', en: 'en' } },
     }),
   ],

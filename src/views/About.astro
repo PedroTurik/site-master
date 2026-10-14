@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import aboutContent from '../content/about.json';
+import { fill } from '../lib/content';
 import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
 import WorldMap from '../components/WorldMap.astro';
@@ -7,7 +9,7 @@ import Trace from '../components/Trace.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { manufacturers } from '../data/manufacturers';
 import { company } from '../data/company';
-import { type Lang, url, routes } from '../i18n/routes';
+import { type Lang, type RouteKey, url, routes } from '../i18n/routes';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -16,112 +18,7 @@ const years = new Date().getFullYear() - company.founded;
 const n = manufacturers.length;
 const hubYears = new Date().getFullYear() - 2001;
 
-const c = {
-  pt: {
-    metaTitle: 'Empresa · Solução técnica e logística em eletrônica desde 1991',
-    desc: 'A Mastertronics é uma solução técnica e logística para a indústria eletrônica da América Latina: representação de fabricantes globais, China HUB e energia renovável com a CRRC, desde 1991.',
-    crumb: 'Empresa',
-    h1: 'Solução técnica e logística, <em>em várias frentes.</em>',
-    lead: 'Representação de fabricantes globais, fábricas desenvolvidas e cargas consolidadas na China e soluções em energia renovável. Desde 1991, cada vez mais próximos dos nossos clientes.',
-    heroCaption: 'Porto Alegre · sede da Mastertronics',
-    intro: 'Quem somos',
-    fronts: ['Representação', '', 'China HUB', 'Energia · CRRC'],
-    text: [
-      'Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Hoje, somos uma solução técnica e logística para os nossos clientes, em várias frentes — e estamos cada vez mais próximos de cada um deles.',
-      'Na representação, atuamos ao lado de fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes. O cliente compra pelo canal de distribuição — com parceiros como Arrow Electronics, Future Electronics, Macnica DHW e Richardson RFPD — ou direto da fábrica.',
-      'Nosso portfólio de produtos inclui semicondutores para eletrônica de potência (MOSFETs, IGBTs, SiC, diodos e transistores), memórias NOR e NAND (incluindo SSD, eMMC e UFS) e DRAM (SDRAM, DDR1, DDR2, DDR3(L) e LPDDR), displays customizados (TFT com touchscreen e monocromáticos), sensores MEMS (magnetômetros, acelerômetros, chaves Hall e IMUs), optoacopladores e drivers isolados para IGBT/MOSFET, e sensores de corrente e tensão (Hall e fluxgate) para aplicações industriais e de energia.',
-      'Com o China HUB, nossa unidade ISO 9001 na China, desenvolvemos fábricas e consolidamos as cargas dessas fábricas. A Mastertronics é o fornecedor e o exportador para o cliente — ou a fábrica exporta direto, na compra direto de fábrica. Comprando direto da fábrica, sem intermediários nem brokers, damos garantia, rastreabilidade e suporte técnico às peças.',
-      'Em parceria estratégica com o grupo CRRC, oferecemos sistemas completos para energias renováveis, reforçando nosso compromisso com a sustentabilidade e a eletrônica aplicada à geração limpa, ao armazenamento em sistemas BESS e à produção de hidrogênio verde, em linha com as metas de descarbonização.',
-    ],
-    mosaic: [
-      { photo: 'wafer', t: 'Representação de fabricantes', k: 'manufacturers' as const },
-      { photo: 'qualification', t: 'China HUB', k: 'chinaHub' as const },
-      { photo: 'wind-fog', t: 'Energia renovável', k: 'renewables' as const },
-    ],
-    nums: [
-      { v: '1991', l: 'Ano de fundação' },
-      { v: String(n), l: 'Fabricantes globais' },
-      { v: `${hubYears} anos`, l: 'De China HUB: fábricas e consolidação' },
-      { v: 'ISO 9001', l: 'Unidade própria na China' },
-      { v: 'CRRC', l: 'Parceira estratégica em energia' },
-    ],
-    diff: {
-      label: 'Diferenciais',
-      title: 'Por que empresas de toda a América Latina escolhem a Mastertronics.',
-      items: [
-        { i: 'users', t: 'Relacionamento de longo prazo', d: `${years} anos ao lado da indústria eletroeletrônica, acompanhando cada projeto do desenvolvimento à produção.` },
-        { i: 'chip', t: 'Suporte técnico especializado', d: 'Apoio à especificação e à aplicação dos componentes, com agilidade e proximidade.' },
-        { i: 'layers', t: 'Fabricantes de referência', d: 'Líderes globais em potência, memórias, sensores, optoeletrônica, displays e magnéticos, pelo canal de distribuição ou direto da fábrica.' },
-        { i: 'truck', t: 'Logística na China', d: 'Unidade ISO 9001 que desenvolve fábricas e consolida as cargas, com exportação pela Mastertronics ou direto da fábrica.' },
-        { i: 'shield', t: 'Fornecedor que responde pela peça', d: 'Direto da fábrica, sem intermediários nem brokers: garantia, rastreabilidade e suporte técnico.' },
-        { i: 'sun', t: 'Soluções em energia', d: 'Sistemas completos para geração, armazenamento BESS e hidrogênio verde, com a tecnologia CRRC.' },
-      ],
-    },
-    presence: {
-      label: 'Presença global',
-      title: 'Do Brasil para os principais polos de tecnologia do mundo.',
-      p: 'Nossa sede em Porto Alegre atende clientes em todo o Brasil e na América Latina, conectados a fabricantes na Ásia e na Europa e ao nosso China HUB.',
-      list: [
-        { k: 'Sede', v: 'Porto Alegre · RS · Brasil' },
-        { k: 'Atendimento', v: 'Brasil e América Latina' },
-        { k: 'China HUB', v: 'Fábricas e consolidação de cargas na China' },
-        { k: 'Fabricantes', v: 'Taiwan, China, Hong Kong e Reino Unido' },
-      ],
-    },
-  },
-  en: {
-    metaTitle: 'Company · Technical and logistics solutions in electronics since 1991',
-    desc: 'Mastertronics is a technical and logistics solution for Latin America’s electronics industry: manufacturer representation, the China HUB and renewable energy with CRRC, since 1991.',
-    crumb: 'Company',
-    h1: 'Technical and logistics solutions, <em>on several fronts.</em>',
-    lead: 'Global manufacturer representation, factories developed and cargo consolidated in China, and renewable energy solutions. Since 1991, ever closer to our customers.',
-    heroCaption: 'Porto Alegre · Mastertronics headquarters',
-    intro: 'Who we are',
-    fronts: ['Representation', '', 'China HUB', 'Energy · CRRC'],
-    text: [
-      'Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. Today we are a technical and logistics solution for our customers, on several fronts — and closer to each of them than ever.',
-      'In representation, we work alongside international manufacturers with agile, close technical and commercial support focused on customer needs, anticipating trends and enabling access to emerging technologies. Customers buy through the distribution channel — with partners such as Arrow Electronics, Future Electronics, Macnica DHW and Richardson RFPD — or direct from the factory.',
-      'Our product portfolio includes semiconductors for power electronics (MOSFETs, IGBTs, SiC, diodes and transistors), NOR and NAND flash memories (including SSD, eMMC and UFS) and DRAM (SDRAM, DDR1, DDR2, DDR3(L) and LPDDR), custom displays (TFT with touchscreen and monochrome), MEMS sensors (magnetometers, accelerometers, Hall switches and IMUs), optocouplers and isolated IGBT/MOSFET gate drivers, and current and voltage sensors (Hall and fluxgate) for industrial and energy applications.',
-      'Through the China HUB, our ISO 9001-certified unit in China, we develop factories and consolidate the cargo from those factories. Mastertronics is the supplier and the exporter to the customer — or the factory exports directly when the customer buys direct from the factory. Buying direct from the factory, with no middlemen or brokers, we provide warranty, traceability and technical support for the parts.',
-      'In strategic partnership with the CRRC group, we offer complete renewable energy systems, reinforcing our commitment to sustainability and to electronics applied to clean energy generation, BESS storage and green hydrogen production, in line with decarbonization goals.',
-    ],
-    mosaic: [
-      { photo: 'wafer', t: 'Manufacturer representation', k: 'manufacturers' as const },
-      { photo: 'qualification', t: 'China HUB', k: 'chinaHub' as const },
-      { photo: 'wind-fog', t: 'Renewable energy', k: 'renewables' as const },
-    ],
-    nums: [
-      { v: '1991', l: 'Year founded' },
-      { v: String(n), l: 'Global manufacturers' },
-      { v: `${hubYears} years`, l: 'Of China HUB: factories and consolidation' },
-      { v: 'ISO 9001', l: 'Our own unit in China' },
-      { v: 'CRRC', l: 'Strategic energy partner' },
-    ],
-    diff: {
-      label: 'Why us',
-      title: 'Why companies across Latin America choose Mastertronics.',
-      items: [
-        { i: 'users', t: 'Long-term relationships', d: `${years} years alongside the electronics industry, with long-term support for every project.` },
-        { i: 'chip', t: 'Specialized technical support', d: 'Support with component specification and application, with agility and a close relationship.' },
-        { i: 'layers', t: 'Leading manufacturers', d: 'Global leaders in power, memory, sensors, optoelectronics, displays and magnetics, through distribution or direct from the factory.' },
-        { i: 'truck', t: 'Logistics in China', d: 'An ISO 9001 unit that develops factories and consolidates cargo, exported by Mastertronics or directly by the factory.' },
-        { i: 'shield', t: 'A supplier that answers for the part', d: 'Direct from the factory, with no middlemen or brokers: warranty, traceability and technical support.' },
-        { i: 'sun', t: 'Energy solutions', d: 'Complete systems for generation, BESS storage and green hydrogen, with CRRC technology.' },
-      ],
-    },
-    presence: {
-      label: 'Global presence',
-      title: 'From Brazil to the world’s leading technology hubs.',
-      p: 'Our headquarters in Porto Alegre serves customers across Brazil and Latin America, connected to manufacturers in Asia and Europe and to our China HUB.',
-      list: [
-        { k: 'Headquarters', v: 'Porto Alegre · RS · Brazil' },
-        { k: 'Coverage', v: 'Brazil and Latin America' },
-        { k: 'China HUB', v: 'Factories and cargo consolidation in China' },
-        { k: 'Manufacturers', v: 'Taiwan, China, Hong Kong and the UK' },
-      ],
-    },
-  },
-}[lang];
+const c = fill(aboutContent, { years, n, hubYears })[lang];
 
 const nodes = [
   { id: 'poa', label: 'Porto Alegre', lon: -51.2, lat: -30.0, kind: 'hq' as const },
@@ -165,7 +62,7 @@ const nodes = [
     <div class="container">
       <div class="mosaic">
         {c.mosaic.map((m, i) => (
-          <a href={url(lang, m.k)} class="mos reveal" style={`--d:${i * 0.07}s`}>
+          <a href={url(lang, m.k as RouteKey)} class="mos reveal" style={`--d:${i * 0.07}s`}>
             <Photo name={m.photo} alt="" sizes="(max-width: 760px) 100vw, 33vw" />
             <span class="mos-cap"><span>{m.t}</span><Icon name="arrow" size={18} /></span>
           </a>

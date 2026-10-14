@@ -1,0 +1,238 @@
+{
+  "pt": {
+    "metaTitle": "Energia renovável · Mastertronics & CRRC",
+    "desc": "Sistemas completos para energias renováveis, em parceria estratégica entre a Mastertronics e a CRRC: geração solar e eólica, armazenamento BESS e hidrogênio verde no Brasil e na América Latina.",
+    "crumb": "Energia renovável",
+    "tag": "Mastertronics & CRRC",
+    "h1": "Energia limpa com tecnologia global <em>e presença local.</em>",
+    "lead": "Sistemas completos para geração solar e eólica, armazenamento em baterias (BESS) e hidrogênio verde, com a tecnologia e a escala da CRRC, líder global da Fortune 500, e o suporte técnico local da Mastertronics.",
+    "cta": "Inicie sua parceria",
+    "partner": {
+      "label": "Parceria estratégica",
+      "title": "Mastertronics & CRRC",
+      "p1": "A Mastertronics é parceira estratégica das divisões Times Electric e ZhuZhou Institute Comprehensive Energy da CRRC no Brasil. Oferecemos consultoria, suporte técnico e apoio à construção de parcerias nos segmentos de geração (solar e eólica), armazenamento (BESS) e novas energias (hidrogênio verde).",
+      "p2": "Garantimos acesso direto a tecnologias avançadas, soluções completas e suporte técnico local para a América Latina, com foco em inovação e competitividade.",
+      "services": [
+        "Consultoria",
+        "Suporte técnico",
+        "Construção de parcerias"
+      ],
+      "caption": "Aerogerador offshore CRRC"
+    },
+    "segs": {
+      "label": "Segmentos",
+      "title": "Sistemas completos, da geração ao armazenamento.",
+      "items": [
+        {
+          "i": "sun",
+          "p": "solar",
+          "k": "Geração",
+          "t": "Solar",
+          "d": "Inversores e sistemas para usinas e geração distribuída."
+        },
+        {
+          "i": "wind",
+          "p": "wind",
+          "k": "Geração",
+          "t": "Eólica",
+          "d": "Aerogeradores e sistemas de conversão para parques eólicos."
+        },
+        {
+          "i": "battery",
+          "p": "bess",
+          "k": "Armazenamento",
+          "t": "BESS",
+          "d": "Sistemas de armazenamento de energia em baterias."
+        },
+        {
+          "i": "drop",
+          "p": "power",
+          "k": "Novas energias",
+          "t": "Hidrogênio verde",
+          "d": "Retificadores, eletrolisadores e gestão energética."
+        }
+      ]
+    },
+    "cred": {
+      "label": "CRRC",
+      "title": "Credenciais e capacidade industrial",
+      "stats": [
+        {
+          "v": "Fortune 500",
+          "l": "Líder global com faturamento multibilionário"
+        },
+        {
+          "v": "65 anos",
+          "l": "De inovação e desenvolvimento no ZhuZhou Institute"
+        },
+        {
+          "v": "+70 GW",
+          "l": "Top 3 no mercado chinês de inversores solares"
+        },
+        {
+          "v": "+100 mil",
+          "l": "Geradores produzidos · Top 1 eólico na China"
+        },
+        {
+          "v": "+48 GWh",
+          "l": "Em BESS implantados · Top 3 global"
+        }
+      ],
+      "cards": [
+        {
+          "t": "Escala global",
+          "p": [
+            "A CRRC é líder global e está classificada na Fortune 500, com faturamento multibilionário.",
+            "Com 65 anos de experiência em inovação e desenvolvimento através do ZhuZhou Institute, a empresa domina uma produção verticalizada de alta tecnologia, desde semicondutores de potência até sistemas completos de energia limpa e armazenamento BESS."
+          ]
+        },
+        {
+          "t": "Energias renováveis",
+          "p": [
+            "No setor de energia solar, a CRRC é Top 3 no mercado chinês de inversores, com mais de 70 GW de capacidade instalada.",
+            "No mercado eólico, é Top 1 na China, com mais de 100 mil geradores produzidos. No armazenamento de energia (BESS), ocupa posição Top 3 global, com mais de 48 GWh implantados ao redor do mundo."
+          ]
+        },
+        {
+          "t": "Inovação em hidrogênio",
+          "p": [
+            "A CRRC lidera a produção de hidrogênio verde na China, com foco em retificadores com tecnologia IGBT, eletrolisadores de alta capacidade (sistemas PEM e alcalinos) e sistemas de gestão energética."
+          ]
+        }
+      ]
+    },
+    "comp": {
+      "label": "Também no nosso portfólio",
+      "title": "Componentes CRRC para a sua eletrônica de potência",
+      "p": "Além dos sistemas completos, representamos duas empresas do grupo CRRC para projetos de eletrônica de potência e sensoriamento.",
+      "a": {
+        "t": "CRRC Times Semiconductor",
+        "d": "IGBT, FRD, tiristores, IGCT e SiC"
+      },
+      "b": {
+        "t": "CRRC Times Transducer",
+        "d": "Sensores de corrente e tensão Hall e fluxgate"
+      }
+    },
+    "contactTitle": "Inicie sua parceria",
+    "contactIntro": "A Mastertronics e a CRRC estão posicionadas para impulsionar a infraestrutura de energia renovável da sua empresa no Brasil. Para discutir a aplicação específica de nossas tecnologias em seus projetos, entre em contato com nossa área comercial."
+  },
+  "en": {
+    "metaTitle": "Renewable energy · Mastertronics & CRRC",
+    "desc": "Complete renewable energy systems, through the strategic partnership between Mastertronics and CRRC: solar and wind generation, BESS storage and green hydrogen in Brazil and Latin America.",
+    "crumb": "Renewable energy",
+    "tag": "Mastertronics & CRRC",
+    "h1": "Clean energy with global technology <em>and local presence.</em>",
+    "lead": "Complete systems for solar and wind generation, battery energy storage (BESS) and green hydrogen, with the technology and scale of CRRC, a Fortune 500 global leader, and Mastertronics’ local technical support.",
+    "cta": "Start your partnership",
+    "partner": {
+      "label": "Strategic partnership",
+      "title": "Mastertronics & CRRC",
+      "p1": "Mastertronics is a strategic partner of CRRC’s Times Electric and ZhuZhou Institute Comprehensive Energy divisions in Brazil. We offer consulting, technical support and assistance in building partnerships in energy generation (solar and wind), storage (BESS) and new energies (green hydrogen).",
+      "p2": "We provide direct access to advanced technologies, complete solutions and local technical support for Latin American customers, with a focus on innovation and competitiveness.",
+      "services": [
+        "Consulting",
+        "Technical support",
+        "Partnership building"
+      ],
+      "caption": "CRRC offshore wind turbine"
+    },
+    "segs": {
+      "label": "Segments",
+      "title": "Complete systems, from generation to storage.",
+      "items": [
+        {
+          "i": "sun",
+          "p": "solar",
+          "k": "Generation",
+          "t": "Solar",
+          "d": "Inverters and systems for utility-scale and distributed generation."
+        },
+        {
+          "i": "wind",
+          "p": "wind",
+          "k": "Generation",
+          "t": "Wind",
+          "d": "Wind turbines and conversion systems for wind farms."
+        },
+        {
+          "i": "battery",
+          "p": "bess",
+          "k": "Storage",
+          "t": "BESS",
+          "d": "Battery energy storage systems."
+        },
+        {
+          "i": "drop",
+          "p": "power",
+          "k": "New energies",
+          "t": "Green hydrogen",
+          "d": "Rectifiers, electrolyzers and energy management."
+        }
+      ]
+    },
+    "cred": {
+      "label": "CRRC",
+      "title": "Credentials and manufacturing capacity",
+      "stats": [
+        {
+          "v": "Fortune 500",
+          "l": "Global leader with multibillion-dollar revenue"
+        },
+        {
+          "v": "65 years",
+          "l": "Of innovation and development at the ZhuZhou Institute"
+        },
+        {
+          "v": "70+ GW",
+          "l": "Top 3 in the Chinese solar inverter market"
+        },
+        {
+          "v": "100k+",
+          "l": "Generators produced · No. 1 in wind in China"
+        },
+        {
+          "v": "48+ GWh",
+          "l": "Of BESS deployed · Top 3 worldwide"
+        }
+      ],
+      "cards": [
+        {
+          "t": "Global scale",
+          "p": [
+            "CRRC is a global leader ranked in the Fortune 500, with multibillion-dollar revenue.",
+            "With 65 years of experience in innovation and development through the ZhuZhou Institute, the company masters a vertically integrated high-tech production process — from power semiconductors to complete clean energy systems and BESS storage solutions."
+          ]
+        },
+        {
+          "t": "Renewable energy",
+          "p": [
+            "In the solar energy sector, CRRC ranks among the Top 3 in the Chinese inverter market, with over 70 GW of installed capacity. In the wind energy market, it holds the Top 1 position in China, with more than 100,000 generators produced.",
+            "In energy storage (BESS), it occupies a Top 3 global position, with over 48 GWh deployed worldwide."
+          ]
+        },
+        {
+          "t": "Innovation in hydrogen",
+          "p": [
+            "CRRC leads the production of green hydrogen in China, focusing on rectifiers with IGBT technology, high-capacity electrolyzers (PEM and Alkaline systems), and energy management systems."
+          ]
+        }
+      ]
+    },
+    "comp": {
+      "label": "Also in our portfolio",
+      "title": "CRRC components for your power electronics",
+      "p": "Beyond complete systems, we represent two CRRC group companies for power electronics and sensing projects.",
+      "a": {
+        "t": "CRRC Times Semiconductor",
+        "d": "IGBT, FRD, thyristors, IGCT and SiC"
+      },
+      "b": {
+        "t": "CRRC Times Transducer",
+        "d": "Hall and fluxgate current and voltage sensors"
+      }
+    },
+    "contactTitle": "Start your partnership",
+    "contactIntro": "Mastertronics and CRRC are ready to boost your company’s renewable energy infrastructure in Brazil. Please contact our commercial team to discuss the specific application of our technologies in your renewable projects."
+  }
+}

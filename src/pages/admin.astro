@@ -1,0 +1,322 @@
+---
+// Text editor for the site copy (src/content/*.json). Static page; talks to /api/admin/*.
+import '../styles/global.css';
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Editar textos · Mastertronics</title>
+  </head>
+  <body>
+    <form id="login" class="login">
+      <h1>Editar textos do site</h1>
+      <label for="pw">Senha</label>
+      <input id="pw" type="password" autocomplete="current-password" required autofocus />
+      <button type="submit">Entrar</button>
+      <p class="msg" id="login-msg" role="alert"></p>
+    </form>
+
+    <div id="app" class="app" hidden>
+      <header class="bar">
+        <strong>Textos do site</strong>
+        <span class="status" id="status" role="status"></span>
+        <button type="button" id="discard" class="ghost" disabled>Descartar</button>
+        <button type="button" id="save" disabled>Salvar</button>
+      </header>
+      <nav class="side" id="side" aria-label="Páginas"></nav>
+      <main class="main" id="main"></main>
+    </div>
+
+    <script>
+      import { isLocked } from '../lib/content-shape';
+
+      type Lang = 'pt' | 'en';
+      type File = { sha: string; data: Record<Lang, any> };
+
+      const PAGES: Record<string, { label: string; href?: string }> = {
+        home: { label: 'Início', href: '/' },
+        about: { label: 'Empresa', href: '/empresa/' },
+        'china-hub': { label: 'China HUB', href: '/china-hub/' },
+        'consolidation-flow': { label: 'China HUB · fluxo de cargas', href: '/china-hub/' },
+        renewables: { label: 'Energia', href: '/renovaveis/' },
+        manufacturers: { label: 'Fabricantes', href: '/fabricantes/' },
+        'distribution-partners': { label: 'Fabricantes · distribuição', href: '/fabricantes/#distribuicao' },
+        'manufacturer-detail': { label: 'Página de cada fabricante', href: '/fabricantes/memsic/' },
+        contact: { label: 'Contato', href: '/contato/' },
+        'contact-form': { label: 'Formulário de contato', href: '/contato/' },
+        privacy: { label: 'Privacidade', href: '/privacidade/' },
+        ui: { label: 'Menu, rodapé e botões' },
+      };
+      const VARS: Record<string, string> = {
+        years: 'anos desde a fundação (1991)',
+        n: 'número de fabricantes',
+        hubYears: 'anos de China HUB (desde 2001)',
+        name: 'nome do fabricante',
+        email: 'e-mail da empresa',
+        legalName: 'razão social',
+        cnpj: 'CNPJ',
+        street: 'endereço',
+      };
+      const WORDS: Record<string, string> = {
+        meta: 'SEO (Google)', title: 'título', desc: 'descrição', sub: 'subtítulo', label: 'rótulo',
+        t: 'título', d: 'texto', p: 'parágrafo', v: 'valor', l: 'legenda', k: 'rótulo', cta: 'botão',
+        items: 'itens', steps: 'etapas', stats: 'números', intro: 'introdução', text: 'texto', tag: 'etiqueta',
+      };
+
+      const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+      const clone = <T,>(v: T): T => JSON.parse(JSON.stringify(v));
+      const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
+
+      let password = '';
+      let files: Record<string, File> = {};
+      let draft: Record<string, File['data']> = {};
+      let current = '';
+      try { password = sessionStorage.getItem('admin-pw') ?? ''; } catch {}
+
+      const dirtyNames = () => Object.keys(files).filter((n) => !same(files[n].data, draft[n]));
+
+      async function api(path: string, body: object) {
+        const res = await fetch(`/api/admin/${path}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password, ...body }),
+        });
+        const data = await res.json().catch(() => ({ error: `Erro ${res.status}` }));
+        if (!res.ok) throw Object.assign(new Error(data.error ?? `Erro ${res.status}`), { status: res.status });
+        return data;
+      }
+
+      async function load() {
+        const data = await api('content', {});
+        files = data.files;
+        draft = Object.fromEntries(Object.entries(files).map(([n, f]) => [n, clone(f.data)]));
+        if (!files[current]) current = Object.keys(PAGES).find((n) => files[n]) ?? Object.keys(files)[0];
+        $('login').hidden = true;
+        $('app').hidden = false;
+        render();
+      }
+
+      $('login').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        password = $<HTMLInputElement>('pw').value;
+        $('login-msg').textContent = 'Entrando…';
+        try {
+          await load();
+          try { sessionStorage.setItem('admin-pw', password); } catch {}
+        } catch (err: any) {
+          $('login-msg').textContent = err.message;
+        }
+      });
+
+      function setStatus(text: string, link?: string) {
+        const s = $('status');
+        s.textContent = text;
+        if (link) {
+          const a = Object.assign(document.createElement('a'), { href: link, target: '_blank', rel: 'noopener', textContent: 'ver alteração' });
+          s.append(' · ', a);
+        }
+      }
+
+      function refreshBar() {
+        const d = dirtyNames();
+        $<HTMLButtonElement>('save').disabled = !d.length;
+        $<HTMLButtonElement>('discard').disabled = !d.length;
+        $('save').textContent = d.length ? `Salvar (${d.length} ${d.length === 1 ? 'página' : 'páginas'})` : 'Salvar';
+        for (const a of $('side').querySelectorAll<HTMLElement>('[data-name]')) a.classList.toggle('dirty', d.includes(a.dataset.name!));
+      }
+
+      const human = (k: string | number) => (typeof k === 'number' ? `#${k + 1}` : WORDS[k] ?? k);
+
+      // Flattens the PT tree into editable leaves: [path, ptValue].
+      function leaves(pt: any, en: any, path: (string | number)[] = []): [(string | number)[], string][] {
+        if (typeof pt === 'string') return isLocked(pt, en) ? [] : [[path, pt]];
+        if (pt && typeof pt === 'object') {
+          return Object.keys(pt).flatMap((k) => {
+            const key = Array.isArray(pt) ? Number(k) : k;
+            return leaves(pt[key], en?.[key], [...path, key]);
+          });
+        }
+        return [];
+      }
+      const get = (obj: any, path: (string | number)[]) => path.reduce((o, k) => o?.[k], obj);
+      const set = (obj: any, path: (string | number)[], v: string) => { get(obj, path.slice(0, -1))[path.at(-1)!] = v; };
+
+      function grow(t: HTMLTextAreaElement) { t.style.height = 'auto'; t.style.height = `${t.scrollHeight + 2}px`; }
+
+      function render() {
+        const side = $('side');
+        side.replaceChildren(...Object.keys(files)
+          .sort((a, b) => Object.keys(PAGES).indexOf(a) - Object.keys(PAGES).indexOf(b))
+          .map((n) => {
+            const b = Object.assign(document.createElement('button'), { type: 'button', textContent: PAGES[n]?.label ?? n });
+            b.dataset.name = n;
+            if (n === current) b.setAttribute('aria-current', 'page');
+            b.onclick = () => { current = n; render(); window.scrollTo(0, 0); };
+            return b;
+          }));
+
+        const main = $('main');
+        main.replaceChildren();
+        const d = draft[current];
+        const page = PAGES[current];
+
+        const head = document.createElement('div');
+        head.className = 'head';
+        head.innerHTML = `<h2></h2>${page?.href ? `<a target="_blank" rel="noopener">abrir página ↗</a>` : ''}`;
+        head.querySelector('h2')!.textContent = page?.label ?? current;
+        if (page?.href) head.querySelector('a')!.href = page.href;
+        main.append(head);
+
+        const used = Object.keys(VARS).filter((v) => JSON.stringify(files[current].data).includes(`{${v}}`));
+        if (used.length) {
+          const p = document.createElement('p');
+          p.className = 'hint';
+          p.textContent = 'Valores automáticos (mantenha as chaves): ' + used.map((v) => `{${v}} = ${VARS[v]}`).join(' · ');
+          main.append(p);
+        }
+
+        // group by top-level key when the page has nested sections
+        const all = leaves(d.pt, d.en);
+        const groups = new Map<string, typeof all>();
+        for (const l of all) {
+          const g = l[0].length > 1 ? String(l[0][0]) : '';
+          groups.set(g, [...(groups.get(g) ?? []), l]);
+        }
+        for (const [g, items] of groups) {
+          const sec = document.createElement('section');
+          if (g) {
+            const h = document.createElement('h3');
+            h.textContent = human(g);
+            sec.append(h);
+          }
+          for (const [path] of items) {
+            const row = document.createElement('div');
+            row.className = 'row';
+            const lab = document.createElement('div');
+            lab.className = 'lab';
+            lab.textContent = (g ? path.slice(1) : path).map(human).join(' › ') || human(g);
+            row.append(lab);
+            for (const lang of ['pt', 'en'] as Lang[]) {
+              const wrap = document.createElement('label');
+              wrap.className = 'field';
+              const tag = Object.assign(document.createElement('span'), { textContent: lang.toUpperCase() });
+              const ta = document.createElement('textarea');
+              ta.rows = 1;
+              ta.value = get(d[lang], path) ?? '';
+              ta.lang = lang === 'pt' ? 'pt-BR' : 'en';
+              const orig = get(files[current].data[lang], path);
+              const mark = () => ta.classList.toggle('changed', ta.value !== orig);
+              ta.addEventListener('input', () => { set(d[lang], path, ta.value); grow(ta); mark(); refreshBar(); });
+              mark();
+              wrap.append(tag, ta);
+              row.append(wrap);
+            }
+            sec.append(row);
+          }
+          main.append(sec);
+        }
+        requestAnimationFrame(() => main.querySelectorAll('textarea').forEach(grow));
+        refreshBar();
+      }
+
+      $('discard').addEventListener('click', () => {
+        if (!confirm('Descartar todas as alterações não salvas?')) return;
+        draft = Object.fromEntries(Object.entries(files).map(([n, f]) => [n, clone(f.data)]));
+        render();
+        setStatus('');
+      });
+
+      $('save').addEventListener('click', async () => {
+        const names = dirtyNames();
+        const btn = $<HTMLButtonElement>('save');
+        btn.disabled = true;
+        setStatus('Salvando…');
+        try {
+          const res = await api('save', { files: Object.fromEntries(names.map((n) => [n, { sha: files[n].sha, data: draft[n] }])) });
+          Object.assign(files, res.files);
+          draft = Object.fromEntries(Object.entries(files).map(([n, f]) => [n, clone(f.data)]));
+          render();
+          setStatus('Salvo. O site é atualizado em 1–2 minutos.', res.commit.url);
+        } catch (err: any) {
+          setStatus(err.message);
+          if (err.status === 401) { try { sessionStorage.removeItem('admin-pw'); } catch {} }
+          refreshBar();
+        }
+      });
+
+      window.addEventListener('beforeunload', (e) => { if (dirtyNames().length) e.preventDefault(); });
+
+      if (password) load().catch(() => { try { sessionStorage.removeItem('admin-pw'); } catch {} password = ''; });
+    </script>
+
+    <style is:global>
+      body { background: var(--paper); }
+      [hidden] { display: none !important; }
+      .login {
+        max-width: 360px; margin: 18vh auto 0; padding: 32px; display: grid; gap: 10px;
+        background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-1);
+      }
+      .login h1 { font: 600 22px/1.2 var(--font-display); margin-bottom: 8px; }
+      .login label { font-size: 13px; color: var(--slate); }
+      .login input { font: inherit; padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); }
+      .msg { min-height: 1.5em; font-size: 14px; color: var(--slate); }
+
+      button {
+        font: 500 14px/1 var(--font-body); padding: 10px 16px; border-radius: 999px; cursor: pointer;
+        background: var(--ink); color: var(--on-dark); border: 1px solid var(--ink);
+      }
+      button:disabled { opacity: .4; cursor: default; }
+      button.ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+      :focus-visible { outline: 2px solid var(--lime-ink); outline-offset: 2px; }
+
+      .app { display: grid; grid-template-columns: 240px 1fr; grid-template-rows: auto 1fr; min-height: 100vh; }
+      .bar {
+        grid-column: 1 / -1; position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 12px;
+        padding: 12px 20px; background: var(--ink); color: var(--on-dark);
+      }
+      .bar strong { font: 600 16px var(--font-display); margin-right: auto; }
+      .bar .status { font-size: 13px; color: var(--on-dark-muted); }
+      .bar .status a { color: var(--lime); }
+      .bar button { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+      .bar button.ghost { background: transparent; color: var(--on-dark); border-color: var(--line-dark); }
+
+      .side { position: sticky; top: 58px; align-self: start; display: grid; gap: 2px; padding: 16px 12px; max-height: calc(100vh - 58px); overflow: auto; }
+      .side button {
+        background: transparent; color: var(--graphite); border: 0; border-radius: var(--radius-sm);
+        text-align: left; padding: 9px 12px; line-height: 1.3;
+      }
+      .side button:hover { background: var(--paper-2); }
+      .side button[aria-current] { background: var(--white); color: var(--ink); font-weight: 600; box-shadow: var(--shadow-1); }
+      .side button.dirty::after { content: ' ●'; color: var(--lime-ink); }
+
+      .main { padding: 24px clamp(16px, 3vw, 40px) 80px; max-width: 1200px; min-width: 0; }
+      .head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+      .head h2 { font: 600 26px/1.2 var(--font-display); }
+      .head a { font-size: 14px; color: var(--slate); }
+      .hint { font-size: 13px; color: var(--slate); background: var(--paper-2); padding: 8px 12px; border-radius: var(--radius-sm); margin: 8px 0 0; }
+      section { margin-top: 28px; }
+      h3 { font: 500 12px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--slate); padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+      .row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+      .lab { grid-column: 1 / -1; font-size: 13px; font-weight: 500; color: var(--graphite); }
+      .field { display: grid; grid-template-columns: 26px 1fr; align-items: start; gap: 6px; }
+      .field span { font: 500 11px/30px var(--font-mono); color: var(--muted); }
+      textarea {
+        font: 15px/1.5 var(--font-body); width: 100%; resize: vertical; overflow: hidden;
+        padding: 6px 10px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--white); color: var(--ink);
+      }
+      textarea.changed { border-color: var(--lime-ink); box-shadow: 0 0 0 3px var(--lime-glow); }
+
+      @media (max-width: 760px) {
+        .app { grid-template-columns: 1fr; }
+        .bar { flex-wrap: wrap; padding: 10px 16px; }
+        .side { position: static; display: flex; overflow-x: auto; max-height: none; padding: 8px 16px; }
+        .side button { white-space: nowrap; }
+        .row { grid-template-columns: 1fr; }
+      }
+    </style>
+  </body>
+</html>

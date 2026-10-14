@@ -1,0 +1,74 @@
+{
+  "pt": {
+    "t": "Política de privacidade",
+    "d": "Como a Mastertronics trata os dados pessoais enviados pelo site, em conformidade com a LGPD.",
+    "lead": "Como tratamos os dados pessoais enviados por meio deste site, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).",
+    "s": [
+      [
+        "Controlador",
+        "{legalName}, CNPJ {cnpj}, com sede na {street}, Porto Alegre – RS, Brasil."
+      ],
+      [
+        "Dados coletados",
+        "Coletamos apenas os dados que você informa voluntariamente no formulário de contato: nome, empresa, e-mail, telefone (opcional), assunto e mensagem."
+      ],
+      [
+        "Finalidade",
+        "Os dados são utilizados exclusivamente para responder à sua solicitação e dar continuidade ao relacionamento comercial iniciado por você. A base legal é o seu consentimento e o legítimo interesse em atender ao contato."
+      ],
+      [
+        "Compartilhamento",
+        "Não vendemos nem cedemos seus dados. O envio do formulário é processado por um provedor de serviço de e-mail que atua apenas como operador, para entregar a mensagem à nossa equipe. Quando necessário para atender à sua demanda, informações podem ser compartilhadas com fabricantes parceiros ou distribuidores parceiros."
+      ],
+      [
+        "Armazenamento",
+        "Mantemos os dados pelo tempo necessário para atender à solicitação e cumprir obrigações legais, adotando medidas de segurança adequadas."
+      ],
+      [
+        "Cookies",
+        "Este site não utiliza cookies de rastreamento ou publicidade."
+      ],
+      [
+        "Seus direitos",
+        "Você pode solicitar a qualquer momento acesso, correção, portabilidade ou exclusão dos seus dados, bem como revogar o consentimento, pelo e-mail {email}."
+      ]
+    ],
+    "upd": "Última atualização: setembro de 2026."
+  },
+  "en": {
+    "t": "Privacy policy",
+    "d": "How Mastertronics handles personal data submitted through this website, in accordance with Brazil’s LGPD.",
+    "lead": "How we handle personal data submitted through this website, in accordance with Brazil’s General Data Protection Law (LGPD, Law No. 13,709/2018).",
+    "s": [
+      [
+        "Controller",
+        "{legalName}, CNPJ {cnpj}, headquartered at {street}, Porto Alegre – RS, Brazil."
+      ],
+      [
+        "Data collected",
+        "We only collect the data you voluntarily provide in the contact form: name, company, email, phone (optional), subject and message."
+      ],
+      [
+        "Purpose",
+        "The data is used solely to respond to your request and to continue the business conversation you started. The legal bases are your consent and our legitimate interest in answering your request."
+      ],
+      [
+        "Sharing",
+        "We do not sell or transfer your data. Form submissions are processed by an email service provider acting only as a processor to deliver the message to our team. When needed to address your request, information may be shared with represented manufacturers or distribution partners."
+      ],
+      [
+        "Retention",
+        "We keep the data for as long as needed to handle your request and meet legal obligations, with appropriate security measures."
+      ],
+      [
+        "Cookies",
+        "This website does not use tracking or advertising cookies."
+      ],
+      [
+        "Your rights",
+        "You may request access, correction, portability or deletion of your data, or withdraw consent, at any time by writing to {email}."
+      ]
+    ],
+    "upd": "Last updated: September 2026."
+  }
+}

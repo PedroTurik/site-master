@@ -1,0 +1,22 @@
+{
+  "pt": {
+    "label": "Parceiros de distribuição",
+    "title": "Canal de distribuição ou direto da fábrica.",
+    "p": "Os produtos dos fabricantes que representamos também estão disponíveis através de distribuidores globais parceiros. A via de compra — distribuidor ou direto da fábrica — é definida com cada cliente.",
+    "routes": [
+      "Canal de distribuição",
+      "Direto da fábrica"
+    ],
+    "visit": "Visitar site"
+  },
+  "en": {
+    "label": "Distribution partners",
+    "title": "Through distribution or direct from the factory.",
+    "p": "Products from the manufacturers we represent are also available through our global distribution partners. The purchase route — distributor or direct from the factory — is defined with each customer.",
+    "routes": [
+      "Distribution channel",
+      "Direct from the factory"
+    ],
+    "visit": "Visit website"
+  }
+}

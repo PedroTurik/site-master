@@ -17,7 +17,7 @@
       "Desde 1991, conectamos a indústria eletroeletrônica da América Latina às principais soluções globais em semicondutores e componentes eletrônicos. Hoje, somos uma solução técnica e logística para os nossos clientes, em várias frentes — e estamos cada vez mais próximos de cada um deles.",
       "Na representação, atuamos ao lado de fabricantes internacionais com suporte técnico e comercial ágil, próximo e focado nas necessidades dos clientes, antecipando tendências e viabilizando acesso a tecnologias emergentes. O cliente compra pelo canal de distribuição — com parceiros como Arrow Electronics, Future Electronics, Macnica DHW e Richardson RFPD — ou direto da fábrica.",
       "Nosso portfólio de produtos inclui semicondutores para eletrônica de potência (MOSFETs, IGBTs, SiC, diodos e transistores), memórias NOR e NAND (incluindo SSD, eMMC e UFS) e DRAM (SDRAM, DDR1, DDR2, DDR3(L) e LPDDR), displays customizados (TFT com touchscreen e monocromáticos), sensores MEMS (magnetômetros, acelerômetros, chaves Hall e IMUs), optoacopladores e drivers isolados para IGBT/MOSFET, e sensores de corrente e tensão (Hall e fluxgate) para aplicações industriais e de energia.",
-      "Com o China HUB, nossa unidade ISO 9001 na China, desenvolvemos fábricas e consolidamos as cargas dessas fábricas. A Mastertronics é o fornecedor e o exportador para o cliente — ou a fábrica exporta direto, na compra direto de fábrica. Comprando direto da fábrica, sem intermediários nem brokers, damos garantia, rastreabilidade e suporte técnico às peças.",
+      "Gerenciamos o China HUB, unidade ISO 9001 na China que desenvolve fábricas, consolida as cargas dessas fábricas e exporta para os nossos clientes — ou embarca para os nossos parceiros distribuidores, por onde escoa boa parte das mercadorias. Comprando direto da fábrica, sem intermediários nem brokers, o China HUB dá garantia, rastreabilidade e suporte técnico às peças.",
       "Em parceria estratégica com o grupo CRRC, oferecemos sistemas completos para energias renováveis, reforçando nosso compromisso com a sustentabilidade e a eletrônica aplicada à geração limpa, ao armazenamento em sistemas BESS e à produção de hidrogênio verde, em linha com as metas de descarbonização."
     ],
     "mosaic": [
@@ -76,16 +76,16 @@
         {
           "i": "layers",
           "t": "Fabricantes de referência",
-          "d": "Líderes globais em potência, memórias, sensores, optoeletrônica, displays e magnéticos, pelo canal de distribuição ou direto da fábrica."
+          "d": "Líderes globais em potência, memórias, sensores, optoeletrônica e displays, pelo canal de distribuição ou direto da fábrica."
         },
         {
           "i": "truck",
           "t": "Logística na China",
-          "d": "Unidade ISO 9001 que desenvolve fábricas e consolida as cargas, com exportação pela Mastertronics ou direto da fábrica."
+          "d": "Gerenciamos o China HUB, unidade ISO 9001 que desenvolve fábricas, consolida as cargas e exporta para clientes e distribuidores."
         },
         {
           "i": "shield",
-          "t": "Fornecedor que responde pela peça",
+          "t": "Garantia e rastreabilidade",
           "d": "Direto da fábrica, sem intermediários nem brokers: garantia, rastreabilidade e suporte técnico."
         },
         {
@@ -97,8 +97,8 @@
     },
     "presence": {
       "label": "Presença global",
-      "title": "Do Brasil para os principais polos de tecnologia do mundo.",
-      "p": "Nossa sede em Porto Alegre atende clientes em todo o Brasil e na América Latina, conectados a fabricantes na Ásia e na Europa e ao nosso China HUB.",
+      "title": "Dos principais polos de tecnologia do mundo para o Brasil e a América Latina.",
+      "p": "Tecnologia e suprimentos de fabricantes na Ásia e na Europa e do China HUB chegam aos nossos clientes em todo o Brasil e na América Latina, com atendimento a partir da nossa sede em Porto Alegre.",
       "list": [
         {
           "k": "Sede",
@@ -137,7 +137,7 @@
       "Since 1991, we have been connecting the Latin American electrical and electronics industry with leading global solutions in semiconductors and electronic components. Today we are a technical and logistics solution for our customers, on several fronts — and closer to each of them than ever.",
       "In representation, we work alongside international manufacturers with agile, close technical and commercial support focused on customer needs, anticipating trends and enabling access to emerging technologies. Customers buy through the distribution channel — with partners such as Arrow Electronics, Future Electronics, Macnica DHW and Richardson RFPD — or direct from the factory.",
       "Our product portfolio includes semiconductors for power electronics (MOSFETs, IGBTs, SiC, diodes and transistors), NOR and NAND flash memories (including SSD, eMMC and UFS) and DRAM (SDRAM, DDR1, DDR2, DDR3(L) and LPDDR), custom displays (TFT with touchscreen and monochrome), MEMS sensors (magnetometers, accelerometers, Hall switches and IMUs), optocouplers and isolated IGBT/MOSFET gate drivers, and current and voltage sensors (Hall and fluxgate) for industrial and energy applications.",
-      "Through the China HUB, our ISO 9001-certified unit in China, we develop factories and consolidate the cargo from those factories. Mastertronics is the supplier and the exporter to the customer — or the factory exports directly when the customer buys direct from the factory. Buying direct from the factory, with no middlemen or brokers, we provide warranty, traceability and technical support for the parts.",
+      "We manage the China HUB, an ISO 9001-certified unit in China that develops factories, consolidates their cargo and exports to our customers — or ships to our distribution partners, through whom much of the goods flow. Buying direct from the factory, with no middlemen or brokers, the China HUB provides warranty, traceability and technical support for the parts.",
       "In strategic partnership with the CRRC group, we offer complete renewable energy systems, reinforcing our commitment to sustainability and to electronics applied to clean energy generation, BESS storage and green hydrogen production, in line with decarbonization goals."
     ],
     "mosaic": [
@@ -196,16 +196,16 @@
         {
           "i": "layers",
           "t": "Leading manufacturers",
-          "d": "Global leaders in power, memory, sensors, optoelectronics, displays and magnetics, through distribution or direct from the factory."
+          "d": "Global leaders in power, memory, sensors, optoelectronics and displays, through distribution or direct from the factory."
         },
         {
           "i": "truck",
           "t": "Logistics in China",
-          "d": "An ISO 9001 unit that develops factories and consolidates cargo, exported by Mastertronics or directly by the factory."
+          "d": "We manage the China HUB, an ISO 9001 unit that develops factories, consolidates cargo and exports to customers and distributors."
         },
         {
           "i": "shield",
-          "t": "A supplier that answers for the part",
+          "t": "Warranty and traceability",
           "d": "Direct from the factory, with no middlemen or brokers: warranty, traceability and technical support."
         },
         {
@@ -217,8 +217,8 @@
     },
     "presence": {
       "label": "Global presence",
-      "title": "From Brazil to the world’s leading technology hubs.",
-      "p": "Our headquarters in Porto Alegre serves customers across Brazil and Latin America, connected to manufacturers in Asia and Europe and to our China HUB.",
+      "title": "From the world’s leading technology hubs to Brazil and Latin America.",
+      "p": "Technology and supplies from manufacturers in Asia and Europe and from the China HUB reach our customers across Brazil and Latin America, served from our headquarters in Porto Alegre.",
       "list": [
         {
           "k": "Headquarters",

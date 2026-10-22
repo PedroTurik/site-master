@@ -10,7 +10,7 @@
         "Solução técnica e logística",
         "para a indústria eletrônica."
       ],
-      "sub": "Somos o fornecedor técnico e logístico da sua engenharia e do seu suprimento: representamos fabricantes globais de semicondutores e componentes e, pelo China HUB, desenvolvemos fábricas e consolidamos cargas na China.",
+      "sub": "Somos uma empresa de representação e consultoria técnica: representamos fabricantes globais de semicondutores e componentes e gerenciamos o China HUB, que desenvolve fábricas, consolida cargas na China e exporta para os nossos clientes e parceiros distribuidores.",
       "cta1": "Fale com um especialista",
       "cta2": "Como atuamos"
     },
@@ -37,7 +37,7 @@
     "fronts": {
       "label": "Como atuamos",
       "title": "Uma solução técnica e logística, em duas frentes.",
-      "sub": "Do semicondutor de potência à peça customizada, a Mastertronics fornece com suporte técnico local, pelos fabricantes que representamos ou pelas fábricas que desenvolvemos na China.",
+      "sub": "Do semicondutor de potência à peça customizada, com suporte técnico local: pelos fabricantes que representamos ou pelas fábricas que o China HUB desenvolve na China.",
       "items": [
         {
           "photo": "pcb",
@@ -67,7 +67,7 @@
           "n": "02",
           "tag": "China HUB",
           "title": "Fábricas desenvolvidas e cargas consolidadas na China.",
-          "text": "Desenvolvemos fábricas na China para os insumos que o seu projeto precisa e consolidamos as cargas dessas fábricas. O fornecedor é a Mastertronics, que exporta para você — ou a fábrica exporta direto, na compra direto de fábrica.",
+          "text": "O China HUB, gerenciado pela Mastertronics, desenvolve fábricas na China para os insumos que o seu projeto precisa, consolida as cargas dessas fábricas e exporta para você — ou embarca para os nossos parceiros distribuidores.",
           "spec": [
             {
               "k": "Fábricas",
@@ -79,7 +79,7 @@
             },
             {
               "k": "Exportação",
-              "v": "Pela Mastertronics ou direto da fábrica"
+              "v": "Pelo China HUB, para você ou para os nossos distribuidores"
             }
           ],
           "cta": "Conhecer o China HUB",
@@ -89,13 +89,13 @@
     },
     "direct": {
       "label": "Direto da fábrica",
-      "title": "Fornecedor somos nós. E respondemos pela peça.",
-      "p": "Compramos direto da fábrica, sem intermediários nem brokers. Por isso a Mastertronics responde por cada peça que fornece, com três garantias:",
+      "title": "Direto da fábrica. Com garantia em cada peça.",
+      "p": "O China HUB compra direto das fábricas que desenvolve, sem intermediários nem brokers. Por isso cada peça vem com três garantias:",
       "items": [
         {
           "i": "shield",
           "t": "Garantia",
-          "d": "Garantia das peças fornecidas, dada pela própria Mastertronics."
+          "d": "Garantia das peças fornecidas pelo China HUB."
         },
         {
           "i": "route",
@@ -121,7 +121,7 @@
     "mfr": {
       "label": "Portfólio",
       "title": "Nossos fabricantes",
-      "sub": "Líderes globais em semicondutores de potência, memórias, sensores, optoeletrônica, displays, cristais e magnéticos.",
+      "sub": "Líderes globais em semicondutores de potência, memórias, sensores, optoeletrônica, displays e cristais.",
       "all": "Ver todos os fabricantes"
     },
     "hub": {
@@ -176,7 +176,7 @@
         "Technical and logistics solutions",
         "for the electronics industry."
       ],
-      "sub": "We are the technical and logistics supplier behind your engineering and sourcing: we represent global semiconductor and component manufacturers and, through our China HUB, develop factories and consolidate cargo in China.",
+      "sub": "We are a representation and technical consulting company: we represent global semiconductor and component manufacturers and manage the China HUB, which develops factories, consolidates cargo in China and exports to our customers and distribution partners.",
       "cta1": "Talk to a specialist",
       "cta2": "How we work"
     },
@@ -233,7 +233,7 @@
           "n": "02",
           "tag": "China HUB",
           "title": "Factories developed and cargo consolidated in China.",
-          "text": "We develop factories in China for the parts your project needs and consolidate the cargo from those factories. Mastertronics is the supplier and exports to you — or the factory exports directly when you buy direct from the factory.",
+          "text": "The China HUB, managed by Mastertronics, develops factories in China for the parts your project needs, consolidates the cargo from those factories and exports to you — or ships it to our distribution partners.",
           "spec": [
             {
               "k": "Factories",
@@ -245,7 +245,7 @@
             },
             {
               "k": "Export",
-              "v": "By Mastertronics or direct from the factory"
+              "v": "By the China HUB, to you or to our distributors"
             }
           ],
           "cta": "Discover the China HUB",
@@ -255,8 +255,8 @@
     },
     "direct": {
       "label": "Direct from the factory",
-      "title": "We are the supplier. And we stand behind every part.",
-      "p": "We buy direct from the factory, with no middlemen or brokers. That is why Mastertronics answers for every part it supplies, with three guarantees:",
+      "title": "Direct from the factory. With every part backed.",
+      "p": "The China HUB buys direct from the factories it develops, with no middlemen or brokers. That is why every part comes with three guarantees:",
       "items": [
         {
           "i": "shield",
@@ -287,7 +287,7 @@
     "mfr": {
       "label": "Portfolio",
       "title": "Our manufacturers",
-      "sub": "Global leaders in power semiconductors, memory, sensors, optoelectronics, displays, crystals and magnetics.",
+      "sub": "Global leaders in power semiconductors, memory, sensors, optoelectronics, displays and crystals.",
       "all": "See all manufacturers"
     },
     "hub": {

@@ -1,9 +1,9 @@
 ---
-// Dot-matrix world map with animated trace arcs from Porto Alegre to manufacturer regions.
+// Dot-matrix world map with animated trace arcs flowing from manufacturer regions and the China HUB into Porto Alegre.
 import world from '../data/world-dots.json';
 
 interface Node { id: string; label: string; lon: number; lat: number; kind?: 'hq' | 'hub' | 'mfr'; }
-// `route` turns the hub arc into the logistics route (China HUB → HQ) and labels it at its apex.
+// `route` marks the hub arc as the logistics route (China HUB → HQ) and labels it south of the Cape.
 interface Props { nodes: Node[]; class?: string; theme?: 'dark' | 'light'; labelScale?: number; route?: string; }
 const { nodes, class: cls = '', theme = 'dark', labelScale = 1, route } = Astro.props;
 
@@ -13,21 +13,34 @@ const H = (world.latMax - world.latMin) * K;
 const x = (lon: number) => (lon - world.lonMin) * K;
 const y = (lat: number) => (world.latMax - lat) * K;
 
+type P = [number, number];
+const bez = (p: P[], t: number): P => {
+  const u = 1 - t;
+  return [0, 1].map((k) => u * u * u * p[0][k] + 3 * u * u * t * p[1][k] + 3 * u * t * t * p[2][k] + t * t * t * p[3][k]) as P;
+};
+
 const hq = nodes.find((n) => n.kind === 'hq')!;
+// Every arc flows into HQ (technology and supplies come to Brazil). Arcs from Asia take the sea
+// route south of the Cape of Good Hope, so nothing reads as crossing (or stopping in) Africa.
 const arcs = nodes
   .filter((n) => n.kind !== 'hq')
   .map((n, i) => {
     const hub = n.kind === 'hub';
     const isRoute = hub && !!route;
-    // The route runs from the hub to HQ, so its travelling dash flows towards Brazil.
-    const [a, b] = isRoute ? [n, hq] : [hq, n];
-    const x1 = x(a.lon), y1 = y(a.lat), x2 = x(b.lon), y2 = y(b.lat);
-    const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
-    const dist = Math.hypot(x2 - x1, y2 - y1);
-    const lift = dist * 0.32;
-    const cy = my - lift;
-    const apex = { x: (x1 + 2 * mx + x2) / 4, y: (y1 + 2 * cy + y2) / 4 };
-    return { d: `M${x1},${y1} Q${mx},${cy} ${x2},${y2}`, i, hub, isRoute, apex };
+    const pts: P[] = n.lon > 40
+      ? [[n.lon, n.lat], [n.lon - 6, -52], [12, -64], [hq.lon, hq.lat]]
+      : (() => {
+          const mx = (n.lon + hq.lon) / 2, my = (n.lat + hq.lat) / 2;
+          const c: P = [mx, my + Math.hypot(hq.lon - n.lon, hq.lat - n.lat) * 0.32];
+          return [[n.lon, n.lat], c, c, [hq.lon, hq.lat]];
+        })();
+    const [p0, p1, p2, p3] = pts.map(([lon, lat]) => [x(lon), y(lat)]);
+    const d = `M${p0} C${p1} ${p2} ${p3}`;
+    // Route label sits south of the Cape, with a chevron pointing along the path towards Brazil.
+    const [ax, ay] = bez(pts, 0.66).map((v, k) => (k ? y(v) : x(v)));
+    const [bx, by] = bez(pts, 0.68).map((v, k) => (k ? y(v) : x(v)));
+    const label = { x: ax, y: ay, angle: (Math.atan2(by - ay, bx - ax) * 180) / Math.PI };
+    return { d, i, hub, isRoute, label };
   });
 const routeArc = arcs.find((a) => a.isRoute);
 const r = world.step * K * 0.2;
@@ -52,9 +65,9 @@ const r = world.step * K * 0.2;
       ))}
     </g>
     {routeArc && (
-      <g class="wmap-route" transform={`translate(${routeArc.apex.x} ${routeArc.apex.y})`}>
-        <rect class="wmap-route-mark" x="-7" y="-7" width="14" height="14" rx="2.5" transform="rotate(45)" />
-        <text y={-26 * labelScale} text-anchor="middle" style={`font-size:${26 * labelScale}px`}>{route}</text>
+      <g class="wmap-route" transform={`translate(${routeArc.label.x} ${routeArc.label.y})`}>
+        <path class="wmap-route-mark" d="M-6,-9 L4,0 L-6,9" transform={`rotate(${routeArc.label.angle})`} />
+        <text y={-30 * labelScale} text-anchor="middle" style={`font-size:${26 * labelScale}px`}>{route}</text>
       </g>
     )}
     <g class="wmap-nodes">
@@ -89,8 +102,8 @@ const r = world.step * K * 0.2;
   .wmap--light .wmap-arc { stroke: var(--ink); }
   .wmap-arc.is-hub { stroke-width: 3; }
   .wmap-arc.is-route { stroke-width: 3.4; stroke-dasharray: 0.1 0.04 0.06 0.8; animation-duration: 4.2s; animation-delay: 0s; opacity: 1; }
-  .wmap-route-mark { fill: var(--ink); stroke: var(--lime); stroke-width: 2.5; }
-  .wmap--light .wmap-route-mark { fill: var(--white); stroke: var(--ink); }
+  .wmap-route-mark { fill: none; stroke: var(--lime); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .wmap--light .wmap-route-mark { stroke: var(--ink); }
   .wmap-route text { font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; fill: var(--lime); }
   .wmap--light .wmap-route text { fill: var(--ink); }
   @keyframes wm-travel { to { stroke-dashoffset: 0; } }

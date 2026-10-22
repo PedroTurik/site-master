@@ -4,7 +4,7 @@
     "desc": "Unidade ISO 9001 da Mastertronics na China, desde 2001: desenvolvimento, auditoria e qualificação de fábricas, consolidação de cargas e compra direto da fábrica com garantia, rastreabilidade e suporte técnico.",
     "crumb": "China HUB",
     "h1": "Fábricas desenvolvidas na China, <em>com logística até você.</em>",
-    "lead": "O China HUB desenvolve, audita e qualifica fábricas na China para os clientes da Mastertronics e consolida as cargas dessas fábricas. A Mastertronics é o fornecedor e exporta para você — ou a fábrica exporta direto, na compra direto de fábrica.",
+    "lead": "Gerenciado pela Mastertronics, o China HUB desenvolve, audita e qualifica fábricas na China e consolida as cargas dessas fábricas. O China HUB exporta direto para você — ou embarca para os nossos parceiros distribuidores.",
     "chips": [
       "ISO 9001",
       "Desde 2001",
@@ -108,7 +108,7 @@
         },
         {
           "t": "Exportação",
-          "d": "A Mastertronics exporta para você — ou a fábrica exporta direto, na compra direto de fábrica."
+          "d": "O China HUB exporta para você ou embarca para os nossos parceiros distribuidores."
         }
       ]
     },
@@ -129,16 +129,16 @@
     "flow": {
       "label": "Logística",
       "title": "Consolidação de cargas na China.",
-      "p": "As peças produzidas pelas fábricas que desenvolvemos são reunidas e consolidadas no China HUB antes da exportação. A Mastertronics é o fornecedor e o exportador para o cliente — ou, na compra direto de fábrica, a própria fábrica exporta direto."
+      "p": "As peças produzidas pelas fábricas que desenvolvemos são reunidas e consolidadas no China HUB, que exporta direto para o cliente ou embarca para os nossos parceiros distribuidores."
     },
     "direct": {
       "label": "Direto da fábrica",
       "title": "Sem distribuidores chineses. Sem brokers.",
-      "p": "Compramos direto das fábricas que desenvolvemos. Sem intermediários entre você e a fábrica, a Mastertronics responde pela peça que fornece.",
+      "p": "O China HUB compra direto das fábricas que desenvolve. Sem intermediários entre você e a fábrica, cada peça tem garantia, rastreabilidade e suporte técnico.",
       "cols": [
         "",
         "Distribuidores chineses e brokers",
-        "Direto da fábrica, com a Mastertronics"
+        "Direto da fábrica, pelo China HUB"
       ],
       "rows": [
         {
@@ -149,7 +149,7 @@
         {
           "k": "Garantia",
           "a": "Varia conforme cada intermediário",
-          "b": "Garantia das peças, dada pela Mastertronics"
+          "b": "Garantia das peças, dada pelo China HUB"
         },
         {
           "k": "Rastreabilidade",
@@ -171,7 +171,7 @@
     "desc": "Mastertronics’ ISO 9001-certified unit in China, since 2001: factory development, auditing and qualification, cargo consolidation and direct-from-factory supply with warranty, traceability and technical support.",
     "crumb": "China HUB",
     "h1": "Factories developed in China, <em>with logistics all the way to you.</em>",
-    "lead": "The China HUB develops, audits and qualifies factories in China for Mastertronics’ customers and consolidates the cargo from those factories. Mastertronics is the supplier and exports to you — or the factory exports directly when you buy direct from the factory.",
+    "lead": "Managed by Mastertronics, the China HUB develops, audits and qualifies factories in China and consolidates the cargo from those factories. The China HUB exports directly to you — or ships to our distribution partners.",
     "chips": [
       "ISO 9001",
       "Since 2001",
@@ -275,7 +275,7 @@
         },
         {
           "t": "Export",
-          "d": "Mastertronics exports to you — or the factory exports directly when you buy direct from the factory."
+          "d": "The China HUB exports to you or ships to our distribution partners."
         }
       ]
     },
@@ -296,16 +296,16 @@
     "flow": {
       "label": "Logistics",
       "title": "Cargo consolidation in China.",
-      "p": "Parts made by the factories we develop are gathered and consolidated at the China HUB before export. Mastertronics is the supplier and the exporter to the customer — or, when you buy direct from the factory, the factory exports directly."
+      "p": "Parts made by the factories we develop are gathered and consolidated at the China HUB, which exports directly to the customer or ships to our distribution partners."
     },
     "direct": {
       "label": "Direct from the factory",
       "title": "No Chinese distributors. No brokers.",
-      "p": "We buy direct from the factories we develop. With no middlemen between you and the factory, Mastertronics stands behind the parts it supplies.",
+      "p": "The China HUB buys direct from the factories it develops. With no middlemen between you and the factory, every part comes with warranty, traceability and technical support.",
       "cols": [
         "",
         "Chinese distributors and brokers",
-        "Direct from the factory, with Mastertronics"
+        "Direct from the factory, through the China HUB"
       ],
       "rows": [
         {
@@ -316,7 +316,7 @@
         {
           "k": "Warranty",
           "a": "Varies with each middleman",
-          "b": "A warranty on the parts, given by Mastertronics"
+          "b": "A warranty on the parts, given by the China HUB"
         },
         {
           "k": "Traceability",

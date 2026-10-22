@@ -1,49 +1,53 @@
 {
   "pt": {
     "factory": "Fábrica",
-    "factorySub": "Desenvolvida pelo HUB",
     "hub": "China HUB",
     "hubSub": "Consolidação de cargas",
+    "distributor": "Distribuidor",
+    "distributorSub": "Parceiro de distribuição",
     "client": "Cliente",
     "clientSub": "Brasil e América Latina",
     "modes": [
       {
         "n": "01",
-        "t": "A Mastertronics exporta",
-        "tag": "Exportador: Mastertronics",
-        "d": "Você compra da Mastertronics, o fornecedor. As cargas das fábricas são consolidadas no China HUB e exportadas por nós.",
-        "edge": "Exportação Mastertronics"
+        "t": "Direto ao cliente",
+        "tag": "Exportador: China HUB",
+        "d": "As cargas das fábricas são consolidadas no China HUB, gerenciado pela Mastertronics, que exporta direto para você.",
+        "edge": "Exportação China HUB"
       },
       {
         "n": "02",
-        "t": "Direto da fábrica",
-        "tag": "Exportador: a fábrica",
-        "d": "Na compra direto de fábrica, a fábrica desenvolvida pelo HUB exporta direto para você.",
-        "edge": "Exportação direta da fábrica"
+        "t": "Via distribuidor parceiro",
+        "tag": "Exportador: China HUB",
+        "d": "O China HUB também embarca as cargas consolidadas para os nossos parceiros distribuidores, que atendem você.",
+        "edge": "Embarque China HUB",
+        "edge2": "Distribuição"
       }
     ]
   },
   "en": {
     "factory": "Factory",
-    "factorySub": "Developed by the HUB",
     "hub": "China HUB",
     "hubSub": "Cargo consolidation",
+    "distributor": "Distributor",
+    "distributorSub": "Distribution partner",
     "client": "Customer",
     "clientSub": "Brazil and Latin America",
     "modes": [
       {
         "n": "01",
-        "t": "Mastertronics exports",
-        "tag": "Exporter: Mastertronics",
-        "d": "You buy from Mastertronics, the supplier. Cargo from the factories is consolidated at the China HUB and exported by us.",
-        "edge": "Exported by Mastertronics"
+        "t": "Direct to the customer",
+        "tag": "Exporter: China HUB",
+        "d": "Cargo from the factories is consolidated at the China HUB, managed by Mastertronics, which exports directly to you.",
+        "edge": "Exported by the China HUB"
       },
       {
         "n": "02",
-        "t": "Direct from the factory",
-        "tag": "Exporter: the factory",
-        "d": "When you buy direct from the factory, the factory developed by the HUB exports directly to you.",
-        "edge": "Exported directly by the factory"
+        "t": "Through a distribution partner",
+        "tag": "Exporter: China HUB",
+        "d": "The China HUB also ships consolidated cargo to our distribution partners, who serve you.",
+        "edge": "Shipped by the China HUB",
+        "edge2": "Distribution"
       }
     ]
   }

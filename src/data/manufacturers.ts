@@ -2,7 +2,7 @@ import type { Lang } from '../i18n/routes';
 
 type L<T = string> = Record<Lang, T>;
 
-export type Category = 'power' | 'memory' | 'display' | 'sensors' | 'opto' | 'frequency' | 'magnetics';
+export type Category = 'power' | 'memory' | 'display' | 'sensors' | 'opto' | 'frequency';
 
 export const categories: { key: Category; label: L; short: L; blurb: L }[] = [
   {
@@ -40,12 +40,6 @@ export const categories: { key: Category; label: L; short: L; blurb: L }[] = [
     label: { pt: 'Controle de frequência', en: 'Frequency control' },
     short: { pt: 'Frequência', en: 'Frequency' },
     blurb: { pt: 'Cristais, osciladores e wafers piezoelétricos', en: 'Crystals, oscillators and piezoelectric wafers' },
-  },
-  {
-    key: 'magnetics',
-    label: { pt: 'Componentes magnéticos', en: 'Magnetic components' },
-    short: { pt: 'Magnéticos', en: 'Magnetics' },
-    blurb: { pt: 'Transformadores e indutores sob medida', en: 'Custom transformers and inductors' },
   },
 ];
 
@@ -336,24 +330,9 @@ export const manufacturers: Manufacturer[] = [
     products: { pt: ['Cristais', 'Osciladores', 'Wafers piezoelétricos'], en: ['Crystals', 'Oscillators', 'Piezoelectric wafers'] },
     markets: { pt: ['5G', 'Data centers', 'Automotivo', 'IoT', 'Aeroespacial'], en: ['5G', 'Data centers', 'Automotive', 'IoT', 'Aerospace'] },
   },
-  {
-    slug: 'ee-magnetic',
-    tagline: { pt: 'Transformadores e indutores sob medida', en: 'Custom transformers and inductors' },
-    name: 'EE Magnetic',
-    legal: 'E & E Magnetic Products Limited',
-    logo: '/logos/ee-magnetic.png',
-    site: { href: 'http://www.eemagnetic.com/', label: 'www.eemagnetic.com' },
-    categories: ['magnetics'],
-    description: {
-      pt: 'A EE Magnetic desenvolve transformadores, indutores e componentes magnéticos sob medida, com foco em desempenho, confiabilidade e flexibilidade para aplicações industriais, automotivas, médicas e de energia.',
-      en: 'EE Magnetic develops transformers, inductors, and custom magnetic components, focusing on performance, reliability, and flexibility for industrial, automotive, medical, and energy applications.',
-    },
-    products: { pt: ['Transformadores', 'Indutores', 'Magnéticos sob medida'], en: ['Transformers', 'Inductors', 'Custom magnetics'] },
-    markets: { pt: ['Industrial', 'Automotivo', 'Médico', 'Energia'], en: ['Industrial', 'Automotive', 'Medical', 'Energy'] },
-  },
 ];
 
-const order = ['phison', 'crrc-times-semiconductor', 'dynex', 'memsic', 'ct-micro', 'crrc-times-transducer', 'goford', 'esmt', 'siward', 'jenson-display', 'rcl-display', 'ee-magnetic'];
+const order = ['phison', 'crrc-times-semiconductor', 'dynex', 'memsic', 'ct-micro', 'crrc-times-transducer', 'goford', 'esmt', 'siward', 'jenson-display', 'rcl-display'];
 manufacturers.sort((a, b) => order.indexOf(a.slug) - order.indexOf(b.slug));
 
 export const distributors: { name: string; logo: string; href: string; about: L }[] = [
